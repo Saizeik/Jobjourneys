@@ -1,0 +1,89 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model User {
+  id                String             @id @default(cuid())
+  email             String             @unique
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  notes             Note[]
+  password          Password?
+  Post              Post[]
+  JobAppNote        JobAppNote[]
+
+}
+
+model Password {
+  hash   String
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id    String @id @default(cuid())
+  title String
+  body  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model JobAppNote {
+  id                String             @id @default(cuid())
+  title             String
+  body              String
+  yourName          String
+  phoneNumber       String
+  DesiredSalary     String
+  referenceOne      String
+  referenceTwo      String
+  referenceThree    String
+ 
+  previousPositions PreviousPosition[]
+
+   
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  userId            String
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PreviousPosition {
+  id                String  @id @default(uuid())
+  positionTitle         String
+  duties                String
+  employerName          String
+  address               String
+  employmentStartDate   String
+  employmentEndDate     String
+ 
+  jobAppNote            JobAppNote []
+
+}
+
+
+
+model Post {
+  slug           String   @id
+  title          String
+  address        String
+  date           String
+  markdown       String
+  jobAppLink     String
+  appStatus              String? 
+  coordinateLat  String
+  coordinateLong String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         String?
+  User           User?    @relation(fields: [userId], references: [id])
+}
