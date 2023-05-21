@@ -55,69 +55,69 @@ export default function NewNotePage() {
 
   return (
     <motion.div
-    initial={{ opacity: 0, x: '-2vh' }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5 }}
->
-    <Form
-      method="post"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        width: "100%",
-      }}
+      initial={{ opacity: 0, x: "-2vh" }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <div>
-        <label className="flex w-full flex-col gap-1 block text-gray-700 font-bold mb-2">
-          <span>Title: </span>
-          <input
-            ref={titleRef}
-            name="title"
-            className="flex-1 shadow appearance-none border rounded border-custom-newColor w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            aria-invalid={actionData?.errors?.title ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.title ? "title-error" : undefined
-            }
-          />
-        </label>
-        {actionData?.errors?.title && (
-          <div className="pt-1 text-red-700" id="title-error">
-            {actionData.errors.title}
-          </div>
-        )}
-      </div>
+      <Form
+        method="post"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          width: "100%",
+        }}
+      >
+        <div>
+          <label className="mb-2 block flex w-full flex-col gap-1 font-bold text-gray-700">
+            <span>Title: </span>
+            <input
+              ref={titleRef}
+              name="title"
+              className="border-custom-newColor focus:shadow-outline w-full flex-1 appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+              aria-invalid={actionData?.errors?.title ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.title ? "title-error" : undefined
+              }
+            />
+          </label>
+          {actionData?.errors?.title && (
+            <div className="pt-1 text-red-700" id="title-error">
+              {actionData.errors.title}
+            </div>
+          )}
+        </div>
 
-      <div>
-        <label className="flex w-full flex-col gap-1 block text-gray-700 font-bold mb-2">
-          <span>Body: </span>
-          <textarea
-            ref={bodyRef}
-            name="body"
-            rows={8}
-            className="flex-1 shadow appearance-none border rounded border-custom-newColor w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            aria-invalid={actionData?.errors?.body ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.body ? "body-error" : undefined
-            }
-          />
-        </label>
-        {actionData?.errors?.body && (
-          <div className="pt-1 text-red-700" id="body-error">
-            {actionData.errors.body}
-          </div>
-        )}
-      </div>
+        <div>
+          <label className="mb-2 block flex w-full flex-col gap-1 font-bold text-gray-700">
+            <span>Body: </span>
+            <textarea
+              ref={bodyRef}
+              name="body"
+              rows={8}
+              className="border-custom-newColor focus:shadow-outline w-full flex-1 appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+              aria-invalid={actionData?.errors?.body ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.body ? "body-error" : undefined
+              }
+            />
+          </label>
+          {actionData?.errors?.body && (
+            <div className="pt-1 text-red-700" id="body-error">
+              {actionData.errors.body}
+            </div>
+          )}
+        </div>
 
-      <div className="text-right">
-        <button
-          type="submit"
-          className="rounded bg-custom-newColor py-2 px-4 text-bold text-white text hover:bg-teal-400 focus:bg--teal-400"
-        >
-          Save
-        </button>
-      </div>
-    </Form>
+        <div className="text-right">
+          <button
+            type="submit"
+            className="bg-custom-newColor focus:bg--teal-400 rounded px-4 py-2 font-bold text-white hover:bg-teal-400"
+          >
+            Save
+          </button>
+        </div>
+      </Form>
     </motion.div>
   );
 }

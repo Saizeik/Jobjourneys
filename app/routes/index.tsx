@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import jobSearch from "../../jobSearch.jpg"
+import jobSearch from "../../jobSearch.jpg";
 import { useOptionalUser } from "~/utils";
 
 export default function Index() {
@@ -17,14 +17,16 @@ export default function Index() {
               />
               <div className="absolute inset-0 bg-teal-400 mix-blend-multiply" />
             </div>
-            <div className=" lg:pb-18 relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
+            <div className=" lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
                 <span className="block uppercase text-white drop-shadow-md">
                   Job Journey
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
-                Document your journey to finding that new job you have been dreaming of, chasing and seeking after. Build a road map and see how far you have come!
+                Document your journey to finding that new job you have been
+                dreaming of, chasing and seeking after. Build a road map and see
+                how far you have come!
               </p>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? (
@@ -38,13 +40,13 @@ export default function Index() {
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                     <Link
                       to="/join"
-                      className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-custom-spaceBlack hover:text-white sm:px-8"
+                      className="hover:bg-custom-spaceBlack flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:text-white sm:px-8"
                     >
                       Sign up
                     </Link>
                     <Link
                       to="/login"
-                      className="flex items-center justify-center rounded-md bg-custom px-4 py-3 font-medium text-white hover:bg-custom-spaceBlack"
+                      className="bg-custom hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
                     >
                       Log In
                     </Link>
@@ -63,17 +65,13 @@ export default function Index() {
         </div>
 
         <div className="mx-auto mt-16 max-w-lg text-center">
-        <Link
-                to="/posts"
-                className="flex items-center justify-center rounded-md border border-transparent bg-white  px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-black hover:text-white sm:px-8"
-              >
-               
-             
-            Blog Posts
+          <Link
+            to="/posts"
+            className="flex items-center justify-center rounded-md border border-transparent bg-white  px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-black hover:text-white sm:px-8"
+          >
+            Job Posts
           </Link>
         </div>
-
-        
       </div>
     </main>
   );

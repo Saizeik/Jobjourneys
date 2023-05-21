@@ -14,7 +14,7 @@ export default function NoteIndexPage() {
 >
     <p className = "text-xl">
       No note selected. Select a note on the left, or{" "}
-      <Link to="new" className="text-custom-newColor underline font-medium">
+      <Link to="new" className="text-custom-newColor underline font-bold">
         create a new note.
       </Link>
     </p>

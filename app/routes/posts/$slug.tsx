@@ -37,8 +37,8 @@ export default function PostsRoute() {
   const { title, newDate, address, html, jobAppLink, appStatus } = useLoaderData() as LoaderData;
   return (
     <main className=" flex h-full min-h-screen flex-col" >
-      <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
-          <h1 className="text-3xl font-bold">
+      <header className="flex flex-col md:flex-row items-center justify-between bg-teal-400 p-4 text-white">
+          <h1 className="text-3xl font-bold mb-4 md:mb-0">
             <Link to=".">Post</Link>{`${" "}`}{title}
           </h1>
           <button>
@@ -46,7 +46,7 @@ export default function PostsRoute() {
             {user ? (
               <Link
                 to="/notes"
-                className="flex items-center justify-center rounded-md border border-transparent bg-white  px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
+                className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white  px-4 py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8"
               >
                 View Notes
               </Link>
@@ -56,7 +56,7 @@ export default function PostsRoute() {
             {user ? (
               <Link
                 to="/posts"
-                className="flex items-center justify-center rounded-md border border-transparent bg-white  px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
+                className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white  px-4 py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8"
               >
                 View Posts
               </Link>
@@ -65,15 +65,15 @@ export default function PostsRoute() {
           <Form action="/logout" method="post">
             <button
               type="submit"
-              className="m-2 rounded bg-slate-600 py-2 px-4 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
+              className="m-2 rounded bg-white py-2 px-4 text-black hover:bg-black active:bg-black hover:text-white font-medium"
             >
               Logout
             </button>
           </Form>
           <p>{username.email}</p>
         </header>
-      <div className ="dark mx-auto max-w-2xl  rounded-lg bg-gray-900" > 
-      <div className=" p-6 text-center text-yellow-100">
+      <div className ="dark mx-auto max-w-2xl  rounded-lg bg-custom-newColor" > 
+      <div className=" p-6 text-center font-bold text-white">
         <article>
           <h1 className="my-6 border-b-2 text-center text-3xl font-bold">
             {title}
@@ -88,7 +88,7 @@ export default function PostsRoute() {
             {`${address}`}
           </p>
           
-          <a href = {`${jobAppLink}`} className="my-6 text-center text-lg font-bold  text-yellow-300" target="_blank">Go to Application Website {`${" "}`}
+          <a href = {`${jobAppLink}`} className="my-6 text-center text-lg font-bold  text-white" target="_blank">Go to Application Website {`${" "}`}
             
           </a>
           <p className="mt-4 ">

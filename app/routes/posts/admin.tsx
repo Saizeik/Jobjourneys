@@ -21,22 +21,22 @@ export default function AdminRoute() {
   
   return (
     <div className="flex h-full min-h-screen flex-col">
-      <header className="flex items-center justify-between bg-teal-400 p-4 text-white">
-        <h1 className="text-3xl font-bold">
+      <header className="flex flex-col md:flex-row items-center justify-between bg-teal-400 p-4 text-white">
+        <h1 className="text-3xl font-bold mb-4 md:mb-0">
           <Link to=".">Admin</Link>
         </h1>
         <button
           type="submit"
-          className="mt-2 rounded bg-custom-spaceBlack font-medium py-2 px-4 text-white hover:bg-white active:bg-custom-spaceBlack hover:text-black hover:bg-white"
+          className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white  px-4 py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8"
         >
-          <Link to="/posts" className="text-md text-white-600">
+          <Link to="/posts">
             Blog Posts
           </Link>
         </button>
         <Form action="/logout" method="post">
           <button
             type="submit"
-            className="m-2 rounded bg-custom-spaceBlack font-medium py-2 px-4 text-white hover:bg-white active:bg-custom-spaceBlack hover:text-black hover:bg-white shadow-lg"
+            className="m-2 rounded bg-white py-2 px-4 text-black hover:bg-black active:bg-black hover:text-white font-medium"
           >
             Logout
           </button>
@@ -47,7 +47,7 @@ export default function AdminRoute() {
       <div className=" my-10 mx-auto max-w-4xl">
         <div className="flex max-w-lg flex-col space-y-6 font-bold overflow-hidden rounded-lg bg-custom-newColor p-6 text-white shadow-md">
           <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">
-             Admin
+            User Posts
           </h1>
           <div className="grid grid-cols-3 gap-6">
         

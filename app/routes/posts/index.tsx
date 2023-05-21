@@ -84,7 +84,7 @@ export default function PostsRoute() {
         </header>
 
         <div className="flex flex-col items-center rounded w-full max-w-screen-3xl bg-gradient-to-r from-indigo-900 to-white  
-        'px-4 py-6 my-14">
+        px-4 py-6 my-14">
         <motion.ul
     variants={container}
     initial="hidden"
