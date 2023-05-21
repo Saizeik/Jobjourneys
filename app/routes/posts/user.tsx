@@ -82,7 +82,7 @@ export default function UserRoute() {
           className="mt-2 rounded bg-indigo-900 mb-4 md:mb-0 py-2 px-4 font-bold text-white hover:bg-black hover:text-white active:bg-black"
         >
           <Link to="/posts" className="text-md text-white-600">
-            Blog Posts
+            Job Posts
           </Link>
         </button>
         <Form action="/logout" method="post">
