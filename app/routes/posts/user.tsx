@@ -1,5 +1,5 @@
 import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
-
+import { useEffect, useState } from "react";
 import type { LoaderFunction } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
 import { json } from "@remix-run/node";
@@ -7,7 +7,8 @@ import { requireUser, requireUserId } from "~/session.server";
 import { useOptionalUser } from "~/utils";
 import { useUser } from "~/utils";
 import { motion } from "framer-motion";
-import dashboard from "dashboard.jpg"
+
+import { images } from "../../images.js";
 
 type LoaderData = {
   posts: Awaited<ReturnType<typeof getPostListings>>;
@@ -20,6 +21,15 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json<LoaderData>({ posts: await getPostListings({ userId: userId }) });
 };
 
+export interface ImageInfo {
+  src: string;
+  alt: string;
+}
+
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * images.length);
+  return images[randomIndex];
+}
 export default function UserRoute() {
   const user = useOptionalUser();
   const { posts } = useLoaderData() as LoaderData;
@@ -38,22 +48,23 @@ export default function UserRoute() {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
   };
+  const [randomImage, setRandomImage] = useState<ImageInfo>();
 
-  const imageHeight = 300; // Desired height value
-
-  // Function to handle height changes
- 
+  useEffect(() => {
+    const image = getRandomImage();
+    setRandomImage(image);
+  }, []);
 
   return (
     <div className="flex-col">
-      <header className="flex flex-col md:flex-row items-center justify-between bg-teal-400 p-4 text-white">
-        <h1 className="text-3xl font-bold mb-4 md:mb-0">
+      <header className="flex flex-col items-center justify-between bg-teal-400 p-4 text-white md:flex-row">
+        <h1 className="mb-4 text-3xl font-bold md:mb-0">
           <Link to=".">Dashboard</Link>
         </h1>
 
         <button
           type="submit"
-          className="hover: mt-2 rounded bg-indigo-900 py-2 px-4 mb-4 md:mb-0 font-bold text-white text-white hover:bg-black active:bg-black"
+          className="hover: mb-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white text-white hover:bg-black active:bg-black md:mb-0"
         >
           <Link to="/map" className="text-md text-white-600">
             Map Journey
@@ -62,7 +73,7 @@ export default function UserRoute() {
 
         <button
           type="submit"
-          className="mt-2 rounded bg-indigo-900 py-2  mb-4 md:mb-0 px-4 font-bold text-white hover:bg-black hover:text-white active:bg-black"
+          className="mb-4 mt-2 rounded bg-indigo-900  px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
         >
           <Link to="/notes" className="text-md text-white-600">
             Notes
@@ -70,7 +81,7 @@ export default function UserRoute() {
         </button>
         <button
           type="submit"
-          className="hover: mt-2 rounded bg-indigo-900 mb-4 md:mb-0  py-2 px-4 font-bold  text-white hover:bg-black active:bg-black"
+          className="hover: mb-4 mt-2 rounded bg-indigo-900 px-4  py-2 font-bold text-white  hover:bg-black active:bg-black md:mb-0"
         >
           <Link to="/jobappnotes" className="text-md text-white-600">
             Job App Notes
@@ -79,7 +90,7 @@ export default function UserRoute() {
 
         <button
           type="submit"
-          className="mt-2 rounded bg-indigo-900 mb-4 md:mb-0 py-2 px-4 font-bold text-white hover:bg-black hover:text-white active:bg-black"
+          className="mb-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
         >
           <Link to="/posts" className="text-md text-white-600">
             Job Posts
@@ -88,24 +99,25 @@ export default function UserRoute() {
         <Form action="/logout" method="post">
           <button
             type="submit"
-            className="m-2 rounded bg-indigo-900 py-2 px-4 font-bold text-white hover:bg-black hover:text-white active:bg-black"
+            className="m-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black"
           >
             Logout
           </button>
         </Form>
-        <p className="font-medium hidden md:block">{username.email}</p>
+        <p className="hidden font-medium md:block">{username.email}</p>
       </header>
-      <section className="mx-auto mt-4 mb-2 rounded bg-[#F3F4F6] pt-0 pb-0 lg:pt-[0px] lg:pb-0">
+      <section className="mx-auto mb-2 mt-4 rounded bg-[#F3F4F6] pb-0 pt-0 lg:pb-0 lg:pt-[0px]">
         <div className="container mx-auto max-w-4xl">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-full xl:w-full">
               <div className="overflow-hidden rounded-lg bg-white">
-                <img
-                  src={dashboard}
-                  alt="image"
-                  className="w-full  h-28"
-                />
-
+                {randomImage && (
+                  <img
+                    src={randomImage.src}
+                    alt={randomImage.alt}
+                    className="h-64 w-full"
+                  />
+                )}
                 <div className="-lg bg-opacity-78  mx-auto mb-10  max-w-screen-xl flex-col space-y-6 overflow-hidden rounded-b-xl bg-gradient-to-r from-teal-400 to-white p-6 font-bold text-black shadow-md">
                   {user ? (
                     <motion.ul
@@ -126,7 +138,7 @@ export default function UserRoute() {
                       <ol className="mx-4 mr-4 list-decimal text-lg font-bold text-white ">
                         {user
                           ? posts.map((post) => (
-                              <div className="curser-pointer hover:scale-102  my-4 rounded bg-custom-spaceBlack text-center transition duration-300 ease-in-out  hover:transform hover:bg-white">
+                              <div className="curser-pointer hover:scale-102  bg-custom-spaceBlack my-4 rounded text-center transition duration-300 ease-in-out  hover:transform hover:bg-white">
                                 <li key={post.slug} className="my-2 ">
                                   <Link
                                     to={post.slug}
