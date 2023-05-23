@@ -60,7 +60,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);
   if (intent === "delete") {
     await deletePost(params.slug);
-    return redirect("/posts/admin");
+    return redirect("/posts/user");
   }
 
   const title = formData.get("title");
