@@ -30,7 +30,7 @@ export default function NotesPage() {
         
         <button
             type="submit"
-            className="rounded bg-slate-600 m-2 py-2 px-4 text-white hover:bg-custom-newColor active:bg-custom-newColor"
+            className="rounded bg-slate-600 m-2 py-2 px-4 text-white hover:bg-custom-newColor active:bg-custom-newColor sm:hidden"
           ><Link to="/notes" className="text-md text-white-600 font-medium ">
         Notes
         </Link>
@@ -39,7 +39,7 @@ export default function NotesPage() {
        
           <button
             type="submit"
-            className="rounded bg-slate-600 m-2 md:mt-2 py-2 px-4 text-white hover:bg-custom-newColor active:bg-custom-newColor"
+            className="rounded bg-slate-600 m-2 md:mt-2 py-2 px-4 text-white hover:bg-custom-newColor active:bg-custom-newColor sm:hidden"
           ><Link to="/posts" className="text-md text-white-600 font-medium">
         Job Posts
         </Link>

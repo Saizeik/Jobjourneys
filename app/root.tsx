@@ -13,11 +13,10 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-
+import Layout from "./layout";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
-
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -37,49 +36,53 @@ type LoaderData = {
 export const loader: LoaderFunction = async ({ request }) => {
   console.log(ENV);
   return json<LoaderData>({
-    user: await getUser(request), 
+    user: await getUser(request),
     ENV: getEnv(),
   });
 };
 
-
-
 export default function App() {
-  const data =useLoaderData();
+  const data = useLoaderData();
   console.log(ENV);
   return (
     <html lang="en" className="h-full">
       <head>
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossOrigin=""/>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossOrigin=""
+        />
 
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
 
+        <script
+          src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossOrigin=""
+        ></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-
-     
- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossOrigin=""></script>
-
-<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-UIt1wYQzhcy_QUXVfWv0swsHXjNUGsw&libraries=places&callback=initMap"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-UIt1wYQzhcy_QUXVfWv0swsHXjNUGsw&libraries=places&callback=initMap"></script>
         <Meta />
         <Links />
       </head>
-      
-      <body className = "h-full">
-   
-   
-   
-       
-        <Outlet />
+
+      <body className="h-full">
+        <Layout>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
-        <script dangerouslySetInnerHTML={{__html: `window.ENV =${JSON.stringify(data.ENV)}`,}} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV =${JSON.stringify(data.ENV)}`,
+          }}
+        />
         <LiveReload />
       </body>
-      
     </html>
   );
 }

@@ -399,7 +399,7 @@ embed,
 object {
   display: block;
   /* 1 */
-  vertical-align: middle;
+  
   /* 2 */
 }
 
@@ -517,6 +517,16 @@ video {
   width: 100%;
 }
 
+@media (max-width: 767px) {
+  .sm\:hidden {
+    display: none;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
@@ -526,6 +536,10 @@ video {
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 }
 

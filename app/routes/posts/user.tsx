@@ -57,14 +57,14 @@ export default function UserRoute() {
 
   return (
     <div className="flex-col">
-      <header className="flex flex-col items-center justify-between bg-teal-400 p-4 text-white md:flex-row">
+      <header className="flex flex-col items-center justify-between bg-teal-400 p-4 text-white sm:hidden md:flex-row">
         <h1 className="mb-4 text-3xl font-bold md:mb-0">
           <Link to=".">Dashboard</Link>
         </h1>
 
         <button
           type="submit"
-          className="hover: mb-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white text-white hover:bg-black active:bg-black md:mb-0"
+          className="hover: mb-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white text-white hover:bg-black active:bg-black sm:hidden md:mb-0"
         >
           <Link to="/map" className="text-md text-white-600">
             Map Journey
@@ -73,7 +73,7 @@ export default function UserRoute() {
 
         <button
           type="submit"
-          className="mb-4 mt-2 rounded bg-indigo-900  px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
+          className="mb-4 mt-2 rounded bg-indigo-900  px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black sm:hidden md:mb-0"
         >
           <Link to="/notes" className="text-md text-white-600">
             Notes
@@ -81,7 +81,7 @@ export default function UserRoute() {
         </button>
         <button
           type="submit"
-          className="hover: mb-4 mt-2 rounded bg-indigo-900 px-4  py-2 font-bold text-white  hover:bg-black active:bg-black md:mb-0"
+          className="hover: mb-4 mt-2 rounded bg-indigo-900 px-4  py-2 font-bold text-white  hover:bg-black active:bg-black sm:hidden md:mb-0"
         >
           <Link to="/jobappnotes" className="text-md text-white-600">
             Job App Notes
@@ -90,7 +90,7 @@ export default function UserRoute() {
 
         <button
           type="submit"
-          className="mb-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
+          className="mb-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black sm:hidden md:mb-0"
         >
           <Link to="/posts" className="text-md text-white-600">
             Job Posts
@@ -99,7 +99,7 @@ export default function UserRoute() {
         <Form action="/logout" method="post">
           <button
             type="submit"
-            className="m-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black"
+            className="m-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
           >
             Logout
           </button>

@@ -31,10 +31,10 @@ export default function Index() {
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? (
                   <Link
-                    to="/notes"
+                    to="/posts/user"
                     className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-black hover:text-white sm:px-8"
                   >
-                    View Notes for {user.email}
+                    View Dashboard for {user.email}
                   </Link>
                 ) : (
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
@@ -64,14 +64,7 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="mx-auto mt-16 max-w-lg text-center">
-          <Link
-            to="/posts"
-            className="flex items-center justify-center rounded-md border border-transparent bg-white  px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-black hover:text-white sm:px-8"
-          >
-            Job Posts
-          </Link>
-        </div>
+      
       </div>
     </main>
   );

@@ -50,7 +50,7 @@ export default function PostsRoute() {
           <h1 className="text-3xl font-bold mb-4 md:mb-0">
             <Link to=".">Posts</Link>
           </h1>
-          <button>
+          <button className= "sm:hidden">
             {" "}
             {user ? (
               <Link
@@ -61,7 +61,7 @@ export default function PostsRoute() {
               </Link>
             ) : null}
           </button>
-          <button>
+          <button className ="sm:hidden">
             {" "}
             {user ? (
               <Link

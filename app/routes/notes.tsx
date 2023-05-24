@@ -22,7 +22,7 @@ export default function NotesPage() {
 
   return (
     <div className="flex h-full min-h-screen flex-col">
-    <header className="flex flex-col md:flex-row items-center justify-between  bg-teal-400 p-4 text-white font-bold">
+    <header className="flex flex-col md:flex-row items-center justify-between bg-teal-400 p-4 text-white font-bold">
   <div className="flex items-center">
     <h1 className="text-3xl font-bold mr-4">
       <Link to=".">Notes</Link>
@@ -33,7 +33,7 @@ export default function NotesPage() {
   <div className="flex flex-col md:flex-row">
     <button
       type="submit"
-      className="rounded bg-custom-newColor m-2 py-2 px-4 text-white font-medium hover:bg-black active:bg-black"
+      className="rounded bg-custom-newColor m-2 py-2 px-4 text-white font-medium hover:bg-black active:bg-black sm:hidden"
     >
       <Link to="/jobappnotes" className="text-md text-whit-600 mb-4 md:mb-0">
         Job App Notes
@@ -42,7 +42,7 @@ export default function NotesPage() {
 
     <button
       type="submit"
-      className="rounded bg-custom-newColor m-2 py-2 px-4 text-white font-medium hover:bg-black active:bg-black"
+      className="rounded bg-custom-newColor m-2 py-2 px-4 text-white font-medium hover:bg-black active:bg-black sm:hidden"
     >
       <Link to="/posts" className="text-md text-whit-600 mb-4 md:mb-0">
         Job Posts
@@ -52,7 +52,7 @@ export default function NotesPage() {
     <Form action="/logout" method="post">
       <button
         type="submit"
-        className=" mt-2  ml-2 rounded bg-custom-newColor py-2 px-4 text-white font-medium hover:bg-black active:bg-black mb-4 md:mb-0"
+        className=" mt-2  ml-2 rounded bg-custom-newColor py-2 px-4 text-white font-medium hover:bg-black active:bg-black mb-4 md:mb-0 "
       >
         Logout
       </button>

@@ -78,25 +78,25 @@ export default function MapJourney() {
     <main>
       <div className="flex h-full min-h-screen flex-col">
         <header className="flex flex-col md:flex-row items-center justify-between bg-teal-400 p-4 text-white">
-          <h1 className="text-3xl font-bold mb-4 md:mb-0">
+          <h1 className="text-3xl font-bold mb-4 md:hidden">
             <Link to=".">Map Journey</Link>
           </h1>
-          <button>
+          <button className ="sm:hidden">
             {" "}
             {user ? (
               <Link
                 to="/notes"
-                className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white  px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white sm:px-8"
+                className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white  px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white md:hidden"
               >
                 View Notes
               </Link>
             ) : null}
           </button>
-          <button>
+          <button className ="sm:hidden">
             {user ? (
               <Link
                 to="/posts"
-                className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white sm:px-8"
+                className="flex items-center justify-center rounded-md border border-transparent mb-4 md:mb-0 bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white sm:hidden"
               >
                 View Posts
               </Link>
