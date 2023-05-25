@@ -56,7 +56,7 @@ export default function UserRoute() {
   }, []);
 
   return (
-    <div className="flex-col">
+    <div className="flex-col sm:overflow-x-hidden">
       <header className="flex flex-col items-center justify-between bg-teal-400 p-4 text-white sm:hidden md:flex-row">
         <h1 className="mb-4 text-3xl font-bold md:mb-0">
           <Link to=".">Dashboard</Link>
