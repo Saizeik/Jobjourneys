@@ -89,6 +89,18 @@ export const action: ActionFunction = async ({ request, params }) => {
     markdown: markdown ? null : "Markdown is required",
   };
 
+/*
+  function validateURL(jobAppLink: string): boolean {
+    const regex = /^https:\/\//; // Regular expression to match "https://"
+    return regex.test(jobAppLink);
+  }
+
+  
+const isValid = validateURL(jobAppLink);
+
+console.log(isValid); // Output: true
+   */
+
   if (
     typeof slug !== "string" ||
     /[\{\}\[\]\(\)\#\@\!\$\%\^\&\*\+\=\<\>\?\,\'\"\;\:\\\/]/g.test(slug)

@@ -10,7 +10,7 @@ import invariant from "tiny-invariant";
 
 type LoaderData = {
   title: string;
-
+slug: string;
   newDate: string;
   address: string;
   html: string;
@@ -30,6 +30,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     formattedDate[1] + "-" + formattedDate[2] + "-" + formattedDate[0];
   return json<LoaderData>({
     title: post.title,
+    slug:post.slug,
     newDate,
     address: post.address,
     html,
@@ -41,8 +42,9 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function PostsRoute() {
   const user = useOptionalUser();
   const username = useUser();
-  const { title, newDate, address, html, jobAppLink, appStatus } =
+  const { title, slug,  newDate, address, html, jobAppLink, appStatus } =
     useLoaderData() as LoaderData;
+    const jobTitle =slug.split("-")[0];
   return (
     <main className=" flex h-full min-h-screen flex-col">
       <header className="flex flex-col items-center justify-between bg-teal-400 p-4 text-white md:flex-row">
@@ -89,10 +91,14 @@ export default function PostsRoute() {
               {title}
             </h1>
             <p className="my-6  text-center text-2xl font-bold text-blue-400">
+              Job Title: {`${" "}`}
+             {jobTitle}
+            </p>
+            <p className="my-6  text-center text-2xl font-bold text-blue-400">
               Date Applied: {`${" "}`}
               {`${newDate}`}
             </p>
-            <p className="text-md my-6 text-center font-bold text-blue-300">
+            <p className="text-lg my-6 text-center font-bold text-blue-300">
               Status: {`${" "}`}
               {`${appStatus}`}
             </p>
