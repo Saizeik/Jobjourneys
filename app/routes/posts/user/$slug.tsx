@@ -89,17 +89,11 @@ export const action: ActionFunction = async ({ request, params }) => {
     markdown: markdown ? null : "Markdown is required",
   };
 
-/*
-  function validateURL(jobAppLink: string): boolean {
-    const regex = /^https:\/\//; // Regular expression to match "https://"
-    return regex.test(jobAppLink);
+  const urlPattern = /^https:\/\//;
+
+  if (typeof jobAppLink === "string" && !urlPattern.test(jobAppLink)) {
+    errors.jobAppLink = "Website address must start with 'https://'";
   }
-
-  
-const isValid = validateURL(jobAppLink);
-
-console.log(isValid); // Output: true
-   */
 
   if (
     typeof slug !== "string" ||
@@ -250,8 +244,8 @@ export function getCoords({
   return (
     <motion.ul variants={container} initial="hidden" animate="show">
       <motion.li variants={item}>
-        <div className="lg flex flex-col items-center rounded bg-custom p-6 text-center text-blue-50 shadow-lg md:flex-row">
-          <Form className="md: mx-auto w-full w-2/3">
+        <div className="lg bg-custom flex flex-col items-center rounded p-6 text-center text-blue-50 shadow-lg md:flex-row">
+          <Form className="md: mx-auto w-2/3 w-full">
             <h6 className="mb-4  w-full p-2  text-center text-xl font-bold text-white">
               Enter Company Address for Coordinates
             </h6>
@@ -271,7 +265,7 @@ export function getCoords({
             </label>
 
             <button
-              className="m-4 rounded bg-indigo-900 py-2 px-4 font-bold text-white hover:bg-teal-400"
+              className="m-4 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-teal-400"
               onClick={handleFindClick}
             >
               Find
@@ -351,7 +345,7 @@ export default function NewPostRoute() {
             })}
           </div>
 
-          <div className="mt-4 rounded-xl bg-custom-newColor p-6 text-lg font-bold text-white shadow-lg md:mt-0 md:flex md:w-full md:max-w-none md:flex-col">
+          <div className="bg-custom-newColor mt-4 rounded-xl p-6 text-lg font-bold text-white shadow-lg md:mt-0 md:flex md:w-full md:max-w-none md:flex-col">
             <Form method="post" key={data.post?.slug ?? "new"}>
               <p>
                 <label>
@@ -543,7 +537,7 @@ export default function NewPostRoute() {
                     type="submit"
                     name="intent"
                     value="delete"
-                    className="rounded bg-red-500 py-2 px-4 text-white hover:bg-red-600 focus:bg-red-400 disabled:bg-red-300"
+                    className="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:bg-red-400 disabled:bg-red-300"
                     disabled={isDeleting}
                   >
                     {isDeleting ? "Deleting..." : "Delete"}
@@ -553,7 +547,7 @@ export default function NewPostRoute() {
                   type="submit"
                   name="intent"
                   value={isNewPost ? "create" : "update"}
-                  className="rounded bg-teal-400 py-2 px-4 text-white hover:bg-custom focus:bg-indigo-900 disabled:bg-gray-300"
+                  className="hover:bg-custom rounded bg-teal-400 px-4 py-2 text-white focus:bg-indigo-900 disabled:bg-gray-300"
                   disabled={isCreating || isUpdating}
                 >
                   {isNewPost
