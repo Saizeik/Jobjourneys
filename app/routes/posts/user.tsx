@@ -106,7 +106,7 @@ export default function UserRoute() {
         </Form>
         <p className="hidden font-medium md:block">{username.email}</p>
       </header>
-      <section className="mx-auto mb-2 mt-4 rounded bg-[#F3F4F6] pb-0 pt-0 lg:pb-0 lg:pt-[0px]">
+      <section className="mx-auto mb-8 mt-4 rounded bg-[#F3F4F6] pb-0 pt-0 lg:pb-0 lg:pt-[0px]">
         <div className="container mx-auto max-w-4xl">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-full xl:w-full">
@@ -115,7 +115,7 @@ export default function UserRoute() {
                   <img
                     src={randomImage.src}
                     alt={randomImage.alt}
-                    className="h-64 w-full"
+                    className="h-full w-full"
                   />
                 )}
                 <div className="-lg bg-opacity-78  mx-auto mb-10  max-w-screen-xl flex-col space-y-6 overflow-hidden rounded-b-xl bg-gradient-to-r from-teal-400 to-white p-6 font-bold text-black shadow-md">

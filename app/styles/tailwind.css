@@ -517,6 +517,13 @@ video {
   width: 100%;
 }
 
+@media (max-width: 640px) {
+  .sm\:overflow-x-hidden {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 767px) {
   .sm\:hidden {
     display: none;
