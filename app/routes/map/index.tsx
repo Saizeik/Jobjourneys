@@ -77,7 +77,7 @@ export default function MapJourney() {
     <main>
       <div className="flex h-full min-h-screen flex-col">
         <header className="flex flex-col items-center justify-between bg-teal-400 p-4 text-white md:flex-row">
-          <h1 className="mb-4 text-3xl font-bold md:hidden">
+          <h1 className="mb-4 text-3xl font-bold">
             <Link to=".">Map Journey</Link>
           </h1>
           <div className="flex flex-col md:flex-row">
