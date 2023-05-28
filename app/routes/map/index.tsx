@@ -80,12 +80,13 @@ export default function MapJourney() {
           <h1 className="mb-4 text-3xl font-bold md:hidden">
             <Link to=".">Map Journey</Link>
           </h1>
+          <div className="flex flex-col md:flex-row">
           <button className="sm:hidden">
             {" "}
             {user ? (
               <Link
                 to="/notes"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white md:mb-0 md:hidden"
+                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white md:mb-0 md:hidden"
               >
                 Notes
               </Link>
@@ -96,7 +97,7 @@ export default function MapJourney() {
             {user ? (
               <Link
                 to="/jobappnotes"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white md:mb-0 md:hidden"
+                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white md:mb-0 md:hidden"
               >
                 Job App Notes
               </Link>
@@ -106,7 +107,7 @@ export default function MapJourney() {
             {user ? (
               <Link
                 to="/posts"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white sm:hidden md:mb-0"
+                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-teal-400 shadow-sm hover:bg-black hover:text-white sm:hidden md:mb-0"
               >
                 Job Posts
               </Link>
@@ -115,12 +116,13 @@ export default function MapJourney() {
           <Form action="/logout" method="post">
             <button
               type="submit"
-              className="m-2 mb-4 rounded bg-white px-4 py-2 font-medium text-teal-400 hover:bg-black hover:text-white active:bg-black md:mb-0"
+              className="mb-2 mr-2 rounded bg-white px-4 py-2 font-medium text-teal-400 hover:bg-black hover:text-white active:bg-black md:mb-0"
             >
               Logout
             </button>
           </Form>
-          <p className="hidden md:block ">{username.email}</p>
+          <p className="hidden md:hidden ">{username.email}</p>
+          </div>
         </header>
         <div>
           <div>

@@ -47,6 +47,17 @@ export default function NotesPage() {
             className="bg-custom-newColor m-2 rounded px-4 py-2 font-medium text-white hover:bg-black active:bg-black sm:hidden"
           >
             <Link
+              to="/map"
+              className="text-md text-whit-600 mb-4 md:mb-0"
+            >
+              MapJourney
+            </Link>
+          </button>
+          <button
+            type="submit"
+            className="bg-custom-newColor m-2 rounded px-4 py-2 font-medium text-white hover:bg-black active:bg-black sm:hidden"
+          >
+            <Link
               to="/jobappnotes"
               className="text-md text-whit-600 mb-4 md:mb-0"
             >

@@ -50,12 +50,13 @@ export default function PostsRoute() {
           <h1 className="mb-4 text-3xl font-bold md:mb-0">
             <Link to=".">Job Posts</Link>
           </h1>
+          <div className="flex flex-col md:flex-row">
           <button className="sm:hidden">
             {" "}
             {user ? (
               <Link
                 to="/posts/user"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
               >
                 Dashboard
               </Link>
@@ -66,7 +67,7 @@ export default function PostsRoute() {
             {user ? (
               <Link
                 to="/map"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                className="mb-4  mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
               >
                 Map Journey
               </Link>
@@ -77,7 +78,7 @@ export default function PostsRoute() {
             {user ? (
               <Link
                 to="/notes"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
               >
                 Notes
               </Link>
@@ -88,7 +89,7 @@ export default function PostsRoute() {
             {user ? (
               <Link
                 to="/jobappnotes"
-                className="mb-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-3 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
               >
                 Job App Notes
               </Link>
@@ -97,14 +98,15 @@ export default function PostsRoute() {
           <Form action="/logout" method="post">
             <button
               type="submit"
-              className="m-2 rounded bg-white px-4 py-2 font-medium text-black hover:bg-black hover:text-white active:bg-black"
+              className="m-2  mr-4 rounded bg-white px-4 py-2 font-medium text-black hover:bg-black hover:text-white active:bg-black"
             >
               Logout
             </button>
           </Form>
-          <p className=" ml-4 hidden font-medium text-white md:block">
+          <p className=" ml-4 hidden font-medium text-white md:hidden">
             {username.email}
           </p>
+          </div>
         </header>
 
         <div

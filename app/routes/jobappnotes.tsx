@@ -30,7 +30,7 @@ export default function NotesPage() {
         <div className="flex flex-col md:flex-row">
           <button
             type="submit"
-            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-slate-600 px-4 py-2 text-white sm:hidden md:mt-2"
+            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-custom-spaceBlack px-4 py-2 text-white sm:hidden md:mt-2"
           >
             <Link
               to="/posts/user"
@@ -41,7 +41,18 @@ export default function NotesPage() {
           </button>
           <button
             type="submit"
-            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-slate-600 px-4 py-2 text-white sm:hidden"
+            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-custom-spaceBlack px-4 py-2 text-white sm:hidden md:mt-2"
+          >
+            <Link
+              to="/map"
+              className="text-md text-white-600 font-medium"
+            >
+              MapJourney
+            </Link>
+          </button>
+          <button
+            type="submit"
+            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-custom-spaceBlack px-4 py-2 text-white sm:hidden"
           >
             <Link to="/notes" className="text-md text-white-600 font-medium ">
               Notes
@@ -50,7 +61,7 @@ export default function NotesPage() {
 
           <button
             type="submit"
-            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-slate-600 px-4 py-2 text-white sm:hidden md:mt-2"
+            className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-custom-spaceBlack px-4 py-2 text-white sm:hidden md:mt-2"
           >
             <Link to="/posts" className="text-md text-white-600 font-medium">
               Job Posts
@@ -59,7 +70,7 @@ export default function NotesPage() {
           <Form action="/logout" method="post">
             <button
               type="submit"
-              className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-slate-600 px-4 py-2 font-medium text-white"
+              className="hover:bg-custom-newColor active:bg-custom-newColor m-2 rounded bg-custom-spaceBlack px-4 py-2 font-medium text-white"
             >
               Logout
             </button>
