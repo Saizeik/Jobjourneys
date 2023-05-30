@@ -62,52 +62,52 @@ export default function UserRoute() {
           <Link to=".">Dashboard</Link>
         </h1>
         <div className="flex flex-col  md:flex-row">
-        <button
-          type="submit"
-          className="hover: mb-4 mt-2 mr-4 rounded bg-indigo-900 px-4 py-2 font-bold text-white text-white hover:bg-black active:bg-black sm:hidden md:mb-0"
-        >
-          <Link to="/map" className="text-md text-white-600">
-            Map Journey
-          </Link>
-        </button>
-
-        <button
-          type="submit"
-          className="mb-4 mt-2 mr-4  rounded bg-indigo-900  px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black sm:hidden md:mb-0"
-        >
-          <Link to="/notes" className="text-md text-white-600">
-            Notes
-          </Link>
-        </button>
-        <button
-          type="submit"
-          className="hover: mb-4 mt-2 mr-4  rounded bg-indigo-900 px-4  py-2 font-bold text-white  hover:bg-black active:bg-black sm:hidden md:mb-0"
-        >
-          <Link to="/jobappnotes" className="text-md text-white-600">
-            Job App Notes
-          </Link>
-        </button>
-
-        <button
-          type="submit"
-          className="mb-4 mt-2 mr-4 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black sm:hidden md:mb-0"
-        >
-          <Link to="/posts" className="text-md text-white-600">
-            Job Posts
-          </Link>
-        </button>
-        <Form action="/logout" method="post">
           <button
             type="submit"
-            className=" m-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
+            className="hover: mb-4 mr-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white text-white hover:bg-black active:bg-black sm:hidden md:mb-0"
           >
-            Logout
+            <Link to="/map" className="text-md text-white-600">
+              Map Journey
+            </Link>
           </button>
-        </Form>
-        <p className="hidden font-medium md:hidden">{username.email}</p>
+
+          <button
+            type="submit"
+            className="mb-4 mr-4 mt-2  rounded bg-indigo-900  px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black sm:hidden md:mb-0"
+          >
+            <Link to="/notes" className="text-md text-white-600">
+              Notes
+            </Link>
+          </button>
+          <button
+            type="submit"
+            className="hover: mb-4 mr-4 mt-2  rounded bg-indigo-900 px-4  py-2 font-bold text-white  hover:bg-black active:bg-black sm:hidden md:mb-0"
+          >
+            <Link to="/jobappnotes" className="text-md text-white-600">
+              Job App Notes
+            </Link>
+          </button>
+
+          <button
+            type="submit"
+            className="mb-4 mr-4 mt-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black sm:hidden md:mb-0"
+          >
+            <Link to="/posts" className="text-md text-white-600">
+              Job Posts
+            </Link>
+          </button>
+          <Form action="/logout" method="post">
+            <button
+              type="submit"
+              className=" m-2 rounded bg-indigo-900 px-4 py-2 font-bold text-white hover:bg-black hover:text-white active:bg-black md:mb-0"
+            >
+              Logout
+            </button>
+          </Form>
+          <p className="hidden font-medium md:hidden">{username.email}</p>
         </div>
       </header>
-      <section className="mx-auto mb-8 mt-4 rounded bg-[#F3F4F6] pb-0 pt-0 lg:pb-0 lg:pt-[0px]">
+      <section className="mx-auto mb-6 mt-4 rounded bg-[#F3F4F6] pb-0 pt-0 lg:pb-0 lg:pt-[0px]">
         <div className="container mx-auto max-w-4xl">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-full xl:w-full">
