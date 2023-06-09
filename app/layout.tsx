@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "@remix-run/react";
 import AppFooter from './footer';
+import DesktopFooter from './desktopFooter'
 // Import any other necessary components
 
 interface LayoutProps {
@@ -14,7 +15,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         
         {children}
       </div>
+      
       <AppFooter />
+      
     </div>
   );
 };
