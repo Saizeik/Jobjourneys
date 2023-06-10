@@ -56,9 +56,9 @@ const AppFooter: React.FC = () => {
     
       <footer
         style={footerStyles}
-        className='bg-teal-400 py-4 text-white md:hidden'
+        className='bg-teal-400 py-4 text-white'
       >
-        <nav className="mx-auto flex max-w-4xl justify-between ">
+        <nav className="mx-auto flex max-w-4xl justify-between">
           <Link
             to="/posts/user"
             className="relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white "
@@ -156,11 +156,11 @@ const AppFooter: React.FC = () => {
             </span>
           </Link>
         </nav>
-        <div className='bg-teal-400 py-4 text-white md:hidden'>
-        <p className=" relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white md:hidden">
+        <div className='bg-teal-400 py-4 text-white mt-4'>
+        <p className=" relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white">
           &copy; {currentYear} Nathan Walker Productions. 
         </p>
-        <p className="relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white md:hidden">All rights reserved.</p>
+        <p className="relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white">All rights reserved.</p>
       </div>
     
      </footer>
