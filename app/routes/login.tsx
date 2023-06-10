@@ -6,6 +6,7 @@ import type {
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
+import jobSearch from "../../jobSearch.jpg";
 
 import { createUserSession, getUserId } from "~/session.server";
 import { verifyLogin } from "~/models/user.server";
@@ -91,6 +92,24 @@ export default function LoginPage() {
   }, [actionData]);
 
   return (
+    <main className="relative min-h-screen bg-white flex items-center justify-center">
+      <div className="relative sm:pb-16 sm:pt-8">
+        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
+            <div className=" absolute inset-0">
+              <img
+                className=" h-full w-full object-cover"
+                src={jobSearch}
+                alt="Man holding a briefcase"
+              />
+              <div className="absolute inset-0 bg-teal-400 mix-blend-multiply" />
+            </div>
+            <div className=" lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32">
+              <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
+                <span className="block uppercase text-white drop-shadow-md mb-4">
+                  Job Journey
+                </span>
+              </h1>
     <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
@@ -151,11 +170,11 @@ export default function LoginPage() {
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
             type="submit"
-            className="w-full rounded bg-teal-400  py-2 px-4 text-white hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack hover: text-white font-medium"
+            className="w-full rounded bg-custom-newColor   py-2 px-4 text-white hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack hover: text-white font-medium"
           >
             Log in
           </button>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between sm: justify-center">
             <div className="flex items-center">
               <input
                 id="remember"
@@ -165,15 +184,15 @@ export default function LoginPage() {
               />
               <label
                 htmlFor="remember"
-                className="ml-2 block text-sm text-gray-900 border-teal-400"
+                className="ml-2  text-sm text-custom-spaceBlack font-bold border-teal-400"
               >
                 Remember me
               </label>
             </div>
-            <div className="text-center text-sm text-gray-500">
+            <div className="text-center text-sm text-custom-spaceBlack font-bold">
               Don't have an account?{" "}
               <Link
-                className="text-teal-400 underline"
+                className="text-lg text-custom-newColor font-bold underline"
                 to={{
                   pathname: "/join",
                   search: searchParams.toString(),
@@ -186,5 +205,11 @@ export default function LoginPage() {
         </Form>
       </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </main>
+    
   );
 }
