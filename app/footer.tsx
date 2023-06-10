@@ -41,13 +41,22 @@ const AppFooter: React.FC = () => {
     setJobNotesIsHovered(hover);
   };
 
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
 
+  const isLoginOrJoinPage = location.pathname === '/login' || location.pathname === '/join';
+
+  if (isLoginOrJoinPage) {
+    return null; // Return null to hide the footer on the login and join pages
+  }
+
+
+
   return (
-    <>
+    
       <footer
         style={footerStyles}
-        className=" bg-teal-400 py-4 text-white md:hidden"
+        className='bg-teal-400 py-4 text-white md:hidden'
       >
         <nav className="mx-auto flex max-w-4xl justify-between ">
           <Link
@@ -147,14 +156,15 @@ const AppFooter: React.FC = () => {
             </span>
           </Link>
         </nav>
-      </footer>
-      <footer className=" bg-teal-400 py-4 text-white">
-        <p className=" relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white">
+        <div className='bg-teal-400 py-4 text-white md:hidden'>
+        <p className=" relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white md:hidden">
           &copy; {currentYear} Nathan Walker Productions. 
         </p>
-        <p className=" relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white">All rights reserved.</p>
-      </footer>
-    </>
+        <p className="relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white md:hidden">All rights reserved.</p>
+      </div>
+    
+     </footer>
+    
   );
 };
 

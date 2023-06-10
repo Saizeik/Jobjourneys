@@ -127,7 +127,7 @@ export default function LoginPage() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              Passwords
             </label>
             <div className="mt-1">
               <input

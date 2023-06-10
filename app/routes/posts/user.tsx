@@ -127,7 +127,7 @@ export default function UserRoute() {
                       animate="show"
                     >
                       <motion.li variants={item}>
-                        <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">
+                        <h1 className="my-6 mb-2 border-b-2 font-primary text-center text-3xl">
                           {" "}
                           {`${user?.email} Job Posts`}
                         </h1>
