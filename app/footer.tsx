@@ -44,7 +44,7 @@ const AppFooter: React.FC = () => {
   const location = useLocation();
   const currentYear = new Date().getFullYear();
 
-  const isLoginOrJoinPage = location.pathname === '/login' || location.pathname === '/join';
+  const isLoginOrJoinPage = location.pathname === '/login' || location.pathname === '/join' || location.pathname === '/';
 
   if (isLoginOrJoinPage) {
     return null; // Return null to hide the footer on the login and join pages
