@@ -41,7 +41,7 @@ export default function Index() {
                     animate={{
                       opacity: imageLoading ? 0 : 1,
                     }}
-                    transition={{ delay: 0.5, duration: 0.4 }}
+                    transition={{ delay: 0.2, duration: 0.2 }}
                     onLoad={imageLoaded}
                     src={randomImage.src}
                     alt={randomImage.alt}
