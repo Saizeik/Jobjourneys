@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-
+import { motion } from "framer-motion";
 import { useOptionalUser } from "~/utils";
 import { useEffect, useState } from "react";
 import { loginImages } from "../loginImages";
@@ -16,6 +16,11 @@ function getRandomImage() {
 
 export default function Index() {
   const [randomImage, setRandomImage] = useState<loginInfo>();
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const imageLoaded = () => {
+    setImageLoading(false);
+  };
 
   useEffect(() => {
     const image = getRandomImage();
@@ -25,13 +30,19 @@ export default function Index() {
   const user = useOptionalUser();
   return (
     <>
-      <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
+      <main className="relative min-h-screen bg-white flex items-center justify-center sm:flex sm:items-center sm:justify-center">
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
               <div className=" absolute inset-0">
                 {randomImage && (
-                  <img
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: imageLoading ? 0 : 1,
+                    }}
+                    transition={{ delay: 0.5, duration: 0.4 }}
+                    onLoad={imageLoaded}
                     src={randomImage.src}
                     alt={randomImage.alt}
                     className="h-full w-full object-cover"

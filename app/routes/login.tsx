@@ -9,6 +9,7 @@ import * as React from "react";
 
 import { loginImages } from "../loginImages";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import { createUserSession, getUserId } from "~/session.server";
 import { verifyLogin } from "~/models/user.server";
@@ -94,6 +95,11 @@ export default function LoginPage() {
   const actionData = useActionData() as ActionData;
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const imageLoaded = () => {
+    setImageLoading(false);
+  };
 
   React.useEffect(() => {
     if (actionData?.errors?.email) {
@@ -117,7 +123,13 @@ export default function LoginPage() {
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
             <div className=" absolute inset-0">
               {randomImage && (
-                <img
+                <motion.img
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: imageLoading ? 0 : 1,
+                  }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                  onLoad={imageLoaded}
                   src={randomImage.src}
                   alt={randomImage.alt}
                   className="h-full w-full object-cover"
