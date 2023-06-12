@@ -1,5 +1,8 @@
 import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+
 import { useEffect, useState } from "react";
+import { animateScroll as scroll } from "react-scroll";
+
 import type { LoaderFunction } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
 import { json } from "@remix-run/node";
@@ -30,6 +33,7 @@ function getRandomImage() {
   const randomIndex = Math.floor(Math.random() * images.length);
   return images[randomIndex];
 }
+
 export default function UserRoute() {
   const user = useOptionalUser();
   const { posts } = useLoaderData() as LoaderData;
@@ -54,6 +58,15 @@ export default function UserRoute() {
     const image = getRandomImage();
     setRandomImage(image);
   }, []);
+
+  const handleItemClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    setTimeout(() => {
+      scroll.scrollTo(500, {
+        smooth: true,
+        offset: -50,
+      });
+    }, 0);
+  };
 
   return (
     <div className="flex-col sm:overflow-x-hidden">
@@ -127,7 +140,7 @@ export default function UserRoute() {
                       animate="show"
                     >
                       <motion.li variants={item}>
-                        <h1 className="my-6 mb-2 border-b-2 font-primary text-center text-3xl">
+                        <h1 className="font-primary my-6 mb-2 border-b-2 text-center text-3xl">
                           {" "}
                           {`${user?.email} Job Posts`}
                         </h1>
@@ -144,6 +157,7 @@ export default function UserRoute() {
                                   <Link
                                     to={post.slug}
                                     className="px-2 text-xl  font-bold  text-white hover:text-black"
+                                    onClick={handleItemClick}
                                   >
                                     {post.title}
                                   </Link>
@@ -156,6 +170,7 @@ export default function UserRoute() {
 
                     <main className="col-span-4 md:col-span-3">
                       <Outlet />
+                      <div id="outlet"></div>
                     </main>
                   </div>
                 </div>

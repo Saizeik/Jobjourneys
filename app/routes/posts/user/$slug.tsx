@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Form,
   useActionData,
@@ -295,8 +295,9 @@ export default function NewPostRoute() {
   const [address, setAddress] = useState(data.post?.address || "");
   const [latitude, setLatitude] = useState(data.post?.coordinateLat || "");
   const [longitude, setLongitude] = useState(data.post?.coordinateLong || "");
-
-  const [statusError, setStatusError] = useState<string>("");
+  const postRef = useRef<HTMLUListElement>(null);
+  const outletRef = useRef<HTMLDivElement>(null);
+ 
 
   function handleAddressChange(event: React.ChangeEvent<HTMLInputElement>) {
     const address = event.target.value;
@@ -328,8 +329,14 @@ export default function NewPostRoute() {
     show: { opacity: 1 },
   };
 
+  useEffect(() => {
+    if (postRef.current) {
+      postRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [postRef.current]);
+
   return (
-    <motion.ul variants={container} initial="hidden" animate="show">
+    <motion.ul variants={container} ref={postRef} initial="hidden" animate="show">
       <motion.li variants={item}>
         <div className="flex max-w-screen-lg flex-col">
           <div className="p-2">
@@ -345,7 +352,7 @@ export default function NewPostRoute() {
             })}
           </div>
 
-          <div className="bg-custom-newColor mt-4 rounded-xl p-6 text-lg font-bold text-white shadow-lg md:mt-0 md:flex md:w-full md:max-w-none md:flex-col">
+          <div className="bg-custom-newColor mt-4 rounded-xl p-6 text-lg font-bold text-white shadow-lg md:mt-0 md:flex md:w-full md:max-w-none md:flex-col" ref={outletRef}>
             <Form method="post" key={data.post?.slug ?? "new"}>
               <p>
                 <label>
