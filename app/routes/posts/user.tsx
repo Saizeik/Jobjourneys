@@ -10,6 +10,7 @@ import { requireUser, requireUserId } from "~/session.server";
 import { useOptionalUser } from "~/utils";
 import { useUser } from "~/utils";
 import { motion } from "framer-motion";
+import UserIndexRoute from "./user/index.js";
 
 import { images } from "../../images.js";
 
@@ -66,7 +67,7 @@ export default function UserRoute() {
 
   const handleItemClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     setTimeout(() => {
-      scroll.scrollTo(700, {
+      scroll.scrollTo(600, {
         smooth: true,
         offset: -50,
       });
@@ -173,15 +174,20 @@ export default function UserRoute() {
                                     {post.title}
                                   </Link>
                                 </li>
+                                
                               </div>
+                              
                             ))
                           : null}
+                          <div className ="my-2 mb-4 ">
+                         <UserIndexRoute/>
+                         </div>
                       </ol>
+                      
                     </nav>
 
                     <main className="col-span-4 md:col-span-3">
                       <Outlet />
-                      <div id="outlet"></div>
                     </main>
                   </div>
                 </div>
