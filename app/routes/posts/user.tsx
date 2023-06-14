@@ -53,6 +53,11 @@ export default function UserRoute() {
     show: { opacity: 1 },
   };
   const [randomImage, setRandomImage] = useState<ImageInfo>();
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const imageLoaded = () => {
+    setImageLoading(false);
+  };
 
   useEffect(() => {
     const image = getRandomImage();
@@ -61,7 +66,7 @@ export default function UserRoute() {
 
   const handleItemClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     setTimeout(() => {
-      scroll.scrollTo(500, {
+      scroll.scrollTo(700, {
         smooth: true,
         offset: -50,
       });
@@ -126,7 +131,13 @@ export default function UserRoute() {
             <div className="w-full px-4 md:w-full xl:w-full">
               <div className="overflow-hidden rounded-lg bg-white">
                 {randomImage && (
-                  <img
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: imageLoading ? 0 : 1,
+                    }}
+                    onLoad={imageLoaded}
+                    transition={{ delay: 0, duration: 1 }}
                     src={randomImage.src}
                     alt={randomImage.alt}
                     className="h-full w-full"

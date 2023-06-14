@@ -128,7 +128,7 @@ export default function LoginPage() {
                   animate={{
                     opacity: imageLoading ? 0 : 1,
                   }}
-                  transition={{ delay: 0.2, duration: 0.2 }}
+                  transition={{ delay: 0, duration: 1 }}
                   onLoad={imageLoaded}
                   src={randomImage.src}
                   alt={randomImage.alt}
