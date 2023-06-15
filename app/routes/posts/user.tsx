@@ -2,7 +2,7 @@ import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
 
 import { useEffect, useState } from "react";
 import { animateScroll as scroll } from "react-scroll";
-
+import UserIndexRoute from "./user/index.js";
 import type { LoaderFunction } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
 import { json } from "@remix-run/node";
@@ -10,7 +10,7 @@ import { requireUser, requireUserId } from "~/session.server";
 import { useOptionalUser } from "~/utils";
 import { useUser } from "~/utils";
 import { motion } from "framer-motion";
-import UserIndexRoute from "./user/index.js";
+
 
 import { images } from "../../images.js";
 
@@ -67,7 +67,7 @@ export default function UserRoute() {
 
   const handleItemClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     setTimeout(() => {
-      scroll.scrollTo(600, {
+      scroll.scrollTo(650, {
         smooth: true,
         offset: -50,
       });
@@ -164,11 +164,11 @@ export default function UserRoute() {
                       <ol className="mx-4 mr-4 list-decimal text-lg font-bold text-white ">
                         {user
                           ? posts.map((post) => (
-                              <div className="curser-pointer hover:scale-102  bg-custom-spaceBlack my-4 rounded text-center transition duration-300 ease-in-out  hover:transform hover:bg-white">
+                              <div className="curser-pointer hover:scale-102  bg-custom-spaceBlack my-4 rounded text-center transition duration-300 ease-in-out  hover:transform">
                                 <li key={post.slug} className="my-2 ">
                                   <Link
                                     to={post.slug}
-                                    className="px-2 text-xl  font-bold  text-white hover:text-black"
+                                    className="px-2 text-xl  font-bold  text-white "
                                     onClick={handleItemClick}
                                   >
                                     {post.title}
@@ -180,7 +180,7 @@ export default function UserRoute() {
                             ))
                           : null}
                           <div className ="my-2 mb-4 ">
-                         <UserIndexRoute/>
+                         
                          </div>
                       </ol>
                       

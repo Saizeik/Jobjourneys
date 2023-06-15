@@ -158,7 +158,7 @@ const AppFooter: React.FC = () => {
         </nav>
         <div className='bg-teal-400 py-4 text-white mt-4'>
         <p className=" relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white">
-          &copy; {currentYear} Nathan Walker Productions. 
+          &copy; {currentYear} Nathan Walker Productions
         </p>
         <p className="relative flex  w-12 flex-col items-center px-4 text-gray-300 hover:text-white">All rights reserved.</p>
       </div>

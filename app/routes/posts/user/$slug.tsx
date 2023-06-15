@@ -6,8 +6,9 @@ import {
   useLoaderData,
   useParams,
   useTransition,
+  Outlet,
 } from "@remix-run/react";
-
+import UserIndexRoute from ".";
 import { redirect, json } from "@remix-run/node";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { Post } from "~/models/post.server";

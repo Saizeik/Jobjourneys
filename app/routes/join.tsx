@@ -115,7 +115,7 @@ export default function Join() {
   }, []);
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-white">
+    <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">

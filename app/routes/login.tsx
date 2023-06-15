@@ -117,7 +117,7 @@ export default function LoginPage() {
   }, []);
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-white">
+    <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
@@ -128,7 +128,7 @@ export default function LoginPage() {
                   animate={{
                     opacity: imageLoading ? 0 : 1,
                   }}
-                  transition={{ delay: 0, duration: 1 }}
+                  transition={{ delay: 0, duration: 2 }}
                   onLoad={imageLoaded}
                   src={randomImage.src}
                   alt={randomImage.alt}
