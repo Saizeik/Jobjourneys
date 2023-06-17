@@ -8,7 +8,7 @@ import {
   useTransition,
   Outlet,
 } from "@remix-run/react";
-import UserIndexRoute from ".";
+
 import { redirect, json } from "@remix-run/node";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { Post } from "~/models/post.server";
@@ -435,6 +435,7 @@ export default function NewPostRoute() {
                     onChange={handleAddressChange}
                     className={inputClassName}
                     defaultValue={data.post?.address}
+                    readOnly
                   />
                   {errors?.address ? (
                     <em className="text-red-600">{errors.address}</em>
@@ -456,6 +457,8 @@ export default function NewPostRoute() {
                   onChange={handleLatitudeChange}
                   className={`${inputClassName} font-mono`}
                   defaultValue={data.post?.coordinateLat}
+                  readOnly
+
                 />
               </p>
 
@@ -474,6 +477,7 @@ export default function NewPostRoute() {
                   onChange={handleLongitudeChange}
                   className={`${inputClassName} font-mono`}
                   defaultValue={data.post?.coordinateLong}
+                  readOnly
                 />
               </p>
               <div>

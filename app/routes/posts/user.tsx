@@ -1,8 +1,9 @@
 import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+import { useRevalidator } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+
 import { animateScroll as scroll } from "react-scroll";
-import UserIndexRoute from "./user/index.js";
 import type { LoaderFunction } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
 import { json } from "@remix-run/node";
@@ -10,7 +11,6 @@ import { requireUser, requireUserId } from "~/session.server";
 import { useOptionalUser } from "~/utils";
 import { useUser } from "~/utils";
 import { motion } from "framer-motion";
-
 
 import { images } from "../../images.js";
 
@@ -37,7 +37,9 @@ function getRandomImage() {
 
 export default function UserRoute() {
   const user = useOptionalUser();
+
   const { posts } = useLoaderData() as LoaderData;
+
   const username = useUser();
   const container = {
     hidden: { opacity: 0 },
@@ -65,14 +67,11 @@ export default function UserRoute() {
     setRandomImage(image);
   }, []);
 
-  const handleItemClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    setTimeout(() => {
-      scroll.scrollTo(650, {
-        smooth: true,
-        offset: -50,
-      });
-    }, 0);
-  };
+  function WindowFocusRevalidator() {
+    let revalidator = useRevalidator();
+
+    return <div hidden={revalidator.state === "idle"}></div>;
+  }
 
   return (
     <div className="flex-col sm:overflow-x-hidden">
@@ -169,21 +168,16 @@ export default function UserRoute() {
                                   <Link
                                     to={post.slug}
                                     className="px-2 text-xl  font-bold  text-white "
-                                    onClick={handleItemClick}
+                                    onClick={WindowFocusRevalidator}
                                   >
                                     {post.title}
                                   </Link>
                                 </li>
-                                
                               </div>
-                              
                             ))
                           : null}
-                          <div className ="my-2 mb-4 ">
-                         
-                         </div>
+                        <div className="my-2 mb-4 "></div>
                       </ol>
-                      
                     </nav>
 
                     <main className="col-span-4 md:col-span-3">
