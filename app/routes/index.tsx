@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useOptionalUser } from "~/utils";
 import { useEffect, useState } from "react";
 import { loginImages } from "../loginImages";
+import {actions} from './cookie'
 
 export interface loginInfo {
   src: string;
@@ -15,6 +16,9 @@ function getRandomImage() {
 }
 
 export default function Index() {
+  const { action, signOut } = actions;
+  action();
+signOut();
   const [randomImage, setRandomImage] = useState<loginInfo>();
   const [imageLoading, setImageLoading] = useState(true);
 

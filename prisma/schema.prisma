@@ -15,6 +15,7 @@ model User {
   updatedAt         DateTime           @updatedAt
   notes             Note[]
   password          Password?
+  PasswordReset PasswordReset[] @relation("UserToPasswordReset")
   Post              Post[]
   JobAppNote        JobAppNote[]
 
@@ -24,6 +25,17 @@ model Password {
   hash   String
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PasswordReset {
+  id         Int      @id @default(autoincrement())
+  token      String   @unique
+  userId     String
+  user       User    @relation("UserToPasswordReset", fields: [userId], references: [id])
+
+
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
 }
 
 model Note {

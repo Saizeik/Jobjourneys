@@ -1,5 +1,7 @@
-import type { Password, User } from "@prisma/client";
+import type { Password, User, PasswordReset } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from 'uuid';
+import nodemailer from 'nodemailer';
 
 import { prisma } from "~/db.server";
 
@@ -27,6 +29,59 @@ export async function createUser(email: User["email"], password: string) {
     },
   });
 }
+
+export async function createPasswordResetToken(userId: User["id"],) {
+  const token = uuidv4();
+  const EXPIRATION_TIME = 3600000; // 1 hour
+  
+
+  return prisma.passwordReset.create({
+    data: {
+      token,
+      userId,
+      expiresAt: new Date(Date.now() + EXPIRATION_TIME),
+    },
+  });
+}
+
+
+// Create a nodemailer transporter
+const transporter = nodemailer.createTransport({
+  // Configure your email service provider here
+  // ...
+});
+
+// Handler for sending the password reset email
+async function sendPasswordResetEmail(email: User["email"], token: PasswordReset["token"]) {
+  const PASSWORD_RESET_URL = '/passwordReset'
+  const emailContent = `
+    <p>Dear User,</p>
+    <p>Click the following link to reset your password:</p>
+    <a href="${PASSWORD_RESET_URL}?token=${token}">Reset Password</a>
+    <p>Regards,</p>
+    <p>Your Application</p>
+  `;
+
+  // Send the email
+  await transporter.sendMail({
+    from: 'your_email@example.com',
+    to: email,
+    subject: 'Password Reset',
+    html: emailContent,
+  });
+}
+
+// Example usage
+async function handlePasswordResetRequest(email: User["email"], token: PasswordReset["token"]) {
+  try {
+    // Generate the email and send it
+    await sendPasswordResetEmail(email, token);
+    console.log('Password reset email sent successfully');
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
+  }
+}
+
 
 export async function deleteUserByEmail(email: User["email"]) {
   return prisma.user.delete({ where: { email } });

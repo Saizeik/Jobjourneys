@@ -7,6 +7,10 @@ import { getUserById } from "~/models/user.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
+const MINUTE = 60 * 1000; // 1 minute in milliseconds
+const TENMINUTES = MINUTE * 10;
+const DAY = 24 * 60 * MINUTE; // 1 day in milliseconds
+
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "__session",
@@ -28,10 +32,14 @@ export async function getSession(request: Request) {
 
 export async function getUserId(
   request: Request
-): Promise<User["id"]  | undefined> {
+): Promise<User["id"] | undefined> {
   const session = await getSession(request);
   const userId = session.get(USER_SESSION_KEY);
-  return userId;
+
+  const expirationTimestamp = session.get('expirationTimestamp');
+  const valid = !expirationTimestamp || Date.now() < expirationTimestamp;
+
+  return valid ? userId : undefined;
 }
 
 
@@ -90,12 +98,17 @@ export async function createUserSession({
 }) {
   const session = await getSession(request);
   session.set(USER_SESSION_KEY, userId);
+
+  const expirationTime = remember ? 2 * DAY : TENMINUTES;
+  const expirationTimestamp = Date.now() + expirationTime;
+  session.flash("expirationTimestamp", expirationTimestamp);
+  setTimeout(async () => {
+    await logout(request);
+  }, expirationTime);
   return redirect(redirectTo, {
     headers: {
       "Set-Cookie": await sessionStorage.commitSession(session, {
-        maxAge: remember
-          ? 60 * 60 * 24 * 7 // 7 days
-          : undefined,
+        maxAge: remember ?  2 * DAY / 1000 : undefined,
       }),
     },
   });
