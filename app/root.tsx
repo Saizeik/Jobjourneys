@@ -13,11 +13,15 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
+import { ToastContainer } from 'react-toastify';
+
 import Layout from "./layout";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
-import { useTransition, useEffect } from 'react';
+import { useTransition, useEffect } from "react";
+
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -42,11 +46,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-
-
-
 export default function App() {
-  
   const data = useLoaderData();
   console.log(ENV);
   return (
@@ -74,10 +74,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-
+      
       <body className="h-full">
         <Layout>
           <Outlet />
+         
         </Layout>
         <ScrollRestoration />
         <Scripts />

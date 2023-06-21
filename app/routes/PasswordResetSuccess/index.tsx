@@ -1,0 +1,136 @@
+import { ToastContainer, toast } from 'react-toastify';
+
+import "react-toastify/ReactToastify.min.css";
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import { getUserId } from "~/session.server";
+import { getUserByEmail } from "~/models/user.server";
+import { loginImages } from "../../loginImages";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import 'react-toastify/dist/ReactToastify.css';
+
+export interface loginInfo {
+  src: string;
+  alt: string;
+}
+
+export const loader: LoaderFunction = async ({ request }) => {
+
+  return json({});
+};
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const email = formData.get("email");
+
+  // Send reset password email and display toast message
+  const sendResetPasswordEmail = async (email: string) => {
+    // Your email sending logic here
+    // ...
+
+    toast.info('Password reset email sent. Please check your email.');
+  };
+
+  await sendResetPasswordEmail(email?.toString() || '');
+
+
+};
+
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * loginImages.length);
+  return loginImages[randomIndex];
+}
+
+export default function PasswordResetSuccessPage() {
+  const [searchParams] = useSearchParams();
+  const [imageLoading, setImageLoading] = useState(true);
+  const imageLoaded = () => {
+    setImageLoading(false);
+  };
+
+  const [randomImage, setRandomImage] = useState<loginInfo>();
+
+  useEffect(() => {
+    const image = getRandomImage();
+    setRandomImage(image);
+  }, []);
+  
+    const notify = () => {
+      toast.dark("If you have an account, a password reset has been sent to your email address.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    };
+
+ 
+
+  return (
+    <>
+    
+    
+
+
+    <ToastContainer /> {notify}
+      <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
+  
+        <div className="relative sm:pb-16 sm:pt-8">
+          <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
+              <div className="absolute inset-0">
+                {randomImage && (
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: imageLoading ? 0 : 1,
+                    }}
+                    transition={{ delay: 0, duration: 1 }}
+                    onLoad={imageLoaded}
+                    src={randomImage.src}
+                    alt={randomImage.alt}
+                    className="h-full w-full object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-teal-400 mix-blend-multiply" />
+              </div>
+              <div className="lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32">
+                <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
+                  <span className="mb-4 block uppercase text-white drop-shadow-md">
+                    Job Journey
+                  </span>
+                </h1>
+                <div className="flex min-h-full flex-col justify-center">
+                  <div className="mx-auto w-full max-w-md px-8">
+                    <button  type="submit" className = 
+                     
+                     "bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-4 py-2 font-medium text-white text-white"
+                    ><Link
+                          className="text-lg font-bold text-white"
+                          to={{
+                            pathname: "/login",
+                            search: searchParams.toString(),
+                          }}
+                        >
+                          Return to Login Page
+                        </Link></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}

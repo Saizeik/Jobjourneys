@@ -13,11 +13,7 @@ import type {
   import { useEffect, useState } from "react";
   import { motion } from "framer-motion";
   
-  export const loader: LoaderFunction = async ({ request }) => {
-    const userId = await getUserId(request);
-    if (userId) return redirect("/");
-    return json({});
-  };
+
   
   interface ActionData {
     errors: {
