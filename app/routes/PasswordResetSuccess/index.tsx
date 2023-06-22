@@ -63,13 +63,15 @@ export default function PasswordResetSuccessPage() {
 
   return (
     <>
-      <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
+      <div className="flex min-h-full flex-col justify-center">
         <button
           className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-2 py-2 font-medium text-white text-white"
           onClick={notify}
         >
           Success
         </button>
+      </div>
+      <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <Toaster />
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
