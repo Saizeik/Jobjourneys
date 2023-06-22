@@ -9,7 +9,7 @@ import type {
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import { getUserId } from "~/session.server";
-import { getUserByEmail } from "~/models/user.server";
+import { getUserByEmail, updatePassword } from "~/models/user.server";
 import { loginImages } from "../../loginImages";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";

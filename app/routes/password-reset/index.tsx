@@ -1,24 +1,25 @@
 import { json, redirect } from "@remix-run/node";
-
-import { Form, useActionData, useSearchParams  } from "@remix-run/react";
+import { Form, useActionData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { safeRedirect, validateEmail } from "~/utils";
+import { loginImages } from "../../loginImages";
 import {
   createPasswordResetToken,
-  createUser,
   getUserByEmail,
   getUserById,
+  
+  updatePassword,
 } from "~/models/user.server";
-import { useEffect, useState } from "react";
-import { getUserId, createUserSession } from "~/session.server";
+import { getUserId } from "~/session.server";
 import type {
   ActionFunction,
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import { motion } from "framer-motion";
-import { safeRedirect, validateEmail } from "~/utils";
 import type { Password, User, PasswordReset } from "@prisma/client";
-import { loginImages } from "../../loginImages";
+
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
@@ -49,7 +50,7 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const token = queryParams.get("token");
+  const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
 
   if (!validateEmail(email)) {
@@ -81,14 +82,20 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  const user = await createUser(email, password);
+  const passwordReset = await createPasswordResetToken(token);
 
   if (!token) {
     // Token is missing, handle the error
     return redirect("/error");
   }
 
-  const passwordReset = await createPasswordResetToken(token);
+  const userId = String(passwordReset.userId);
+
+  const user = await getUserById(userId);
+
+  if (!user) {
+    return redirect("/error");
+  }
 
   if (!passwordReset || passwordReset.expiresAt) {
     // Invalid token or expired token, handle the error
@@ -100,26 +107,8 @@ export const action: ActionFunction = async ({ request }) => {
     return redirect("/error");
   }
 
-  if (!validateEmail(email)) {
-    return json<ActionData>(
-      { errors: { email: "Email is invalid" } },
-      { status: 400 }
-    );
-  }
-
-  if (typeof password !== "string" || password.length === 0) {
-    return json<ActionData>(
-      { errors: { password: "Password is required" } },
-      { status: 400 }
-    );
-  }
-
-  if (password.length < 8) {
-    return json<ActionData>(
-      { errors: { password: "Password is too short" } },
-      { status: 400 }
-    );
-  }
+  // Update the password using the `updatePassword` function
+  await updatePassword(userId, password);
 
   return json({ user });
 };
@@ -215,8 +204,11 @@ export default function ResetPasswordForm() {
                       </div>
                     </div>
 
-                    
-                    <input type="hidden" name="redirectTo" value={redirectTo} />      
+                    <input
+                      type="hidden"
+                      name="redirectTo"
+                      value={redirectTo}
+                    />
                     <button
                       type="submit"
                       className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
