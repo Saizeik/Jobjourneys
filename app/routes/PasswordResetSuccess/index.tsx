@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast, Toaster } from 'react-hot-toast';
 
 import "react-toastify/ReactToastify.min.css";
 import type {
@@ -34,7 +34,7 @@ export const action: ActionFunction = async ({ request }) => {
     // Your email sending logic here
     // ...
 
-    toast.info('Password reset email sent. Please check your email.');
+ 
   };
 
   await sendResetPasswordEmail(email?.toString() || '');
@@ -61,19 +61,9 @@ export default function PasswordResetSuccessPage() {
     setRandomImage(image);
   }, []);
   
-    const notify = () => {
-      toast.dark("If you have an account, a password reset has been sent to your email address.", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    };
 
+
+    const notify = () => toast("If you have an account, a password reset has been sent to your email address.");
  
 
   return (
@@ -82,7 +72,8 @@ export default function PasswordResetSuccessPage() {
     
 
 
-    <ToastContainer /> {notify}
+    <button onClick={notify}>Message</button>
+      <Toaster />
       <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
   
         <div className="relative sm:pb-16 sm:pt-8">
