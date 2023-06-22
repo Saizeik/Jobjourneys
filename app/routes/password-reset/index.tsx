@@ -1,5 +1,6 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+
+import { Form, useActionData, useSearchParams  } from "@remix-run/react";
 import * as React from "react";
 import {
   createPasswordResetToken,
@@ -49,6 +50,7 @@ export const action: ActionFunction = async ({ request }) => {
   const email = formData.get("email");
   const password = formData.get("password");
   const token = queryParams.get("token");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
 
   if (!validateEmail(email)) {
     return json<ActionData>(
@@ -123,9 +125,11 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function ResetPasswordForm() {
+  const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const imageLoaded = () => {
     setImageLoading(false);
   };
@@ -211,26 +215,8 @@ export default function ResetPasswordForm() {
                       </div>
                     </div>
 
-                    <div className="mt-1">
-                      <input
-                        id="password"
-                        required
-                        autoFocus={true}
-                        name="password"
-                        type="password"
-                        autoComplete="password"
-                        aria-invalid={
-                          actionData?.errors?.password ? true : undefined
-                        }
-                        aria-describedby="password-error"
-                        className="w-full rounded border border-gray-500  px-2 py-1 text-lg"
-                      />
-                      {actionData?.errors?.password && (
-                        <div className="pt-1 text-red-700" id="password-error">
-                          {actionData.errors.password}
-                        </div>
-                      )}
-                    </div>
+                    
+                    <input type="hidden" name="redirectTo" value={redirectTo} />      
                     <button
                       type="submit"
                       className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
