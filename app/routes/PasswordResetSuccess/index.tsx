@@ -1,4 +1,4 @@
-import {  toast, Toaster } from 'react-hot-toast';
+import { toast, Toaster } from "react-hot-toast";
 
 import "react-toastify/ReactToastify.min.css";
 import type {
@@ -13,7 +13,7 @@ import { getUserByEmail, updatePassword } from "~/models/user.server";
 import { loginImages } from "../../loginImages";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export interface loginInfo {
   src: string;
@@ -21,7 +21,6 @@ export interface loginInfo {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-
   return json({});
 };
 
@@ -33,13 +32,9 @@ export const action: ActionFunction = async ({ request }) => {
   const sendResetPasswordEmail = async (email: string) => {
     // Your email sending logic here
     // ...
-
- 
   };
 
-  await sendResetPasswordEmail(email?.toString() || '');
-
-
+  await sendResetPasswordEmail(email?.toString() || "");
 };
 
 function getRandomImage() {
@@ -60,22 +55,22 @@ export default function PasswordResetSuccessPage() {
     const image = getRandomImage();
     setRandomImage(image);
   }, []);
-  
 
-
-    const notify = () => toast("If you have an account, a password reset has been sent to your email address.");
- 
+  const notify = () =>
+    toast(
+      "If you have an account, a password reset has been sent to your email address."
+    );
 
   return (
     <>
-    
-    
-
-
-    <button onClick={notify}>Message</button>
-      <Toaster />
-      <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
-  
+      <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
+        <button
+          className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-2 py-2 font-medium text-white text-white"
+          onClick={notify}
+        >
+          Success
+        </button>
+        <Toaster />
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
@@ -103,18 +98,20 @@ export default function PasswordResetSuccessPage() {
                 </h1>
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
-                    <button  type="submit" className = 
-                     
-                     "bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-4 py-2 font-medium text-white text-white"
-                    ><Link
-                          className="text-lg font-bold text-white"
-                          to={{
-                            pathname: "/login",
-                            search: searchParams.toString(),
-                          }}
-                        >
-                          Return to Login Page
-                        </Link></button>
+                    <button
+                      type="submit"
+                      className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-4 py-2 font-medium text-white text-white"
+                    >
+                      <Link
+                        className="text-lg font-bold text-white"
+                        to={{
+                          pathname: "/login",
+                          search: searchParams.toString(),
+                        }}
+                      >
+                        Return to Login Page
+                      </Link>
+                    </button>
                   </div>
                 </div>
               </div>
