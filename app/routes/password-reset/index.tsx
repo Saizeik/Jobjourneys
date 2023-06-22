@@ -9,7 +9,6 @@ import {
   createPasswordResetToken,
   getUserByEmail,
   getUserById,
-  
   updatePassword,
 } from "~/models/user.server";
 import { getUserId } from "~/session.server";
@@ -18,7 +17,6 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import type { Password, User, PasswordReset } from "@prisma/client";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -123,6 +121,8 @@ export default function ResetPasswordForm() {
     setImageLoading(false);
   };
 
+  // Handle the response
+
   const [randomImage, setRandomImage] = useState<loginInfo>();
 
   useEffect(() => {
@@ -204,11 +204,7 @@ export default function ResetPasswordForm() {
                       </div>
                     </div>
 
-                    <input
-                      type="hidden"
-                      name="redirectTo"
-                      value={redirectTo}
-                    />
+                    <input type="hidden" name="redirectTo" value={redirectTo} />
                     <button
                       type="submit"
                       className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
