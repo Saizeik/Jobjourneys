@@ -50,30 +50,6 @@ export const action: ActionFunction = async ({ request }) => {
   const password = formData.get("password");
   const token = queryParams.get("token");
 
-  if (!token) {
-    // Token is missing, handle the error
-    return redirect("/error");
-  }
-
-  const passwordReset = await createPasswordResetToken(token);
-
-  if (!passwordReset || passwordReset.expiresAt) {
-    // Invalid token or expired token, handle the error
-    return redirect("/error");
-  }
-
-  const user = await getUserById(passwordReset.userId);
-
-  if (!user) {
-    // User not found, handle the error
-    return redirect("/error");
-  }
-
-  if (!user) {
-    // Invalid token, handle the error
-    return redirect("/error");
-  }
-
   if (!validateEmail(email)) {
     return json<ActionData>(
       { errors: { email: "Email is invalid" } },
@@ -99,6 +75,46 @@ export const action: ActionFunction = async ({ request }) => {
   if (existingUser) {
     return json<ActionData>(
       { errors: { email: "A user already exists with this email" } },
+      { status: 400 }
+    );
+  }
+
+  const user = await createUser(email, password);
+
+  if (!token) {
+    // Token is missing, handle the error
+    return redirect("/error");
+  }
+
+  const passwordReset = await createPasswordResetToken(token);
+
+  if (!passwordReset || passwordReset.expiresAt) {
+    // Invalid token or expired token, handle the error
+    return redirect("/error");
+  }
+
+  if (!user) {
+    // User not found, handle the error
+    return redirect("/error");
+  }
+
+  if (!validateEmail(email)) {
+    return json<ActionData>(
+      { errors: { email: "Email is invalid" } },
+      { status: 400 }
+    );
+  }
+
+  if (typeof password !== "string" || password.length === 0) {
+    return json<ActionData>(
+      { errors: { password: "Password is required" } },
+      { status: 400 }
+    );
+  }
+
+  if (password.length < 8) {
+    return json<ActionData>(
+      { errors: { password: "Password is too short" } },
       { status: 400 }
     );
   }
