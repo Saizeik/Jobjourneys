@@ -87,7 +87,7 @@ export const action: ActionFunction = async ({ request }) => {
       html: `
         <p>Hi ${user.email || ""},</p>
         <p>You have requested to reset your password for your Job Journey Account. Please click the link below to reset:</p>
-        <a href="https://jobjourneys.vercel.app/reset-password?token=${encodeURIComponent(token.token)}">Reset Password</a>
+        <a href="https://jobjourneys.vercel.app/password-reset?token=${encodeURIComponent(token.token)}">Reset Password</a>
         <p>If you didn't request this, you can safely ignore this email.</p>
       `,
     };
