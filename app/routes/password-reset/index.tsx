@@ -29,6 +29,7 @@ interface ActionData {
     email?: string;
     password?: string;
     id?: string;
+    confirmPassword?:string;
   };
 }
 
@@ -50,6 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
+  const confirmPassword = formData.get("confirmPassword");
 
   if (!validateEmail(email)) {
     return json<ActionData>(
@@ -68,6 +70,13 @@ export const action: ActionFunction = async ({ request }) => {
   if (password.length < 8) {
     return json<ActionData>(
       { errors: { password: "Password is too short" } },
+      { status: 400 }
+    );
+  }
+
+  if (password !== confirmPassword) {
+    return json<ActionData>(
+      { errors: { confirmPassword: "Passwords do not match" } },
       { status: 400 }
     );
   }
@@ -116,6 +125,7 @@ export default function ResetPasswordForm() {
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = React.useRef<HTMLInputElement>(null);
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const imageLoaded = () => {
     setImageLoading(false);
@@ -211,6 +221,41 @@ export default function ResetPasswordForm() {
                     >
                       Reset Password
                     </button>
+
+                    
+                    <div>
+                      <label
+                        htmlFor="confirmPassword"
+                        className="block text-sm font-bold text-white"
+                      >
+                        Confirm Password
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          id="confirmPassword"
+                          ref={confirmPasswordRef}
+                          name="confirmPassword"
+                          type="password"
+                          autoComplete="current-password"
+                          aria-invalid={
+                            actionData?.errors?.confirmPassword
+                              ? true
+                              : undefined
+                          }
+                          aria-describedby="confirmPassword-error"
+                          className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                        />
+                        {actionData?.errors?.confirmPassword && (
+                          <div
+                            className="pt-1 text-red-700"
+                            id="confirmPassword-error"
+                          >
+                            {actionData.errors.confirmPassword}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
 
                     <input type="hidden" />
                   </Form>

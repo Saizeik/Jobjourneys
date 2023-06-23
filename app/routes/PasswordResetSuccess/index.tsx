@@ -63,16 +63,8 @@ export default function PasswordResetSuccessPage() {
 
   return (
     <>
-      <div className="flex min-h-full flex-col justify-center">
-        <button
-          className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-2 py-2 font-medium text-white text-white"
-          onClick={notify}
-        >
-          Success
-        </button>
-      </div>
+      <div className="flex min-h-full flex-col justify-center"></div>
       <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
-        <Toaster />
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
@@ -98,7 +90,12 @@ export default function PasswordResetSuccessPage() {
                     Job Journey
                   </span>
                 </h1>
-                <div className="flex min-h-full flex-col justify-center">
+                <div
+                  className="flex min-h-full flex-col justify-center"
+                  onLoad={notify}
+                >
+                  {" "}
+                  <Toaster />
                   <div className="mx-auto w-full max-w-md px-8">
                     <button
                       type="submit"
