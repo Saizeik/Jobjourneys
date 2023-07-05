@@ -1,6 +1,6 @@
 import { toast, Toaster } from "react-hot-toast";
 
-import "react-toastify/ReactToastify.min.css";
+
 import type {
   ActionFunction,
   LoaderFunction,

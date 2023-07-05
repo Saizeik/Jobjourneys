@@ -1,35 +1,26 @@
-import { Link } from "@remix-run/react";
+import { Link, useSearchParams } from "@remix-run/react";
 import { motion } from "framer-motion";
 import { useOptionalUser } from "~/utils";
 import { useEffect, useState } from "react";
-import { loginImages } from "../loginImages";
+import jobSearch from "jobSearch.jpg"
+
 import {actions} from './cookie'
 
-export interface loginInfo {
-  src: string;
-  alt: string;
-}
 
-function getRandomImage() {
-  const randomIndex = Math.floor(Math.random() * loginImages.length);
-  return loginImages[randomIndex];
-}
+
+
 
 export default function Index() {
   const { action, signOut } = actions;
   action();
 signOut();
-  const [randomImage, setRandomImage] = useState<loginInfo>();
-  const [imageLoading, setImageLoading] = useState(true);
+const [searchParams] = useSearchParams();
+ 
+  
 
-  const imageLoaded = () => {
-    setImageLoading(false);
-  };
 
-  useEffect(() => {
-    const image = getRandomImage();
-    setRandomImage(image);
-  }, []);
+
+
 
   const user = useOptionalUser();
   return (
@@ -39,19 +30,20 @@ signOut();
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
               <div className=" absolute inset-0">
-                {randomImage && (
+              
                   <motion.img
+                  src= {jobSearch}
                     initial={{ opacity: 0 }}
                     animate={{
-                      opacity: imageLoading ? 0 : 1,
+                      opacity: jobSearch ? 0 : 1,
                     }}
                     transition={{ delay: 0, duration: 1 }}
-                    onLoad={imageLoaded}
-                    src={randomImage.src}
-                    alt={randomImage.alt}
+                   
+                    
+                    alt="Man holding a briefcase"
                     className="h-full w-full object-cover"
                   />
-                )}
+                
                 <div className="absolute inset-0 bg-teal-400 mix-blend-multiply"></div>
               </div>
 
@@ -66,7 +58,7 @@ signOut();
                   dreaming of, chasing and seeking after. Build a road map and
                   see how far you have come!
                 </p>
-                <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+                <div className="mx-auto mt-10 max-w-s  sm:flex sm:max-w-none sm:justify-center">
                   {user ? (
                     <Link
                       to="/posts/user"
@@ -75,20 +67,30 @@ signOut();
                       View Dashboard for {user.email}
                     </Link>
                   ) : (
-                    <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
+                    <div className="flex flex-wrap justify-center sm:flex-row sm:justify-start gap-5 sm:my-4">
                       <Link
                         to="/join"
-                        className="hover:bg-custom-spaceBlack flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:text-white sm:px-8"
+                        className="mr-4 mb-4 sm:mb-0  hover:bg-custom-spaceBlack flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:text-white sm:px-8"
                       >
                         Sign up
                       </Link>
                       <Link
                         to="/login"
-                        className="bg-custom hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
+                        className=" mr-4 mb-4 sm:mb-0 bg-custom hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
                       >
                         Log In
                       </Link>
+                      <Link
+                       className="mr-4 mb-4 sm:mb-0 bg-custom-newColor hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
+                       to={{
+                         pathname: "/ForgotPassword",
+                         search: searchParams.toString(),
+                       }}
+                     >Reset Password
+                   
+                     </Link>
                     </div>
+                   
                   )}
                 </div>
               </div>

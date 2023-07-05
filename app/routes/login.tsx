@@ -207,18 +207,7 @@
                           )}
                         </div>
                       </div>
-                      <div className="text-center text-sm font-bold text-white">
-                          
-                          <Link
-                            className="text-sm font-bold text-white underline"
-                            to={{
-                              pathname: "/ForgotPassword",
-                              search: searchParams.toString(),
-                            }}
-                          >Reset Password
-                        
-                          </Link>
-                        </div>
+                     
                   
 
                       <input type="hidden" name="redirectTo" value={redirectTo} />

@@ -17,6 +17,7 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
+import { prisma } from "~/db.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -30,6 +31,7 @@ interface ActionData {
     password?: string;
     id?: string;
     confirmPassword?:string;
+    userId?:string;
   };
 }
 
@@ -51,7 +53,7 @@ export const action: ActionFunction = async ({ request }) => {
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
-  const confirmPassword = formData.get("confirmPassword");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   if (!validateEmail(email)) {
     return json<ActionData>(
@@ -89,14 +91,22 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  const passwordReset = await createPasswordResetToken(token);
+  const resetPassword = await prisma.passwordReset.findUnique({
+    where: {
+      token: token,
+    },
+    include: {
+      user: true,
+    },
+  });
 
-  if (!token) {
-    // Token is missing, handle the error
+  if (!resetPassword) {
+    // Token is invalid or expired
+    // Handle the error accordingly
     return redirect("/error");
   }
 
-  const userId = String(passwordReset.userId);
+  const userId = String(resetPassword.userId);
 
   const user = await getUserById(userId);
 
@@ -104,7 +114,7 @@ export const action: ActionFunction = async ({ request }) => {
     return redirect("/error");
   }
 
-  if (!passwordReset || passwordReset.expiresAt) {
+  if (!resetPassword || resetPassword.expiresAt) {
     // Invalid token or expired token, handle the error
     return redirect("/error");
   }
@@ -117,8 +127,18 @@ export const action: ActionFunction = async ({ request }) => {
   // Update the password using the `updatePassword` function
   await updatePassword(userId, password);
 
+  // Delete the password reset entry after successful password update
+  await prisma.passwordReset.delete({
+    where: {
+      id: resetPassword.id,
+    },
+  });
+
+  // Password has been successfully updated
+  // You can handle the response accordingly
   return json({ user });
 };
+
 
 export default function ResetPasswordForm() {
   const [searchParams] = useSearchParams();
@@ -214,13 +234,7 @@ export default function ResetPasswordForm() {
                       </div>
                     </div>
 
-                    <input type="hidden" name="redirectTo" value={redirectTo} />
-                    <button
-                      type="submit"
-                      className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
-                    >
-                      Reset Password
-                    </button>
+                   
 
                     
                     <div>
@@ -255,6 +269,14 @@ export default function ResetPasswordForm() {
                         )}
                       </div>
                     </div>
+
+                    <input type="hidden" name="redirectTo" value={redirectTo} />
+                    <button
+                      type="submit"
+                      className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
+                    >
+                      Reset Password
+                    </button>
 
 
                     <input type="hidden" />
