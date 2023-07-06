@@ -30,10 +30,9 @@ export async function createUser(email: User["email"], password: string) {
   });
 }
 
-export async function createPasswordResetToken(userId: User["id"],) {
+export async function createPasswordResetToken(userId: User["id"]) {
   const token = uuidv4();
   const EXPIRATION_TIME = 3600000; // 1 hour
-  
 
   return prisma.passwordReset.create({
     data: {
@@ -48,7 +47,7 @@ export async function updatePassword(email: User["email"], password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   await prisma.user.update({
-    where: { email: email },
+    where: { email },
     data: {
       password: {
         update: {
@@ -59,7 +58,6 @@ export async function updatePassword(email: User["email"], password: string) {
   });
 }
 
-
 // Create a nodemailer transporter
 const transporter = nodemailer.createTransport({
   // Configure your email service provider here
@@ -68,7 +66,7 @@ const transporter = nodemailer.createTransport({
 
 // Handler for sending the password reset email
 async function sendPasswordResetEmail(email: User["email"], token: PasswordReset["token"]) {
-  const PASSWORD_RESET_URL = '/passwordReset'
+  const PASSWORD_RESET_URL = '/passwordReset';
   const emailContent = `
     <p>Dear User,</p>
     <p>Click the following link to reset your password:</p>
@@ -87,7 +85,7 @@ async function sendPasswordResetEmail(email: User["email"], token: PasswordReset
 }
 
 // Example usage
-async function handlePasswordResetRequest(email: User["email"], token: PasswordReset["token"]) {
+export async function handlePasswordResetRequest(email: User["email"], token: PasswordReset["token"]) {
   try {
     // Generate the email and send it
     await sendPasswordResetEmail(email, token);
@@ -96,7 +94,6 @@ async function handlePasswordResetRequest(email: User["email"], token: PasswordR
     console.error('Error sending password reset email:', error);
   }
 }
-
 
 export async function deleteUserByEmail(email: User["email"]) {
   return prisma.user.delete({ where: { email } });

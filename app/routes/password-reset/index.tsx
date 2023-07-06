@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { safeRedirect, validateEmail } from "~/utils";
 import { loginImages } from "../../loginImages";
 import {
-  createPasswordResetToken,
   getUserByEmail,
   getUserById,
   updatePassword,
@@ -30,8 +29,8 @@ interface ActionData {
     email?: string;
     password?: string;
     id?: string;
-    confirmPassword?:string;
-    userId?:string;
+    confirmPassword?: string;
+    userId?: string;
   };
 }
 
@@ -53,7 +52,7 @@ export const action: ActionFunction = async ({ request }) => {
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  
 
   if (!validateEmail(email)) {
     return json<ActionData>(
@@ -75,7 +74,7 @@ export const action: ActionFunction = async ({ request }) => {
       { status: 400 }
     );
   }
-
+  const confirmPassword = formData.get("confirmPassword")?.toString() || "";
   if (password !== confirmPassword) {
     return json<ActionData>(
       { errors: { confirmPassword: "Passwords do not match" } },
@@ -139,7 +138,6 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ user });
 };
 
-
 export default function ResetPasswordForm() {
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
@@ -158,6 +156,7 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
+    
   }, []);
 
   if (actionData?.success) {
@@ -234,9 +233,6 @@ export default function ResetPasswordForm() {
                       </div>
                     </div>
 
-                   
-
-                    
                     <div>
                       <label
                         htmlFor="confirmPassword"
@@ -277,7 +273,6 @@ export default function ResetPasswordForm() {
                     >
                       Reset Password
                     </button>
-
 
                     <input type="hidden" />
                   </Form>
