@@ -4,16 +4,14 @@ import { useOptionalUser } from "~/utils";
 import { useEffect, useState } from "react";
 import jobSearch from "jobSearch.jpg"
 
-import {actions} from './cookie'
+
 
 
 
 
 
 export default function Index() {
-  const { action, signOut } = actions;
-  action();
-signOut();
+
 const [searchParams] = useSearchParams();
  
   
@@ -58,7 +56,7 @@ const [searchParams] = useSearchParams();
                   dreaming of, chasing and seeking after. Build a road map and
                   see how far you have come!
                 </p>
-                <div className="mx-auto mt-10 max-w-sm  sm:flex sm:max-w-none sm:justify-center">
+                <div className="mx-auto mt-10 max-w-sm  sm:flex sm:max-w-none sm:justify-center z-10">
                   {user ? (
                     <Link
                       to="/posts/user"
