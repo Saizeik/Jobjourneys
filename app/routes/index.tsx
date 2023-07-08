@@ -58,7 +58,7 @@ const [searchParams] = useSearchParams();
                   dreaming of, chasing and seeking after. Build a road map and
                   see how far you have come!
                 </p>
-                <div className="mx-auto mt-10 max-w-s  sm:flex sm:max-w-none sm:justify-center">
+                <div className="mx-auto mt-10 max-w-sm  sm:flex sm:max-w-none sm:justify-center">
                   {user ? (
                     <Link
                       to="/posts/user"
@@ -67,21 +67,21 @@ const [searchParams] = useSearchParams();
                       View Dashboard for {user.email}
                     </Link>
                   ) : (
-                    <div className="flex flex-wrap justify-center sm:flex-row sm:justify-start gap-5 sm:my-4">
+                    <div className="space-y-4 sm:mx- sm:flex sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                       <Link
                         to="/join"
-                        className="mr-4 mb-4 sm:mb-0  hover:bg-custom-spaceBlack flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-teal-400 shadow-sm hover:text-white sm:px-8"
+                        className="mr-4 mb-4 sm:mb-0 sm:flex-shrink-0  hover:bg-custom-spaceBlack flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 sm:py-0 text-base font-medium text-teal-400 shadow-sm hover:text-white sm:px-8"
                       >
                         Sign up
                       </Link>
                       <Link
                         to="/login"
-                        className=" mr-4 mb-4 sm:mb-0 bg-custom hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
+                        className=" mr-4 mb-4 sm:mb-0 sm:flex-shrink-0  bg-custom hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 sm:py-0 font-medium text-white"
                       >
                         Log In
                       </Link>
                       <Link
-                       className="mr-4 mb-4 sm:mb-0 bg-custom-newColor hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 font-medium text-white"
+                       className="mr-4 mb-4 sm:mb-0 sm:flex-shrink-0  bg-custom-newColor hover:bg-custom-spaceBlack flex items-center justify-center rounded-md px-4 py-3 sm:py-0  font-medium text-white"
                        to={{
                          pathname: "/ForgotPassword",
                          search: searchParams.toString(),
