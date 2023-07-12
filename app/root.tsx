@@ -3,6 +3,7 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
+
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -13,13 +14,15 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { ToastContainer } from 'react-toastify';
+
+
 
 import Layout from "./layout";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
+
 import { useTransition, useEffect } from "react";
 
 
@@ -50,6 +53,7 @@ export default function App() {
   const data = useLoaderData();
   console.log(ENV);
   return (
+   
     <html lang="en" className="h-full">
       <head>
         <link
@@ -76,10 +80,12 @@ export default function App() {
       </head>
       
       <body className="h-full">
+     
         <Layout>
           <Outlet />
          
         </Layout>
+       
         <ScrollRestoration />
         <Scripts />
         <script
@@ -90,5 +96,6 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+ 
   );
 }

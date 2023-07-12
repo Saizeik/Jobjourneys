@@ -46,16 +46,20 @@ export async function createPasswordResetToken(userId: User["id"]) {
 export async function updatePassword(email: User["email"], password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await prisma.user.update({
-    where: { email },
-    data: {
-      password: {
-        update: {
-          hash: hashedPassword,
-        },
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (user) {
+    await prisma.password.upsert({
+      where: { userId: user.id },
+      create: {
+        hash: hashedPassword,
+        userId: user.id,
       },
-    },
-  });
+      update: {
+        hash: hashedPassword,
+      },
+    });
+  }
 }
 
 // Create a nodemailer transporter

@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
 
-  const isLoginOrJoinPage = location.pathname === '/login' || location.pathname === '/join' || location.pathname === '/ '
+  const isLoginOrJoinPage = location.pathname === '/login' || location.pathname === '/join' || location.pathname === '/forgot' ||  location.pathname === '/'
 
   if (isLoginOrJoinPage) {
     return (

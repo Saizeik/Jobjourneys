@@ -8,13 +8,15 @@
   import * as React from "react";
 
   import { loginImages } from "../loginImages";
-  import { useEffect, useState } from "react";
+  import { useEffect, useState} from "react";
   import { motion } from "framer-motion";
+  
+ 
 
   import { createUserSession, getUserId } from "~/session.server";
   import { verifyLogin } from "~/models/user.server";
   import { safeRedirect, validateEmail } from "~/utils";
-
+ 
   export const loader: LoaderFunction = async ({ request }) => {
     const userId = await getUserId(request);
     if (userId) {return redirect("/");}
@@ -39,6 +41,7 @@
     return loginImages[randomIndex];
   }
 
+  
   export const action: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
     const email = formData.get("email");
@@ -52,6 +55,8 @@
         { status: 400 }
       );
     }
+
+ 
 
     if (typeof password !== "string" || password.length === 0) {
       return json<ActionData>(
@@ -67,6 +72,8 @@
       );
     }
 
+    
+
     const user = await verifyLogin(email, password);
 
     if (!user) {
@@ -76,13 +83,23 @@
       );
     }
 
+   
+    
+  
+  
+    
+
     return createUserSession({
       request,
       userId: user.id,
       remember: remember === "on" ? true : false,
       redirectTo,
-    });
+    })
+
+   
   };
+
+
 
   export const meta: MetaFunction = () => {
     return {
@@ -97,7 +114,12 @@
     const emailRef = React.useRef<HTMLInputElement>(null);
     const passwordRef = React.useRef<HTMLInputElement>(null);
     const [imageLoading, setImageLoading] = useState(true);
+    
+  
+   
+    
 
+   
     const imageLoaded = () => {
       setImageLoading(false);
     };
@@ -109,6 +131,7 @@
         passwordRef.current?.focus();
       }
     }, [actionData]);
+
 
     const [randomImage, setRandomImage] = useState<loginInfo>();
 
@@ -243,7 +266,21 @@
                           >
                             Sign up
                           </Link>
-                        </div>
+                          </div>
+                          <Link
+                            className="text-lg font-bold text-white underline"
+                            to={{
+                              pathname: "/forgot",
+                              search: searchParams.toString(),
+                            }}
+                          >
+                            Reset Password
+                          </Link>
+
+   
+
+      
+                        
                       </div>
                     </Form>
                   </div>

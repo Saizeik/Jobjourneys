@@ -8,22 +8,15 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData } from "@remix-run/react";
 import * as React from "react";
 import { getUserByEmail, createPasswordResetToken } from "~/models/user.server";
+
 import { getUserId } from "~/session.server";
 import { validateEmail } from "~/utils";
-import { loginImages } from "../../loginImages";
-import { useEffect, useState, useRef } from "react";
+import { loginImages } from "../loginImages";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { User, PasswordReset } from "~/models/user.server";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useLocation, useNavigate } from "@remix-run/react";
-import "react-toastify/dist/ReactToastify.css";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await getUserId(request);
 
-  return json({});
-};
 
 interface ActionData {
   errors: {
@@ -41,6 +34,7 @@ function getRandomImage() {
   const randomIndex = Math.floor(Math.random() * loginImages.length);
   return loginImages[randomIndex];
 }
+
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -65,7 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (!token) {
     // Handle the case when token is null
-    return;
+    return null;
   }
 
   const sendResetPasswordEmail = async (user: User, token: PasswordReset) => {
@@ -100,9 +94,12 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect("/PasswordResetSuccess");
 };
 
+
+
+
 export const meta: MetaFunction = () => {
   return {
-    title: "Reset Password",
+    title: "forgot",
   };
 };
 
@@ -110,6 +107,7 @@ export default function ResetPassword() {
   const actionData = useActionData() as ActionData;
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [imageLoading, setImageLoading] = useState(true);
+  
 
   const imageLoaded = () => {
     setImageLoading(false);
@@ -129,6 +127,7 @@ export default function ResetPassword() {
   }, []);
 
   return (
+ 
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -214,6 +213,7 @@ export default function ResetPassword() {
         </div>
       </div>
     </main>
+    
   );
 }
 

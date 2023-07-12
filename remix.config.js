@@ -19,6 +19,15 @@ module.exports = {
     // uses the v1 convention, works in v1.15+ and v2
     return createRoutesFromFolders(defineRoutes);
   },
+  getLoadContext() {
+    return {
+      includePaths: [
+        // Add the additional folders where your routes are located
+        'forgot',
+        
+      ],
+    };
+  },
   ignoredRouteFiles: ["**/.*", "**/*.test.{js,jsx,ts,tsx}"],
   postcss: true,
   serverModuleFormat: "cjs",
