@@ -161,9 +161,16 @@ export default function ResetPasswordForm() {
 
   if (actionData?.success) {
     return (
-      <p>
-        Password reset successful. You can now log in with your new password.
-      </p>
+      <main className="flex items-center justify-center min-h-screen bg-white">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Password Reset Successful
+          </h2>
+          <p className="text-gray-600">
+            You can now log in with your new password.
+          </p>
+        </div>
+      </main>
     );
   }
 
