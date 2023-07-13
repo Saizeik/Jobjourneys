@@ -106,8 +106,10 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const userId = String(resetPassword.userId);
+  console.log("userId:",resetPassword.userId);
 
   const user = await getUserById(userId);
+  console.log("USER:", userId)
 
   if (!user) {
     return redirect("/error");
@@ -125,7 +127,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   // Update the password using the `updatePassword` function
   await updatePassword(userId, password);
-
+console.log("password:", password)
   // Delete the password reset entry after successful password update
   await prisma.passwordReset.delete({
     where: {
