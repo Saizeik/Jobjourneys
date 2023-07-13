@@ -209,16 +209,17 @@ export default function ResetPasswordForm() {
                     <div>
                     <label
                         htmlFor="email"
-                        className="block text-sm font-bold text-white">
-                      
+                        className="block text-sm font-bold text-white"
+                      >
+                        Email
                       </label>
-                      <div className="mt-1">
-                        <input
+                    <input
                           type="text"
-                          name="token"
+                          name="email"
                           value={actionData?.email}
                           readOnly
                         />
+                      
                       <label
                         htmlFor="password"
                         className="block text-sm font-bold text-white"
