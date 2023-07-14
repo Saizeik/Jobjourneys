@@ -43,12 +43,19 @@ export async function createPasswordResetToken(userId: User["id"]) {
   });
 }
 
-export async function updatePassword(userId: User["id"], password: string) {
+export async function updatePassword(email: User["email"], password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await prisma.password.update({
-    where: { userId },
-    data: { hash: hashedPassword },
+  await prisma.user.update({
+    where: { email },
+    data: {
+      email,
+      password: {
+        update: {
+          hash: hashedPassword,
+        },
+      },
+    },
   });
 }
 
@@ -72,7 +79,7 @@ async function sendPasswordResetEmail(email: User["email"], token: PasswordReset
 
   // Send the email
   await transporter.sendMail({
-    from: 'your_email@example.com',
+    from: 'admin@jobjourney',
     to: email,
     subject: 'Password Reset',
     html: emailContent,

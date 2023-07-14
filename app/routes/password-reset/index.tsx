@@ -49,11 +49,10 @@ export const action: ActionFunction = async ({ request }) => {
   const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
   const email = formData.get("email");
- 
+
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
-  
 
   if (!validateEmail(email)) {
     return json<ActionData>(
@@ -107,10 +106,10 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const userId = String(resetPassword.userId);
-  console.log("userId:",resetPassword.userId);
+  
 
   const user = await getUserById(userId);
-  console.log("USER:", userId)
+  
 
   if (!user) {
     return redirect("/error");
@@ -128,7 +127,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   // Update the password using the `updatePassword` function
   await updatePassword(userId, password);
-console.log("password:", password)
+  
   // Delete the password reset entry after successful password update
   await prisma.passwordReset.delete({
     where: {
@@ -151,7 +150,6 @@ export default function ResetPasswordForm() {
   const imageLoaded = () => {
     setImageLoading(false);
   };
-  const emailUser = getUserByEmail.toString(); 
 
   // Handle the response
 
@@ -160,16 +158,13 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
-    
   }, []);
 
-  if (actionData?.success) {
+  if (actionData?.user) {
     return (
-      <main className="flex items-center justify-center min-h-screen bg-white">
+      <main className="flex min-h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Password Reset Successful
-          </h2>
+          <h2 className="mb-4 text-3xl font-bold">Password Reset Successful</h2>
           <p className="text-gray-600">
             You can now log in with your new password.
           </p>
@@ -209,22 +204,6 @@ export default function ResetPasswordForm() {
                 <div className="mx-auto w-full max-w-md px-8">
                   <Form method="post" className="space-y-6">
                     <div>
-                      <div className="mt-1">
-                    <label
-                        htmlFor="email"
-                        className="block text-sm font-bold text-white"
-                      >
-                        Email
-                      </label>
-                      
-                    <input
-                          type="text"
-                          name="email"
-                          value={emailUser}
-                          className="block text-sm font-bold text-black"
-                          readOnly
-                        />
-                      </div>
                       <label
                         htmlFor="password"
                         className="block text-sm font-bold text-white"
