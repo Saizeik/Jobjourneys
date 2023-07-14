@@ -17,6 +17,7 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { prisma } from "~/db.server";
+import { useOptionalUser } from "~/utils";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -141,6 +142,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function ResetPasswordForm() {
+  const user = useOptionalUser();
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
@@ -203,7 +205,21 @@ export default function ResetPasswordForm() {
               <div className="flex min-h-full flex-col justify-center">
                 <div className="mx-auto w-full max-w-md px-8">
                   <Form method="post" className="space-y-6">
+                  <label
+                        htmlFor="email"
+                        className="block text-sm font-bold text-white"
+                      >
+                        Email
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          type="text"
+                          name="email"
+                          value={user?.email}
+                        />
+                        </div>
                     <div>
+                    
                       <label
                         htmlFor="password"
                         className="block text-sm font-bold text-white"
