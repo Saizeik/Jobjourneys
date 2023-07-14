@@ -209,6 +209,7 @@ export default function Join() {
                     <button
                       type="submit"
                       className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-4 py-2 font-medium text-white text-white"
+                      
                     >
                       Create Account
                     </button>
