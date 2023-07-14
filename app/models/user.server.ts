@@ -46,16 +46,17 @@ export async function createPasswordResetToken(userId: User["id"]) {
 export async function updatePassword(email: User["email"], password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await prisma.user.update({
+  return prisma.user.update({
     where: { email },
     data: {
       email,
       password: {
-        update: {
+        create: {
           hash: hashedPassword,
         },
       },
     },
+    
   });
 }
 
