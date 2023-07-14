@@ -49,6 +49,7 @@ export const action: ActionFunction = async ({ request }) => {
   const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
   const email = formData.get("email");
+ 
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
@@ -150,6 +151,7 @@ export default function ResetPasswordForm() {
   const imageLoaded = () => {
     setImageLoading(false);
   };
+  const emailUser = getUserByEmail.toString(); 
 
   // Handle the response
 
@@ -218,7 +220,7 @@ export default function ResetPasswordForm() {
                     <input
                           type="text"
                           name="email"
-                          value={actionData?.email}
+                          value={emailUser}
                           className="block text-sm font-bold text-black"
                           readOnly
                         />
