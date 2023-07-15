@@ -55,7 +55,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
   
 
@@ -123,7 +123,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 };
 export default function ResetPasswordForm() {
-  
+  const [email, setEmail] = useState<User["email"]>("");
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
@@ -176,6 +176,34 @@ export default function ResetPasswordForm() {
                 <div className="mx-auto w-full max-w-md px-8">
                   <Form method="post" className="space-y-6">
                   <div>
+                    <div>
+                  <label
+                        htmlFor="email"
+                        className="block text-sm font-bold text-white"
+                      >
+                        Email Address
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          autoComplete="email"
+                          aria-invalid={
+                            actionData?.errors?.email ? true : undefined
+                          }
+                          aria-describedby="email-error"
+                          className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                        />
+                        {actionData?.errors?.email && (
+                          <div className="pt-1 text-red-700" id="email-error">
+                            {actionData.errors.email}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   
                       <label
                         htmlFor="password"
