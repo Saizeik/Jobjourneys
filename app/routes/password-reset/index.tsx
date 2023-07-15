@@ -51,7 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
   const queryParams = new URLSearchParams(request.url.split("?")[1]);
   const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
-  const [email, setEmail] = useState<User["email"]>("");
+
 
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
@@ -85,10 +85,26 @@ export const action: ActionFunction = async ({ request }) => {
     where: {
       token: token,
     },
-    include: {
-      user: true,
+  });
+
+  if (!resetPassword) {
+    // Handle the case when the token is invalid or expired
+    return redirect("Token is invalid or expired");
+  }
+
+  // Use the userId from the PasswordReset record to get the associated email
+  const user = await prisma.user.findUnique({
+    where: {
+      id: resetPassword.userId,
     },
   });
+
+  if (!user) {
+    // Handle the case when the user associated with the token is not found
+    return redirect("User not found");
+  }
+
+  const email = user.email;
 
   if (resetPassword && resetPassword.expiresAt) {
     // Token is invalid or expired
@@ -100,13 +116,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   // Update the password using the `updatePassword` function
   await updatePassword(email, password);
-
-  if (!resetPassword) {
-    // Token is invalid or expired
-    // Handle the error accordingly
-    return redirect("unable to delete token as reset password is null");
-  }
-
 
   // Delete the password reset entry after successful password update
   await prisma.passwordReset.delete({
@@ -183,18 +192,13 @@ export default function ResetPasswordForm() {
                       >
                         Email Address
                       </label>
-                      <div className="mt-1">
-                        <input
+                      <div className="mt-1 mb-2">
+                      <input
                           id="email"
                           name="email"
                           type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          autoComplete="email"
-                          aria-invalid={
-                            actionData?.errors?.email ? true : undefined
-                          }
-                          aria-describedby="email-error"
+                          value={actionData.email} // Display the email from actionData
+                          readOnly // Make the input readonly
                           className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
                         />
                         {actionData?.errors?.email && (
