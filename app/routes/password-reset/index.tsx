@@ -49,18 +49,13 @@ export const action: ActionFunction = async ({ request }) => {
   const queryParams = new URLSearchParams(request.url.split("?")[1]);
   const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
-  const email = formData.get("email");
+ 
 
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
 
-  if (!validateEmail(email)) {
-    return json<ActionData>(
-      { errors: { email: "Email is invalid" } },
-      { status: 400 }
-    );
-  }
+  
 
   if (typeof password !== "string" || password.length === 0) {
     return json<ActionData>(
@@ -83,13 +78,6 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  const existingUser = await getUserByEmail(email);
-  if (existingUser) {
-    return json<ActionData>(
-      { errors: { email: "A user already exists with this email" } },
-      { status: 400 }
-    );
-  }
 
   const resetPassword = await prisma.passwordReset.findUnique({
     where: {
@@ -100,35 +88,29 @@ export const action: ActionFunction = async ({ request }) => {
     },
   });
 
-  if (!resetPassword) {
+  if (!resetPassword || resetPassword.expiresAt < new Date()) {
     // Token is invalid or expired
     // Handle the error accordingly
     return redirect("/error");
   }
 
-  const userId = String(resetPassword.userId);
-  
+  const email = resetPassword.user.email;
 
-  const user = await getUserById(userId);
-  
-
-  if (!user) {
+  if (email !== formData.get("email")) {
+    // Email provided in the form doesn't match the token's email
+    // Handle the error accordingly
     return redirect("/error");
   }
 
-  if (!resetPassword || resetPassword.expiresAt) {
-    // Invalid token or expired token, handle the error
-    return redirect("/error");
-  }
+  const user = await getUserByEmail(email);
 
   if (!user) {
-    // User not found, handle the error
     return redirect("/error");
   }
 
   // Update the password using the `updatePassword` function
-  await updatePassword(userId, password);
-  
+  await updatePassword(email, password);
+
   // Delete the password reset entry after successful password update
   await prisma.passwordReset.delete({
     where: {
@@ -140,7 +122,6 @@ export const action: ActionFunction = async ({ request }) => {
   // You can handle the response accordingly
   return json({ user });
 };
-
 export default function ResetPasswordForm() {
   const user = useOptionalUser();
   const [searchParams] = useSearchParams();

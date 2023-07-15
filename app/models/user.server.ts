@@ -11,7 +11,7 @@ export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
 }
 
-export async function getUserByEmail(email: User["email"]) {
+export async function getUserByEmail(email: User["email"]): Promise<User | null> {
   return prisma.user.findUnique({ where: { email } });
 }
 
@@ -43,20 +43,18 @@ export async function createPasswordResetToken(userId: User["id"]) {
   });
 }
 
-export async function updatePassword(email: User["email"], password: string) {
+export async function updatePassword(email: string, password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   return prisma.user.update({
-    where: { email},
+    where: { email },
     data: {
-      email,
       password: {
         update: {
           hash: hashedPassword,
         },
       },
     },
-    
   });
 }
 
