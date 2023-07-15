@@ -141,22 +141,7 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
-    const fetchUserEmail = async () => {
-      const resetPassword = await prisma.passwordReset.findUnique({
-        where: {
-          token: searchParams.get("token") ?? "",
-        },
-        include: {
-          user: true,
-        },
-      });
-  
-      if (resetPassword && resetPassword.user) {
-        setUserEmail(resetPassword.user.email);
-      }
-    };
-  
-    fetchUserEmail();
+    
   }, []);
 
   if (actionData?.userEmail) {
@@ -203,22 +188,7 @@ export default function ResetPasswordForm() {
                 <div className="mx-auto w-full max-w-md px-8">
                   <Form method="post" className="space-y-6">
                   <div>
-                  <label
-    htmlFor="email"
-    className="block text-sm font-bold text-white"
-  >
-    Email
-  </label>
-  <div className="mt-1">
-    <input
-      type="text"
-      id="email"
-      name="email"
-      value={userEmail}
-      readOnly
-      className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-    />
-  </div>
+                  
                       <label
                         htmlFor="password"
                         className="block text-sm font-bold text-white"
