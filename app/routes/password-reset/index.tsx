@@ -17,6 +17,7 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { prisma } from "~/db.server";
+import type { User, PasswordReset } from "@prisma/client";
 
 
 
@@ -50,8 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
   const queryParams = new URLSearchParams(request.url.split("?")[1]);
   const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
-  const email = formData.get("email")?.toString() || "";
-const emailUser = await getUserByEmail(email);
+  const [email, setEmail] = useState<User["email"]>("");
 
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
@@ -115,26 +115,9 @@ const emailUser = await getUserByEmail(email);
     },
   });
 
-  const headers = new Headers({
-    "Content-Type": "multipart/form-data",
-  });
-
-  // Make the form submission with the specified headers
-  const response = await fetch("/password-reset", {
-    method: "POST",
-    body: formData,
-    headers: headers,
-  });
-
-  // Check if the form submission was successful
-  if (response.ok) {
-    // Handle the success response
-    return json({ success: true });
-  } else {
-    // Handle the error response
-    // You can extract and display the error message from the response, if needed
-    return json({ error: "An error occurred while submitting the form" });
-  }
+ return json({ success: true }), redirectTo;
+    
+  
 
 
 
