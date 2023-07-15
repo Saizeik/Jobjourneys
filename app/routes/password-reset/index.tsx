@@ -16,10 +16,8 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import { prisma } from "~/db.server";
+
 import type { User, PasswordReset } from "@prisma/client";
-
-
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -29,7 +27,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 interface ActionData {
   errors: {
-  email?: string;
+    email?: string;
     password?: string;
     id?: string;
     confirmPassword?: string;
@@ -48,16 +46,12 @@ function getRandomImage() {
 }
 
 export const action: ActionFunction = async ({ request }) => {
-  const queryParams = new URLSearchParams(request.url.split("?")[1]);
-  const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
-
+  const [email, setEmail] = useState<User["email"]>("");
 
   const password = formData.get("password");
-  const token = formData.get("token")?.toString() || "";
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
-  
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
 
   if (typeof password !== "string" || password.length === 0) {
     return json<ActionData>(
@@ -80,56 +74,10 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-
-  const resetPassword = await prisma.passwordReset.findUnique({
-    where: {
-      token: token,
-    },
-  });
-
-  if (!resetPassword) {
-    // Handle the case when the token is invalid or expired
-    return redirect("Token is invalid or expired");
-  }
-
-  // Use the userId from the PasswordReset record to get the associated email
-  const user = await prisma.user.findUnique({
-    where: {
-      id: resetPassword.userId,
-    },
-  });
-
-  if (!user) {
-    // Handle the case when the user associated with the token is not found
-    return redirect("User not found");
-  }
-
-  const email = user.email;
-
-  if (resetPassword && resetPassword.expiresAt) {
-    // Token is invalid or expired
-    // Handle the error accordingly
-    return redirect("Token is expired");
-  }
-
-  
-
   // Update the password using the `updatePassword` function
   await updatePassword(email, password);
 
-  // Delete the password reset entry after successful password update
-  await prisma.passwordReset.delete({
-    where: {
-      id: resetPassword.id,
-    },
-  });
-
- return json({ success: true }), redirectTo;
-    
-  
-
-
-
+  return json({ success: true }), redirectTo;
 };
 export default function ResetPasswordForm() {
   const [email, setEmail] = useState<User["email"]>("");
@@ -150,9 +98,7 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
-    
   }, []);
-
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
@@ -184,36 +130,36 @@ export default function ResetPasswordForm() {
               <div className="flex min-h-full flex-col justify-center">
                 <div className="mx-auto w-full max-w-md px-8">
                   <Form method="post" className="space-y-6">
-                  <div>
                     <div>
-                  <label
-                        htmlFor="email"
-                        className="block text-sm font-bold text-white"
-                      >
-                        Email Address
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          autoComplete="email"
-                          aria-invalid={
-                            actionData?.errors?.email ? true : undefined
-                          }
-                          aria-describedby="email-error"
-                          className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-                        />
-                        {actionData?.errors?.email && (
-                          <div className="pt-1 text-red-700" id="email-error">
-                            {actionData.errors.email}
-                          </div>
-                        )}
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-bold text-white"
+                        >
+                          Email Address
+                        </label>
+                        <div className="mt-1">
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="email"
+                            aria-invalid={
+                              actionData?.errors?.email ? true : undefined
+                            }
+                            aria-describedby="email-error"
+                            className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                          />
+                          {actionData?.errors?.email && (
+                            <div className="pt-1 text-red-700" id="email-error">
+                              {actionData.errors.email}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  
+
                       <label
                         htmlFor="password"
                         className="block text-sm font-bold text-white"
