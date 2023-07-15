@@ -46,6 +46,7 @@ export async function createPasswordResetToken(userId: User["id"]) {
 export async function updatePassword(email: string, password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  // Find the user by email and update their password
   return prisma.user.update({
     where: { email },
     data: {
@@ -57,7 +58,6 @@ export async function updatePassword(email: string, password: string) {
     },
   });
 }
-
 
 // Create a nodemailer transporter
 const transporter = nodemailer.createTransport({

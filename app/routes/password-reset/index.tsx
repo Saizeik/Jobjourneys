@@ -47,7 +47,13 @@ function getRandomImage() {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const [email, setEmail] = useState<User["email"]>("");
+  const email = formData.get("email") || "";
+  if (typeof email !== "string") {
+    return json<ActionData>(
+      { errors: { email: "Email is required" } },
+      { status: 400 }
+    );
+  }
 
   const password = formData.get("password");
 
@@ -80,7 +86,8 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ success: true }), redirectTo;
 };
 export default function ResetPasswordForm() {
-  const [email, setEmail] = useState<User["email"]>("");
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
@@ -143,8 +150,7 @@ export default function ResetPasswordForm() {
                             id="email"
                             name="email"
                             type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            ref={emailRef}
                             autoComplete="email"
                             aria-invalid={
                               actionData?.errors?.email ? true : undefined
