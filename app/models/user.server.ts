@@ -43,6 +43,10 @@ export async function createPasswordResetToken(userId: User["id"]) {
   });
 }
 
+export async function deletePasswordResetByToken(token: string) {
+  return prisma.passwordReset.delete({ where: { token } });
+}
+
 export async function updatePassword(email: string, password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 

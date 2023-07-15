@@ -56,7 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const password = formData.get("password");
 
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/login");
 
   if (typeof password !== "string" || password.length === 0) {
     return json<ActionData>(
