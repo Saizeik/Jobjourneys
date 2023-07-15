@@ -17,7 +17,6 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 
-import type { User, PasswordReset } from "@prisma/client";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -83,11 +82,10 @@ export const action: ActionFunction = async ({ request }) => {
   // Update the password using the `updatePassword` function
   await updatePassword(email, password);
 
-  return json({ success: true }), redirectTo;
+  return redirect(redirectTo);
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
-  
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
@@ -105,7 +103,9 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
-  }, []);
+    if (actionData && actionData.success && actionData.redirectTo) {
+    }
+  }, [actionData]);
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
