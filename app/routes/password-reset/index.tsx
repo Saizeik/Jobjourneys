@@ -101,12 +101,21 @@ const emailUser = await getUserByEmail(email);
   // Update the password using the `updatePassword` function
   await updatePassword(email, password);
 
+  if (!resetPassword) {
+    // Token is invalid or expired
+    // Handle the error accordingly
+    return redirect("unable to delete token as reset password is null");
+  }
+
+
   // Delete the password reset entry after successful password update
   await prisma.passwordReset.delete({
     where: {
       id: resetPassword.id,
     },
   });
+
+
 
   // Password has been successfully updated
   // You can handle the response accordingly
