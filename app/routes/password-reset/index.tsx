@@ -17,7 +17,8 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { prisma } from "~/db.server";
-import { useOptionalUser } from "~/utils";
+
+
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -27,7 +28,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 interface ActionData {
   errors: {
-    email?: string;
+  email?: string;
     password?: string;
     id?: string;
     confirmPassword?: string;
@@ -49,7 +50,8 @@ export const action: ActionFunction = async ({ request }) => {
   const queryParams = new URLSearchParams(request.url.split("?")[1]);
   const id = parseInt(queryParams.get("id") || "", 10);
   const formData = await request.formData();
- 
+  const email = formData.get("email")?.toString() || "";
+const emailUser = await getUserByEmail(email);
 
   const password = formData.get("password");
   const token = formData.get("token")?.toString() || "";
@@ -88,25 +90,14 @@ export const action: ActionFunction = async ({ request }) => {
     },
   });
 
-  if (!resetPassword || resetPassword.expiresAt < new Date()) {
+  if (!resetPassword || resetPassword.expiresAt ) {
     // Token is invalid or expired
     // Handle the error accordingly
       return redirect("Token is invalid or expired" );
   }
 
-  const email = resetPassword.user.email;
 
-  if (email !== formData.get("email")) {
-    // Email provided in the form doesn't match the token's email
-    // Handle the error accordingly
-    return redirect("/error");
-  }
-
-  const user = await getUserByEmail(email);
-
-  if (!user) {
-    return redirect("invalid User or email" );
-  }
+  
 
   // Update the password using the `updatePassword` function
   await updatePassword(email, password);
@@ -120,10 +111,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   // Password has been successfully updated
   // You can handle the response accordingly
-  return json({ user });
+  return json({ email });
 };
 export default function ResetPasswordForm() {
-  const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
+  
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
@@ -144,18 +135,6 @@ export default function ResetPasswordForm() {
     
   }, []);
 
-  if (actionData?.userEmail) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-white">
-        <div className="text-center">
-          <h2 className="mb-4 text-3xl font-bold">Password Reset Successful</h2>
-          <p className="text-gray-600">
-            You can now log in with your new password.
-          </p>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
