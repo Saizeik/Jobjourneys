@@ -32,7 +32,6 @@ interface ActionData {
     id?: string;
     confirmPassword?: string;
     userId?: string;
-    token?: string;
   };
 }
 
@@ -92,10 +91,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (!resetPassword || resetPassword.expiresAt < new Date()) {
     // Token is invalid or expired
     // Handle the error accordingly
-    return json<ActionData>(
-      { errors: { token: "Token is has expired" } },
-      { status: 400 }
-    );
+      return redirect("Token is invalid or expired" );
   }
 
   const email = resetPassword.user.email;
@@ -103,19 +99,13 @@ export const action: ActionFunction = async ({ request }) => {
   if (email !== formData.get("email")) {
     // Email provided in the form doesn't match the token's email
     // Handle the error accordingly
-    return json<ActionData>(
-      { errors: { confirmPassword: "Token is invalid or expired" } },
-      { status: 400 }
-    );
+    return redirect("/error");
   }
 
   const user = await getUserByEmail(email);
 
   if (!user) {
-    return json<ActionData>(
-      { errors: { email: "unknown user or email" } },
-      { status: 400 }
-    );
+    return redirect("invalid User or email" );
   }
 
   // Update the password using the `updatePassword` function
@@ -133,7 +123,7 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ user });
 };
 export default function ResetPasswordForm() {
-
+  const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
