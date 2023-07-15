@@ -1,4 +1,4 @@
-import { json, redirect } from "@remix-run/node";
+import { json, redirect, Headers } from "@remix-run/node";
 import { Form, useActionData, useSearchParams } from "@remix-run/react";
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -115,11 +115,29 @@ const emailUser = await getUserByEmail(email);
     },
   });
 
+  const headers = new Headers({
+    "Content-Type": "multipart/form-data",
+  });
+
+  // Make the form submission with the specified headers
+  const response = await fetch("/password-reset", {
+    method: "POST",
+    body: formData,
+    headers: headers,
+  });
+
+  // Check if the form submission was successful
+  if (response.ok) {
+    // Handle the success response
+    return json({ success: true });
+  } else {
+    // Handle the error response
+    // You can extract and display the error message from the response, if needed
+    return json({ error: "An error occurred while submitting the form" });
+  }
 
 
-  // Password has been successfully updated
-  // You can handle the response accordingly
-  return json({});
+
 };
 export default function ResetPasswordForm() {
   
