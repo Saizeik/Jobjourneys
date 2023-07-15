@@ -119,7 +119,7 @@ const emailUser = await getUserByEmail(email);
 
   // Password has been successfully updated
   // You can handle the response accordingly
-  return json({ email });
+  return json({});
 };
 export default function ResetPasswordForm() {
   

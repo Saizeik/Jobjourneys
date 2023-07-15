@@ -1,6 +1,5 @@
 import { toast, Toaster } from "react-hot-toast";
 
-
 import type {
   ActionFunction,
   LoaderFunction,
@@ -56,10 +55,13 @@ export default function PasswordResetSuccessPage() {
     setRandomImage(image);
   }, []);
 
-  const notify = () =>
+  const notify = () =>{
+    return(
     toast(
       "If you have an account, a password reset has been sent to your email address."
-    );
+    )
+    )
+  }
 
   return (
     <>
@@ -90,6 +92,13 @@ export default function PasswordResetSuccessPage() {
                     Job Journey
                   </span>
                 </h1>
+                <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
+                  If an account is associated with this email, an email
+                  containing instructions to reset the password has been sent.
+                  Please check your inbox for further instructions. If you do
+                  not receive an email, it's possible that no account is
+                  currently associated with this email address.
+                </p>
                 <div
                   className="flex min-h-full flex-col justify-center"
                   onLoad={notify}
