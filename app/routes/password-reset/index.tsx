@@ -123,7 +123,7 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ user });
 };
 export default function ResetPasswordForm() {
-  const user = useOptionalUser();
+  const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [searchParams] = useSearchParams();
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
@@ -141,9 +141,25 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
+    const fetchUserEmail = async () => {
+      const resetPassword = await prisma.passwordReset.findUnique({
+        where: {
+          token: searchParams.get("token") ?? "",
+        },
+        include: {
+          user: true,
+        },
+      });
+  
+      if (resetPassword && resetPassword.user) {
+        setUserEmail(resetPassword.user.email);
+      }
+    };
+  
+    fetchUserEmail();
   }, []);
 
-  if (actionData?.user) {
+  if (actionData?.userEmail) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-white">
         <div className="text-center">
@@ -186,21 +202,23 @@ export default function ResetPasswordForm() {
               <div className="flex min-h-full flex-col justify-center">
                 <div className="mx-auto w-full max-w-md px-8">
                   <Form method="post" className="space-y-6">
+                  <div>
                   <label
-                        htmlFor="email"
-                        className="block text-sm font-bold text-white"
-                      >
-                        Email
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          type="text"
-                          name="email"
-                          value={user?.email}
-                        />
-                        </div>
-                    <div>
-                    
+    htmlFor="email"
+    className="block text-sm font-bold text-white"
+  >
+    Email
+  </label>
+  <div className="mt-1">
+    <input
+      type="text"
+      id="email"
+      name="email"
+      value={userEmail}
+      readOnly
+      className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+    />
+  </div>
                       <label
                         htmlFor="password"
                         className="block text-sm font-bold text-white"
