@@ -90,12 +90,11 @@ const emailUser = await getUserByEmail(email);
     },
   });
 
-  if (!resetPassword || resetPassword.expiresAt ) {
+  if (resetPassword && resetPassword.expiresAt) {
     // Token is invalid or expired
     // Handle the error accordingly
-      return redirect("Token is invalid or expired" );
+    return redirect("Token is expired");
   }
-
 
   
 
