@@ -192,13 +192,18 @@ export default function ResetPasswordForm() {
                       >
                         Email Address
                       </label>
-                      <div className="mt-1 mb-2">
-                      <input
+                      <div className="mt-1">
+                        <input
                           id="email"
                           name="email"
                           type="email"
-                          value={actionData.email} // Display the email from actionData
-                          readOnly // Make the input readonly
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          autoComplete="email"
+                          aria-invalid={
+                            actionData?.errors?.email ? true : undefined
+                          }
+                          aria-describedby="email-error"
                           className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
                         />
                         {actionData?.errors?.email && (
