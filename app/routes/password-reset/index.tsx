@@ -133,7 +133,7 @@ export default function ResetPasswordForm() {
   const confirmPasswordRef = React.useRef<HTMLInputElement>(null);
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const [showSuccessMessage, setShowSuccessMessage] = useState(
-    successParam === "true" // Set to true if the success parameter is present
+    successParam === "true"
   );
   const imageLoaded = () => {
     setImageLoading(false);
@@ -155,6 +155,7 @@ export default function ResetPasswordForm() {
   }, [successParam]);
 
   return (
+    <>
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -288,13 +289,12 @@ export default function ResetPasswordForm() {
                     >
                       Reset Password
                     </button>
-
-                    {/* Display the success message */}
                     {showSuccessMessage && (
-                      <div className="pt-4 text-green-500">
-                        Password reset successful!
-                      </div>
-                    )}
+        <div className="bg-green-200 p-2 text-center text-green-800">
+          Password reset successful!
+        </div>
+      )}
+                
                      <div className="flex items-center justify-center">
               <div className="text-center text-sm font-bold text-white">
                 Remember your password?{" "}
@@ -310,7 +310,9 @@ export default function ResetPasswordForm() {
           </div>
         </div>
       </div>
-      <Toaster position="top-right" />
+      
     </main>
+    <Toaster position="top-center" />
+    </>
   );
 }
