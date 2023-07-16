@@ -9,6 +9,7 @@ import {
   getUserByEmail,
   getUserById,
   updatePassword,
+  
 } from "~/models/user.server";
 import { getUserId } from "~/session.server";
 import type {
@@ -16,13 +17,15 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-
+import { prisma } from "~/db.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
   return json({});
 };
+
+
 
 interface ActionData {
   errors: {
@@ -31,6 +34,7 @@ interface ActionData {
     id?: string;
     confirmPassword?: string;
     userId?: string;
+    token?:string;
   };
 }
 
@@ -79,8 +83,43 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
+    // Validate the email, password, and confirmPassword as before...
+
+  // Find the user by email
+  const user = await getUserByEmail(email);
+
+  if (!user) {
+    return json<ActionData>(
+      { errors: { email: "User with this email does not exist" } },
+      { status: 400 }
+    );
+  }
+
+  // Retrieve the associated PasswordReset record from the database based on the user's email
+  const passwordReset = await prisma.passwordReset.findFirst({
+    where: {
+      userId: user.id,
+      expiresAt: {
+        gte: new Date(),
+      },
+    },
+  });
+
+  if (!passwordReset) {
+    // Invalid token or token not found for the user
+    return json<ActionData>(
+      { errors: { token: "Invalid or expired token" } },
+      { status: 400 }
+    );
+  }
+
   // Update the password using the `updatePassword` function
   await updatePassword(email, password);
+
+  // Delete the PasswordReset record associated with the user
+  await prisma.passwordReset.delete({
+    where: { id: passwordReset.id },
+  });
 
   return redirect(redirectTo);
 };
