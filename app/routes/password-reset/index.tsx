@@ -121,16 +121,20 @@ export const action: ActionFunction = async ({ request }) => {
     where: { id: passwordReset.id },
   });
 
-  return redirect(redirectTo);
+  const success = true;
+
+  return { success, redirectTo };
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();
+  const successParam = searchParams.get("success");
   const actionData = useActionData();
   const [imageLoading, setImageLoading] = useState(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const confirmPasswordRef = React.useRef<HTMLInputElement>(null);
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const imageLoaded = () => {
     setImageLoading(false);
   };
@@ -142,9 +146,10 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
-    if (actionData && actionData.success && actionData.redirectTo) {
+    if (successParam === "true") {
+      setShowSuccessMessage(true);
     }
-  }, [actionData]);
+  }, [successParam]);
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
