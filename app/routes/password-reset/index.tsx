@@ -15,6 +15,7 @@ import type {
   LoaderFunction,
 } from "@remix-run/node";
 import { prisma } from "~/db.server";
+import { toast, Toaster } from "react-hot-toast";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -114,12 +115,13 @@ export const action: ActionFunction = async ({ request }) => {
     where: { id: passwordReset.id },
   });
 
-  const redirectTo = `${safeRedirect(
-    formData.get("redirectTo"),
-    "/login"
-  )}?success=true`;
+   // Append the success flag to the redirectTo URL
+   const redirectTo = `${safeRedirect(formData.get("redirectTo"), "/")}?success=true`;
 
-  return { redirectTo };
+   // Show the toast message on successful password reset
+   toast.success("Password reset successful!");
+ 
+   return redirect(redirectTo);
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
@@ -146,6 +148,9 @@ export default function ResetPasswordForm() {
     setRandomImage(image);
     if (successParam === "true") {
       setShowSuccessMessage(true);
+
+      // Show the toast message
+      toast.success("Password reset successful!");
     }
   }, [successParam]);
 
@@ -305,6 +310,7 @@ export default function ResetPasswordForm() {
           </div>
         </div>
       </div>
+      <Toaster position="top-right" />
     </main>
   );
 }
