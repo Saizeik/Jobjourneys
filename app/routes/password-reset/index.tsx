@@ -144,9 +144,9 @@ export default function ResetPasswordForm() {
     setRandomImage(image);
     if (successParam === "true") {
       setShowSuccessMessage(true);
-
-      // Show the toast message
-      toast.success("Password reset successful!");
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000); // Hide the message after 5 seconds (adjust the duration as needed)
     }
   }, [successParam]);
 
