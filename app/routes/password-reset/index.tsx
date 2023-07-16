@@ -9,7 +9,6 @@ import {
   getUserByEmail,
   getUserById,
   updatePassword,
-  
 } from "~/models/user.server";
 import { getUserId } from "~/session.server";
 import type {
@@ -25,8 +24,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({});
 };
 
-
-
 interface ActionData {
   errors: {
     email?: string;
@@ -34,7 +31,7 @@ interface ActionData {
     id?: string;
     confirmPassword?: string;
     userId?: string;
-    token?:string;
+    token?: string;
   };
 }
 
@@ -60,8 +57,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   const password = formData.get("password");
 
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/login");
-
   if (typeof password !== "string" || password.length === 0) {
     return json<ActionData>(
       { errors: { password: "Password is required" } },
@@ -83,7 +78,7 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-    // Validate the email, password, and confirmPassword as before...
+  // Validate the email, password, and confirmPassword as before...
 
   // Find the user by email
   const user = await getUserByEmail(email);
@@ -121,9 +116,12 @@ export const action: ActionFunction = async ({ request }) => {
     where: { id: passwordReset.id },
   });
 
-  const success = true;
+  const redirectTo = `${safeRedirect(
+    formData.get("redirectTo"),
+    "/"
+  )}?success=true`;
 
-  return { success, redirectTo };
+  return { redirectTo };
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
@@ -134,7 +132,9 @@ export default function ResetPasswordForm() {
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const confirmPasswordRef = React.useRef<HTMLInputElement>(null);
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(
+    successParam === "true" // Set to true if the success parameter is present
+  );
   const imageLoaded = () => {
     setImageLoading(false);
   };
@@ -286,7 +286,12 @@ export default function ResetPasswordForm() {
                       Reset Password
                     </button>
 
-                    <input type="hidden" />
+                    {/* Display the success message */}
+                    {showSuccessMessage && (
+                      <div className="pt-4 text-green-500">
+                        Password reset successful!
+                      </div>
+                    )}
                   </Form>
                 </div>
               </div>
