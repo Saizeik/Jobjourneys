@@ -112,7 +112,8 @@ export const action: ActionFunction = async ({ request }) => {
   // Append the success flag to the redirectTo URL
 
 
-
+  // Show the toast message on successful password reset
+ return  toast.success("Password reset successful!");
 
 
     
@@ -151,23 +152,6 @@ export default function ResetPasswordForm() {
 
   return (
     <>
-     <Toaster
-        position="top-center"
-        reverseOrder={false}
-        gutter={8}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          // Define default options
-          className: "",
-          duration: 5000,
-          style: {
-            background: "#363636",
-            color: "#fff",
-          },
-        }}
-      />
-    
      
       <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <div className="relative sm:pb-16 sm:pt-8">
@@ -310,9 +294,9 @@ export default function ResetPasswordForm() {
                         Reset Password
                       </button>
                       {showSuccessMessage && (
-                      
-                        toast.success("Password reset successful!")
-                        
+                        <div className="block text-lg font-bold text-white">
+                          Password reset successful!
+                        </div>
                       )}
 
                       <div className="flex items-center justify-center">
@@ -334,6 +318,24 @@ export default function ResetPasswordForm() {
           </div>
         </div>
       </main>
+      <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+
+   
+  }}
+/>
     </>
   );
 }
