@@ -1,20 +1,18 @@
-import { json, redirect, Headers } from "@remix-run/node";
-import { Form, useActionData, useSearchParams } from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import { Form, useActionData, useSearchParams, Link } from "@remix-run/react";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { safeRedirect, validateEmail } from "~/utils";
+import { safeRedirect, } from "~/utils";
 import { loginImages } from "../../loginImages";
 import {
   getUserByEmail,
-  getUserById,
   updatePassword,
 } from "~/models/user.server";
 import { getUserId } from "~/session.server";
 import type {
   ActionFunction,
   LoaderFunction,
-  MetaFunction,
 } from "@remix-run/node";
 import { prisma } from "~/db.server";
 
@@ -118,7 +116,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const redirectTo = `${safeRedirect(
     formData.get("redirectTo"),
-    "/"
+    "/login"
   )}?success=true`;
 
   return { redirectTo };
@@ -292,6 +290,14 @@ export default function ResetPasswordForm() {
                         Password reset successful!
                       </div>
                     )}
+                     <div className="flex items-center justify-center">
+              <div className="text-center text-sm font-bold text-white">
+                Remember your password?{" "}
+                <Link className="text-lg font-bold text-white underline" to="/login">
+                  Log in
+                </Link>
+              </div>
+            </div>
                   </Form>
                 </div>
               </div>
