@@ -120,8 +120,14 @@ export const action: ActionFunction = async ({ request }) => {
 
    // Show the toast message on successful password reset
    toast.success("Password reset successful!");
- 
-   return redirect(redirectTo);
+
+
+   setTimeout(() => {
+    redirect(redirectTo);
+  }, 3000);
+
+  // Return an empty response, as the redirect will happen after the timeout
+  return {};
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
