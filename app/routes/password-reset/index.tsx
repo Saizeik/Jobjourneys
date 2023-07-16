@@ -110,17 +110,14 @@ export const action: ActionFunction = async ({ request }) => {
   });
 
   // Append the success flag to the redirectTo URL
-  const redirectTo = `${safeRedirect(
-    formData.get("redirectTo"),
-    "/login"
-  )}?success=true`;
+
 
   // Show the toast message on successful password reset
-  toast.success("Password reset successful!");
+ return  toast.success("Password reset successful!");
 
-  setTimeout(() => {
-    return redirect(redirectTo);
-  }, 3000);
+
+    
+
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
@@ -155,7 +152,24 @@ export default function ResetPasswordForm() {
 
   return (
     <>
-      <Toaster position="top-center" />
+     <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+
+    
+  }}
+/>
       <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
