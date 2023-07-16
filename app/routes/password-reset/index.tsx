@@ -113,7 +113,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 
   // Show the toast message on successful password reset
- return  toast.success("Password reset successful!");
+ 
 
 
     
