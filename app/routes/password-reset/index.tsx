@@ -116,7 +116,7 @@ export const action: ActionFunction = async ({ request }) => {
   });
 
    // Append the success flag to the redirectTo URL
-   const redirectTo = `${safeRedirect(formData.get("redirectTo"), "/")}?success=true`;
+   const redirectTo = `${safeRedirect(formData.get("redirectTo"), "/login")}?success=true`;
 
    // Show the toast message on successful password reset
    toast.success("Password reset successful!");
