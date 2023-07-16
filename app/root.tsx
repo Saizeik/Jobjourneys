@@ -16,7 +16,7 @@ import {
 } from "@remix-run/react";
 
 
-import {Toaster } from "react-hot-toast";
+
 import Layout from "./layout";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 
@@ -80,24 +80,7 @@ export default function App() {
       </head>
       
       <body className="h-full">
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        gutter={8}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          // Define default options
-          className: "",
-          duration: 5000,
-          style: {
-            background: "#363636",
-            color: "#fff",
-          },
-        }}
-      />
-    
-     
+      
      
         <Layout>
           <Outlet />

@@ -151,6 +151,23 @@ export default function ResetPasswordForm() {
 
   return (
     <>
+     <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+        }}
+      />
+    
      
       <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <div className="relative sm:pb-16 sm:pt-8">
@@ -293,7 +310,9 @@ export default function ResetPasswordForm() {
                         Reset Password
                       </button>
                       {showSuccessMessage && (
+                      
                         toast.success("Password reset successful!")
+                        
                       )}
 
                       <div className="flex items-center justify-center">
