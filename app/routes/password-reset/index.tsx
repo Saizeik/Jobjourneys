@@ -112,8 +112,7 @@ export const action: ActionFunction = async ({ request }) => {
   // Append the success flag to the redirectTo URL
 
 
-  // Show the toast message on successful password reset
- return  toast.success("Password reset successful!");
+
 
 
     
@@ -294,9 +293,7 @@ export default function ResetPasswordForm() {
                         Reset Password
                       </button>
                       {showSuccessMessage && (
-                        <div className="bg-white p-2 text-center text-green-800">
-                          Password reset successful!
-                        </div>
+                        toast.success("Password reset successful!")
                       )}
 
                       <div className="flex items-center justify-center">
