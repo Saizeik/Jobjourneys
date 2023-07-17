@@ -324,7 +324,7 @@ export default function ResetPasswordForm() {
                       </button>
                       {showSuccessMessage && (
                         <div className="bg-green-200 p-2 text-center text-green-800">
-                          Password reset successful!
+                           {message ? <Toast message={message} /> : null}
                         </div>
                       )}
 
@@ -340,7 +340,7 @@ export default function ResetPasswordForm() {
                         </div>
                       </div>
                     </Form>
-                    {message ? <Toast message={message} /> : null}
+                  
                   </div>
                 </div>
               </div>
