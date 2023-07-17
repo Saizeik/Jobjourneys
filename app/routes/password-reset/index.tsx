@@ -131,6 +131,13 @@ export default function ResetPasswordForm() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(
     successParam === "true"
   );
+  const notify = () =>{
+    return(
+    toast(
+      "Your Password has been reset Successfully!"
+    )
+    )
+  }
   
   const imageLoaded = () => {
     setImageLoading(false);
@@ -290,6 +297,7 @@ export default function ResetPasswordForm() {
                       <button
                         type="submit"
                         className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
+                        onClick = {notify}
                       >
                         Reset Password
                       </button>
@@ -298,6 +306,7 @@ export default function ResetPasswordForm() {
                        <motion.div initial={false} animate={{ x: 100 }}>Your password was reset successfully!</motion.div>
                         </div>
                       )}
+                         <Toaster />
 
                       <div className="flex items-center justify-center">
                         <div className="text-center text-sm font-bold text-white">
