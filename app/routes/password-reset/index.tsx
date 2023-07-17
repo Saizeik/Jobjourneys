@@ -114,7 +114,7 @@ export const action: ActionFunction = async ({ request }) => {
     formData.get("redirectTo"),
     "/login"
   )}?success=true`;
-  setTimeout(() => {
+  return setTimeout(() => {
     redirect(redirectTo), json({
       message: "Your password was reset successfully",
     });
