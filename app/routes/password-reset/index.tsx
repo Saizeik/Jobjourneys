@@ -115,7 +115,7 @@ export const action: ActionFunction = async ({ request }) => {
     "/login"
   )}?success=true`;
   setTimeout(() => {
-    return redirect(redirectTo), json({
+    redirect(redirectTo), json({
       message: "Your password was reset successfully",
     });
   }, 6000);
