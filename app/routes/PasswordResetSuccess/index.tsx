@@ -109,7 +109,7 @@ export default function PasswordResetSuccessPage() {
                 </motion.div>
                 <div
                   className="flex min-h-full flex-col justify-center"
-                  onLoad={notify}
+                  
                 >
                   {" "}
                   <Toaster />

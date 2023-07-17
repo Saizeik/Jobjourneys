@@ -292,10 +292,14 @@ export default function ResetPasswordForm() {
                         Reset Password
                       </button>
                       {showSuccessMessage && (
-                        <div className="bg-green-200 p-2 text-center text-green-800">
+                        
+                        <motion.div  initial={{ opacity: 0, y: '-2vh' }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: .5 }}className="bg-green-200 p-2 text-center text-green-800">
                           Password reset successful!
-                        </div>
+                        </motion.div>
                       )}
+                      <Toaster position="top-center" />
 
                       <div className="flex items-center justify-center">
                         <div className="text-center text-sm font-bold text-white">
@@ -316,7 +320,7 @@ export default function ResetPasswordForm() {
           </div>
         </div>
       </main>
-      <Toaster position="top-center" />
+      
     </>
   );
 }
