@@ -114,12 +114,10 @@ export const action: ActionFunction = async ({ request }) => {
     formData.get("redirectTo"),
     "/login"
   )}?success=true`;
-  return setTimeout(() => {
-    redirect(redirectTo), json({
-      message: "Your password was reset successfully",
-    });
-  }, 6000);
-  
+
+  return  json({
+    message: "Your password was reset successfully",
+  });
 };
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);

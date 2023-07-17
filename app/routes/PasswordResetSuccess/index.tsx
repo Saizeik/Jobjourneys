@@ -92,6 +92,13 @@ export default function PasswordResetSuccessPage() {
                     Job Journey
                   </span>
                 </h1>
+                <motion.div
+      initial={{ opacity: 0, x: '-2vh' }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 5 }}
+      
+     
+  >
                 <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
                   If an account is associated with this email, an email
                   containing instructions to reset the password has been sent.
@@ -99,6 +106,7 @@ export default function PasswordResetSuccessPage() {
                   not receive an email, it's possible that no account is
                   currently associated with this email address.
                 </p>
+                </motion.div>
                 <div
                   className="flex min-h-full flex-col justify-center"
                   onLoad={notify}
