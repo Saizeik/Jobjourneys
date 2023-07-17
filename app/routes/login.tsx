@@ -4,12 +4,14 @@
     MetaFunction,
   } from "@remix-run/node";
   import { json, redirect } from "@remix-run/node";
-  import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+  import { Form, Link, useActionData, useSearchParams, useLoaderData,  } from "@remix-run/react";
+  
   import * as React from "react";
 
   import { loginImages } from "../loginImages";
   import { useEffect, useState} from "react";
   import { motion } from "framer-motion";
+
   
  
 
@@ -21,7 +23,17 @@
     const userId = await getUserId(request);
     if (userId) {return redirect("/");}
     
-    return json({});
+    const message = request.headers
+    .get("Cookie")
+    ?.match(/message=([^;]+)/)?.[1]
+  return json(
+    { message },
+    {
+      headers: {
+        "Set-Cookie": `message=; Path=/; `,
+      },
+    },
+  )
   };
 
   interface ActionData {
@@ -107,6 +119,32 @@
     };
   };
 
+  function Toast({
+    message,
+    time = 5000,
+  }: {
+    message: string
+    time?: number
+  }) {
+    
+ 
+    return (
+      <motion.div
+      initial={{ opacity: 0, x: '-2vh' }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 5 }}
+      
+     
+  >
+        
+        
+      
+        <div className="fixed bottom-4 right-4  rounded-lg border border-gray-100 bg-white px-4 py-2 text-left text-sm font-medium shadow-lg">
+          {message}
+        </div>
+      </motion.div>
+    )
+  }
   export default function LoginPage() {
     const [searchParams] = useSearchParams();
     const redirectTo = searchParams.get("redirectTo") || "/posts/user";
@@ -114,6 +152,7 @@
     const emailRef = React.useRef<HTMLInputElement>(null);
     const passwordRef = React.useRef<HTMLInputElement>(null);
     const [imageLoading, setImageLoading] = useState(true);
+    const { message } = useLoaderData()
     
   
    
@@ -141,6 +180,8 @@
     }, []);
 
     return (
+      <>
+      
       <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -170,6 +211,10 @@
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
+                    {
+  message ? <Toast key={message} message={message} /> : null
+}
+
                       <div>
                         <label
                           htmlFor="email"
@@ -290,5 +335,8 @@
           </div>
         </div>
       </main>
+      
+      </>
+
     );
   }
