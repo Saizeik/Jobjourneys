@@ -93,13 +93,13 @@ export default function PasswordResetSuccessPage() {
                   </span>
                 </h1>
                 <motion.div
-      initial={{ opacity: 0, x: '-2vh' }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: '-2vh' }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 5 }}
       
      
   >
-                <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
+                <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl my-4">
                   If an account is associated with this email, an email
                   containing instructions to reset the password has been sent.
                   Please check your inbox for further instructions. If you do
