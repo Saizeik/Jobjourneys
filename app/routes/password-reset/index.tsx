@@ -115,37 +115,12 @@ export const action: ActionFunction = async ({ request }) => {
     "/login"
   )}?success=true`;
 
-  json({
+ return  json({
     message: "Your form was submitted successfully",
   })
 };
 
-function Toast({
-  message,
-  time = 5000,
-}: {
-  message: string
-  time?: number
-}) {
-  
 
-  return (
-    <motion.div
-    initial={{ opacity: 0, x: '-2vh' }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 5 }}
-    
-   
->
-      
-      
-    
-    <div className="fixed bottom-4 right-4  rounded-lg border border-gray-100 bg-white px-4 py-2 text-left text-sm font-medium shadow-lg">
-        {message}
-      </div>
-    </motion.div>
-  )
-}
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();
@@ -158,6 +133,32 @@ export default function ResetPasswordForm() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(
     successParam === "true"
   );
+  function Toast({
+    message,
+    
+  }: {
+    message: string
+    
+  }) {
+    
+  
+    return (
+      <motion.div
+      initial={{ opacity: 0, x: '-2vh' }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 5 }}
+      
+     
+  >
+        
+        
+      
+      <div className="fixed bottom-4 right-4  rounded-lg border border-gray-100 bg-white px-4 py-2 text-left text-sm font-medium shadow-lg">
+          {message}
+        </div>
+      </motion.div>
+    )
+  }
   const { message } = useActionData()
 
   const imageLoaded = () => {
