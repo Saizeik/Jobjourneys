@@ -114,13 +114,13 @@ export const action: ActionFunction = async ({ request }) => {
     formData.get("redirectTo"),
     "/login"
   )}?success=true`;
-
- return  json({
-    message: "Your form was submitted successfully",
-  })
+  setTimeout(() => {
+    return redirect(redirectTo), json({
+      message: "Your password was reset successfully",
+    });
+  }, 6000);
+  
 };
-
-
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();
@@ -133,34 +133,7 @@ export default function ResetPasswordForm() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(
     successParam === "true"
   );
-  function Toast({
-    message,
-    
-  }: {
-    message: string
-    
-  }) {
-    
   
-    return (
-      <motion.div
-      initial={{ opacity: 0, x: '-2vh' }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 5 }}
-      
-     
-  >
-        
-        
-      
-      <div className="fixed bottom-4 right-4  rounded-lg border border-gray-100 bg-white px-4 py-2 text-left text-sm font-medium shadow-lg">
-          {message}
-        </div>
-      </motion.div>
-    )
-  }
-  const { message } = useActionData()
-
   const imageLoaded = () => {
     setImageLoading(false);
   };
@@ -323,8 +296,8 @@ export default function ResetPasswordForm() {
                         Reset Password
                       </button>
                       {showSuccessMessage && (
-                        <div className="bg-green-200 p-2 text-center text-green-800">
-                           {message ? <Toast message={message} /> : null}
+                        <div className="fixed bottom-4 right-4  rounded-lg border border-gray-100 bg-white px-4 py-2 text-left text-sm font-medium shadow-lg">
+                       <motion.div initial={false} animate={{ x: 100 }}>Your password was reset successfully!</motion.div>
                         </div>
                       )}
 
@@ -340,7 +313,6 @@ export default function ResetPasswordForm() {
                         </div>
                       </div>
                     </Form>
-                  
                   </div>
                 </div>
               </div>
