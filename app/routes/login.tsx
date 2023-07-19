@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   }
   const session = await getSession(request.headers.get("Cookie"));
   // Retrieve the session value set in the previous request
-  const message = session.get("message") || "Welcome to Job Journey!";
+  const message = session.get("message") || "Welcome!";
   return json(
     { message },
     {
@@ -138,14 +138,6 @@ export default function LoginPage() {
 
   return (
     <>
-      <motion.div
-        className="flex min-h-full flex-col justify-center "
-        initial={{ opacity: 0, x: "-2vh" }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <p className="text-center text-4xl font-bold text-white">{message}</p>
-      </motion.div>
       <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -172,6 +164,16 @@ export default function LoginPage() {
                     Job Journey
                   </span>
                 </h1>
+                <motion.div
+                  className="flex min-h-full flex-col justify-center "
+                  initial={{ opacity: 0, x: "-2vh" }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <p className="text-center text-4xl font-bold text-white">
+                    {message}
+                  </p>
+                </motion.div>
 
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
