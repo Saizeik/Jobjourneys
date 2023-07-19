@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   }
   const session = await getSession(request.headers.get("Cookie"));
   // Retrieve the session value set in the previous request
-  const message = session.get("message") || "Welcome to Job Journey";
+  const message = session.get("message") || "Welcome to Job Journey!";
   return json(
     { message },
     {
@@ -164,7 +164,7 @@ export default function LoginPage() {
                     Job Journey
                   </span>
                 </h1>
-                <p className ="text-teal-500 text-4xl font-bold">{message}</p>;
+                <p>{message}</p>;
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
