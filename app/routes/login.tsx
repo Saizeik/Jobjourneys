@@ -164,7 +164,7 @@ export default function LoginPage() {
                     Job Journey
                   </span>
                 </h1>
-                <p>{message}</p>;
+                <p className ="text-teal-500 text-4xl font-bold">{message}</p>;
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
