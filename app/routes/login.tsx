@@ -138,9 +138,14 @@ export default function LoginPage() {
 
   return (
     <>
-           <div className="flex min-h-full flex-col justify-center">
-           <p className ="text-teal-500 text-4xl font-bold text-center">{message}</p>
-           </div>
+      <motion.div
+        className="flex min-h-full flex-col justify-center "
+        initial={{ opacity: 0, x: "-2vh" }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <p className="text-center text-4xl font-bold text-white">{message}</p>
+      </motion.div>
       <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -167,7 +172,7 @@ export default function LoginPage() {
                     Job Journey
                   </span>
                 </h1>
-                
+
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
