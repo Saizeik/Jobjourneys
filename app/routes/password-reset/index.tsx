@@ -10,7 +10,8 @@ import { getUserId } from "~/session.server";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { prisma } from "~/db.server";
 import { toast, Toaster } from "react-hot-toast";
-
+import type { ActionArgs } from "@remix-run/node";
+import { getSession, commitSession } from "~/sessions";
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
@@ -38,7 +39,9 @@ function getRandomImage() {
   return loginImages[randomIndex];
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({ request }: ActionArgs)=> {
+  const session = await getSession(request.headers.get("Cookie"))
+  session.flash("message", "Password Reset Successfully");
   const formData = await request.formData();
   const email = formData.get("email") || "";
   if (typeof email !== "string") {
@@ -115,8 +118,12 @@ export const action: ActionFunction = async ({ request }) => {
     "/login"
   )}?success=true`;
 
-  return redirect(redirectTo)
-};
+  return redirect(redirectTo, {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
+}
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();

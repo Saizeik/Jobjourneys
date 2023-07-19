@@ -50,8 +50,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function App() {
-  const data = useLoaderData();
-  console.log(ENV);
+
   return (
    
     <html lang="en" className="h-full">
@@ -89,11 +88,7 @@ export default function App() {
        
         <ScrollRestoration />
         <Scripts />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV =${JSON.stringify(data.ENV)}`,
-          }}
-        />
+        
         <LiveReload />
       </body>
     </html>

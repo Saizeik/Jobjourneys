@@ -6,14 +6,13 @@ import type {
 import nodemailer from "nodemailer";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData } from "@remix-run/react";
-import * as React from "react";
+import React from "react";
 import { getUserByEmail, createPasswordResetToken } from "~/models/user.server";
 
-import { getUserId } from "~/session.server";
 import { validateEmail } from "~/utils";
 import { loginImages } from "../loginImages";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import  {motion}  from "framer-motion";
 import type { User, PasswordReset } from "~/models/user.server";
 
 

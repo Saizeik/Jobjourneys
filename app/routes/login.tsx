@@ -5,36 +5,32 @@
   } from "@remix-run/node";
   import { json, redirect } from "@remix-run/node";
   import { Form, Link, useActionData, useSearchParams, useLoaderData,  } from "@remix-run/react";
-  
-  import * as React from "react";
+  import type { LoaderArgs } from "@remix-run/node";
+  import  React from "react";
 
   import { loginImages } from "../loginImages";
   import { useEffect, useState} from "react";
   import { motion } from "framer-motion";
-
-  
- 
-
-  import { createUserSession, getUserId } from "~/session.server";
+  import { getSession, commitSession } from "~/sessions";
+ import { createUserSession, getUserId } from "~/session.server";
   import { verifyLogin } from "~/models/user.server";
   import { safeRedirect, validateEmail } from "~/utils";
  
-  export const loader: LoaderFunction = async ({ request }) => {
+  export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
     const userId = await getUserId(request);
     if (userId) {return redirect("/");}
-    
-    const message = request.headers
-    .get("Cookie")
-    ?.match(/message=([^;]+)/)?.[1]
-  return json(
-    { message },
-    {
-      headers: {
-        "Set-Cookie": `message=; Path=/; `,
-      },
+    const session = await getSession(request.headers.get("Cookie"));
+// Retrieve the session value set in the previous request
+const message = session.get("message") || "No message found";
+return json(
+  { message },
+  {
+    headers: {
+      "Set-Cookie": await commitSession(session),
     },
-  )
-  };
+  }
+);
+}
 
   interface ActionData {
     errors?: {
