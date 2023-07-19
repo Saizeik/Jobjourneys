@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   }
   const session = await getSession(request.headers.get("Cookie"));
   // Retrieve the session value set in the previous request
-  const message = session.get("message") || "No message found";
+  const message = session.get("message") || "Welcome to Job Journey";
   return json(
     { message },
     {
