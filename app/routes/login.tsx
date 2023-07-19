@@ -158,13 +158,9 @@ export default function LoginPage() {
                 )}
                 <div className="absolute inset-0 bg-teal-400 mix-blend-multiply" />
               </div>
+                 
               <div className=" lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32">
-                <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                  <span className="mb-4 block uppercase text-white drop-shadow-md">
-                    Job Journey
-                  </span>
-                </h1>
-                <motion.div
+                 <motion.div
                   className="flex min-h-full flex-col justify-center "
                   initial={{ opacity: 0, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -174,6 +170,12 @@ export default function LoginPage() {
                     {message}
                   </p>
                 </motion.div>
+                <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
+                  <span className="mb-4 block uppercase text-white drop-shadow-md">
+                    Job Journey
+                  </span>
+                </h1>
+            
 
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
