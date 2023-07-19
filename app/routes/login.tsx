@@ -1,184 +1,144 @@
-  import type {
-    ActionFunction,
-    LoaderFunction,
-    MetaFunction,
-  } from "@remix-run/node";
-  import { json, redirect } from "@remix-run/node";
-  import { Form, Link, useActionData, useSearchParams, useLoaderData,  } from "@remix-run/react";
-  import type { LoaderArgs } from "@remix-run/node";
-  import  React from "react";
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import {
+  Form,
+  Link,
+  useActionData,
+  useSearchParams,
+  useLoaderData,
+} from "@remix-run/react";
+import type { LoaderArgs } from "@remix-run/node";
+import React from "react";
 
-  import { loginImages } from "../loginImages";
-  import { useEffect, useState} from "react";
-  import { motion } from "framer-motion";
-  import { getSession, commitSession } from "~/sessions";
- import { createUserSession, getUserId } from "~/session.server";
-  import { verifyLogin } from "~/models/user.server";
-  import { safeRedirect, validateEmail } from "~/utils";
- 
-  export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
-    const userId = await getUserId(request);
-    if (userId) {return redirect("/");}
-    const session = await getSession(request.headers.get("Cookie"));
-// Retrieve the session value set in the previous request
-const message = session.get("message") || "No message found";
-return json(
-  { message },
-  {
-    headers: {
-      "Set-Cookie": await commitSession(session),
-    },
+import { loginImages } from "../loginImages";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { getSession, commitSession } from "~/sessions";
+import { createUserSession, getUserId } from "~/session.server";
+import { verifyLogin } from "~/models/user.server";
+import { safeRedirect, validateEmail } from "~/utils";
+
+export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
+  const userId = await getUserId(request);
+  if (userId) {
+    return redirect("/");
   }
-);
+  const session = await getSession(request.headers.get("Cookie"));
+  // Retrieve the session value set in the previous request
+  const message = session.get("message") || "No message found";
+  return json(
+    { message },
+    {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    }
+  );
+};
+
+interface ActionData {
+  errors?: {
+    email?: string;
+    password?: string;
+  };
 }
 
-  interface ActionData {
-    errors?: {
-      email?: string;
-      password?: string;
-    };
+export interface loginInfo {
+  src: string;
+  alt: string;
+}
+
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * loginImages.length);
+  return loginImages[randomIndex];
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
+  const remember = formData.get("remember");
+
+  if (!validateEmail(email)) {
+    return json<ActionData>(
+      { errors: { email: "Email is invalid" } },
+      { status: 400 }
+    );
   }
 
-  export interface loginInfo {
-    src: string;
-    alt: string;
+  if (typeof password !== "string" || password.length === 0) {
+    return json<ActionData>(
+      { errors: { password: "Password is required" } },
+      { status: 400 }
+    );
   }
 
-  function getRandomImage() {
-    const randomIndex = Math.floor(Math.random() * loginImages.length);
-    return loginImages[randomIndex];
+  if (password.length < 8) {
+    return json<ActionData>(
+      { errors: { password: "Password is too short" } },
+      { status: 400 }
+    );
   }
 
-  
-  export const action: ActionFunction = async ({ request }) => {
-    const formData = await request.formData();
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const redirectTo = safeRedirect(formData.get("redirectTo"), "/posts/user");
-    const remember = formData.get("remember");
+  const user = await verifyLogin(email, password);
 
-    if (!validateEmail(email)) {
-      return json<ActionData>(
-        { errors: { email: "Email is invalid" } },
-        { status: 400 }
-      );
-    }
+  if (!user) {
+    return json<ActionData>(
+      { errors: { email: "Invalid email or password" } },
+      { status: 400 }
+    );
+  }
 
- 
+  return createUserSession({
+    request,
+    userId: user.id,
+    remember: remember === "on" ? true : false,
+    redirectTo,
+  });
+};
 
-    if (typeof password !== "string" || password.length === 0) {
-      return json<ActionData>(
-        { errors: { password: "Password is required" } },
-        { status: 400 }
-      );
-    }
+export const meta: MetaFunction = () => {
+  return {
+    title: "Login",
+  };
+};
 
-    if (password.length < 8) {
-      return json<ActionData>(
-        { errors: { password: "Password is too short" } },
-        { status: 400 }
-      );
-    }
+export default function LoginPage() {
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/posts/user";
+  const actionData = useActionData() as ActionData;
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  const passwordRef = React.useRef<HTMLInputElement>(null);
+  const [imageLoading, setImageLoading] = useState(true);
+  const { message } = useLoaderData<typeof loader>();
 
-    
-
-    const user = await verifyLogin(email, password);
-
-    if (!user) {
-      return json<ActionData>(
-        { errors: { email: "Invalid email or password" } },
-        { status: 400 }
-      );
-    }
-
-   
-    
-  
-  
-    
-
-    return createUserSession({
-      request,
-      userId: user.id,
-      remember: remember === "on" ? true : false,
-      redirectTo,
-    })
-
-   
+  const imageLoaded = () => {
+    setImageLoading(false);
   };
 
+  React.useEffect(() => {
+    if (actionData?.errors?.email) {
+      emailRef.current?.focus();
+    } else if (actionData?.errors?.password) {
+      passwordRef.current?.focus();
+    }
+  }, [actionData]);
 
+  const [randomImage, setRandomImage] = useState<loginInfo>();
 
-  export const meta: MetaFunction = () => {
-    return {
-      title: "Login",
-    };
-  };
+  useEffect(() => {
+    const image = getRandomImage();
+    setRandomImage(image);
+  }, []);
 
-  function Toast({
-    message,
-    time = 5000,
-  }: {
-    message: string
-    time?: number
-  }) {
-    
- 
-    return (
-      <motion.div
-      initial={{ opacity: 0, x: '-2vh' }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 5 }}
-      
-     
-  >
-        
-        
-      
-        <div className="fixed bottom-4 right-4  rounded-lg border border-gray-100 bg-white px-4 py-2 text-left text-sm font-medium shadow-lg">
-          {message}
-        </div>
-      </motion.div>
-    )
-  }
-  export default function LoginPage() {
-    const [searchParams] = useSearchParams();
-    const redirectTo = searchParams.get("redirectTo") || "/posts/user";
-    const actionData = useActionData() as ActionData;
-    const emailRef = React.useRef<HTMLInputElement>(null);
-    const passwordRef = React.useRef<HTMLInputElement>(null);
-    const [imageLoading, setImageLoading] = useState(true);
-    const { message } = useLoaderData()
-    
-  
-   
-    
-
-   
-    const imageLoaded = () => {
-      setImageLoading(false);
-    };
-
-    React.useEffect(() => {
-      if (actionData?.errors?.email) {
-        emailRef.current?.focus();
-      } else if (actionData?.errors?.password) {
-        passwordRef.current?.focus();
-      }
-    }, [actionData]);
-
-
-    const [randomImage, setRandomImage] = useState<loginInfo>();
-
-    useEffect(() => {
-      const image = getRandomImage();
-      setRandomImage(image);
-    }, []);
-
-    return (
-      <>
-      
-      <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
+  return (
+    <>
+      <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
         <div className="relative sm:pb-16 sm:pt-8">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
@@ -204,13 +164,10 @@ return json(
                     Job Journey
                   </span>
                 </h1>
+                <p>{message}</p>;
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
-                    {
-  message ? <Toast key={message} message={message} /> : null
-}
-
                       <div>
                         <label
                           htmlFor="email"
@@ -271,10 +228,12 @@ return json(
                           )}
                         </div>
                       </div>
-                     
-                  
 
-                      <input type="hidden" name="redirectTo" value={redirectTo} />
+                      <input
+                        type="hidden"
+                        name="redirectTo"
+                        value={redirectTo}
+                      />
                       <button
                         type="submit"
                         className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-spaceBlack   hover: w-full rounded px-4 py-2 font-medium text-white text-white"
@@ -307,21 +266,16 @@ return json(
                           >
                             Sign up
                           </Link>
-                          </div>
-                          <Link
-                            className="text-lg font-bold text-white underline"
-                            to={{
-                              pathname: "/forgot",
-                              search: searchParams.toString(),
-                            }}
-                          >
-                            Reset Password
-                          </Link>
-
-   
-
-      
-                        
+                        </div>
+                        <Link
+                          className="text-lg font-bold text-white underline"
+                          to={{
+                            pathname: "/forgot",
+                            search: searchParams.toString(),
+                          }}
+                        >
+                          Reset Password
+                        </Link>
                       </div>
                     </Form>
                   </div>
@@ -331,8 +285,6 @@ return json(
           </div>
         </div>
       </main>
-      
-      </>
-
-    );
-  }
+    </>
+  );
+}
