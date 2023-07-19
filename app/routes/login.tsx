@@ -166,7 +166,7 @@ export default function LoginPage() {
                 </h1>
                 <motion.div
                   className="flex min-h-full flex-col justify-center "
-                  initial={{ opacity: 0, x: "-2vh" }}
+                  initial={{ opacity: 0, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1 }}
                 >

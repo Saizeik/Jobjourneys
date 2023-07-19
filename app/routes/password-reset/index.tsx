@@ -41,7 +41,7 @@ function getRandomImage() {
 
 export const action: ActionFunction = async ({ request }: ActionArgs)=> {
   const session = await getSession(request.headers.get("Cookie"))
-  session.flash("message", "Password Reset Successfully");
+  session.flash("message", "Password Reset Successfully!");
   const formData = await request.formData();
   const email = formData.get("email") || "";
   if (typeof email !== "string") {
