@@ -15,8 +15,6 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-
-
 import Layout from "./layout";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 
@@ -24,7 +22,6 @@ import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
 
 import { useTransition, useEffect } from "react";
-
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -50,9 +47,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function App() {
-
   return (
-   
     <html lang="en" className="h-full">
       <head>
         <link
@@ -77,21 +72,17 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      
+
       <body className="h-full">
-      
-     
         <Layout>
           <Outlet />
-         
         </Layout>
-       
+
         <ScrollRestoration />
         <Scripts />
-        
+
         <LiveReload />
       </body>
     </html>
- 
   );
 }

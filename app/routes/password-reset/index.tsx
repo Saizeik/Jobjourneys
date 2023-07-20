@@ -39,8 +39,8 @@ function getRandomImage() {
   return loginImages[randomIndex];
 }
 
-export const action: ActionFunction = async ({ request }: ActionArgs)=> {
-  const session = await getSession(request.headers.get("Cookie"))
+export const action: ActionFunction = async ({ request }: ActionArgs) => {
+  const session = await getSession(request.headers.get("Cookie"));
   session.flash("message", "Password Reset Successfully!");
   const formData = await request.formData();
   const email = formData.get("email") || "";
@@ -123,7 +123,7 @@ export const action: ActionFunction = async ({ request }: ActionArgs)=> {
       "Set-Cookie": await commitSession(session),
     },
   });
-}
+};
 export default function ResetPasswordForm() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [searchParams] = useSearchParams();
@@ -299,10 +299,12 @@ export default function ResetPasswordForm() {
                         Reset Password
                       </button>
                       {showSuccessMessage && (
-                        
-                        <motion.div  initial={{ opacity: 0, y: '-2vh' }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: .5 }}className="bg-green-200 p-2 text-center text-green-800">
+                        <motion.div
+                          initial={{ opacity: 0, y: "-2vh" }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="bg-green-200 p-2 text-center text-green-800"
+                        >
                           Password reset successful!
                         </motion.div>
                       )}
@@ -327,7 +329,6 @@ export default function ResetPasswordForm() {
           </div>
         </div>
       </main>
-      
     </>
   );
 }

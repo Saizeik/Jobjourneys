@@ -12,10 +12,8 @@ import { getUserByEmail, createPasswordResetToken } from "~/models/user.server";
 import { validateEmail } from "~/utils";
 import { loginImages } from "../loginImages";
 import { useEffect, useState } from "react";
-import  {motion}  from "framer-motion";
+import { motion } from "framer-motion";
 import type { User, PasswordReset } from "~/models/user.server";
-
-
 
 interface ActionData {
   errors: {
@@ -33,7 +31,6 @@ function getRandomImage() {
   const randomIndex = Math.floor(Math.random() * loginImages.length);
   return loginImages[randomIndex];
 }
-
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -80,7 +77,9 @@ export const action: ActionFunction = async ({ request }) => {
       html: `
         <p>Hi ${user.email || ""},</p>
         <p>You have requested to reset your password for your Job Journey Account. Please click the link below to reset:</p>
-        <a href="https://jobjourneys.vercel.app/password-reset?token=${encodeURIComponent(token.token)}">Reset Password</a>
+        <a href="https://jobjourneys.vercel.app/password-reset?token=${encodeURIComponent(
+          token.token
+        )}">Reset Password</a>
         <p>If you didn't request this, you can safely ignore this email.</p>
       `,
     };
@@ -93,9 +92,6 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect("/PasswordResetSuccess");
 };
 
-
-
-
 export const meta: MetaFunction = () => {
   return {
     title: "forgot",
@@ -106,7 +102,6 @@ export default function ResetPassword() {
   const actionData = useActionData() as ActionData;
   const emailRef = React.useRef<HTMLInputElement>(null);
   const [imageLoading, setImageLoading] = useState(true);
-  
 
   const imageLoaded = () => {
     setImageLoading(false);
@@ -126,7 +121,6 @@ export default function ResetPassword() {
   }, []);
 
   return (
- 
     <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -212,9 +206,5 @@ export default function ResetPassword() {
         </div>
       </div>
     </main>
-    
   );
 }
-
-
-

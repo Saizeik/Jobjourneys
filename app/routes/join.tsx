@@ -115,7 +115,7 @@ export default function Join() {
   }, []);
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-white overflow-y-auto">
+    <main className="relative flex min-h-screen items-center justify-center overflow-y-auto bg-white">
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
@@ -209,7 +209,6 @@ export default function Join() {
                     <button
                       type="submit"
                       className="bg-custom-newColor hover:bg-custom-spaceBlack focus:bg-custom-newColor  hover: w-full rounded px-4 py-2 font-medium text-white text-white"
-                      
                     >
                       Create Account
                     </button>

@@ -161,12 +161,12 @@ export default function LoginPage() {
                  
               <div className=" lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32">
                  <motion.div
-                  className="flex min-h-full flex-col justify-center "
+                  className="flex min-h-full flex-col justify-center mb-2"
                   initial={{ opacity: 0, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1 }}
+                  transition={{ duration: 2 }}
                 >
-                  <p className="text-center text-4xl font-bold text-white">
+                  <p className="text-center text-xl font-bold text-white">
                     {message}
                   </p>
                 </motion.div>
@@ -180,7 +180,7 @@ export default function LoginPage() {
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
-                      <div>
+                      <div className = "mt-2">
                         <label
                           htmlFor="email"
                           className="block text-sm font-bold  text-white"
@@ -262,13 +262,14 @@ export default function LoginPage() {
                           />
                           <label
                             htmlFor="remember"
-                            className="ml-2  border-teal-400 text-sm font-bold text-white"
+                            className="mx-4  border-blue-400 text-sm font-bold text-white"
                           >
                             Remember me
                           </label>
                         </div>
-                        <div className="text-center text-sm font-bold text-white">
+                        <div className="text-center text-md font-bold text-white">
                           Don't have an account?{" "}
+                          <div>
                           <Link
                             className="text-lg font-bold text-white underline"
                             to={{
@@ -278,9 +279,11 @@ export default function LoginPage() {
                           >
                             Sign up
                           </Link>
+                          </div>
                         </div>
+                        
                         <Link
-                          className="text-lg font-bold text-white underline"
+                          className="inline text-lg font-bold text-white underline mx-4"
                           to={{
                             pathname: "/forgot",
                             search: searchParams.toString(),
