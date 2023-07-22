@@ -6,6 +6,13 @@ const {
 
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
+  assetsBuildDirectory: "./public/build",
+  publicPath: "/build/", // default value, can be removed
+  serverBuildPath: "api/index.js",
+  serverMainFields: ["main", "module"], // default value, can be removed
+  serverMinify: false, // default value, can be removed
+  serverModuleFormat: "cjs", // default value, can be removed
+  serverPlatform: "node", // default value, can be removed    
   cacheDirectory: "./node_modules/.cache/remix",
   future: {
     
@@ -16,6 +23,7 @@ module.exports = {
     v2_routeConvention: true,
   },
   routes(defineRoutes) {
+    '/forgot'
     // uses the v1 convention, works in v1.15+ and v2
     return createRoutesFromFolders(defineRoutes);
   },
@@ -23,7 +31,7 @@ module.exports = {
     return {
       includePaths: [
         // Add the additional folders where your routes are located
-        'forgot',
+        "/forgot"
         
       ],
     };

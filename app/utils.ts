@@ -24,7 +24,13 @@ export function safeRedirect(
     return defaultRedirect;
   }
 
-  return to;
+  const allowedRoutes = ["/forgot", "/another-safe-route"];
+
+  if (allowedRoutes.includes(to) || to.startsWith("/")) {
+    return to;
+  }
+
+  return defaultRedirect
 }
 
 /**

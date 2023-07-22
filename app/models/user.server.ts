@@ -1,8 +1,8 @@
 import type { Password, User, PasswordReset } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { v4 as uuidv4 } from 'uuid';
-import nodemailer from 'nodemailer';
-
+import { v4 as uuidv4 } from "uuid";
+import nodemailer from "nodemailer";
+import { json, redirect } from "@remix-run/node";
 import { prisma } from "~/db.server";
 
 export type { User, PasswordReset } from "@prisma/client";
@@ -63,42 +63,51 @@ export async function updatePassword(email: string, password: string) {
   });
 }
 
-// Create a nodemailer transporter
-const transporter = nodemailer.createTransport({
-  // Configure your email service provider here
-  // ...
-});
-
-// Handler for sending the password reset email
-async function sendPasswordResetEmail(email: User["email"], token: PasswordReset["token"]) {
-  const PASSWORD_RESET_URL = '/passwordReset';
-  const emailContent = `
-    <p>Dear User,</p>
-    <p>Click the following link to reset your password:</p>
-    <a href="${PASSWORD_RESET_URL}?token=${token}">Reset Password</a>
-    <p>Regards,</p>
-    <p>Your Application</p>
-  `;
-
-  // Send the email
-  await transporter.sendMail({
-    from: 'admin@jobjourney',
-    to: email,
-    subject: 'Password Reset',
-    html: emailContent,
-  });
-}
-
-// Example usage
-export async function handlePasswordResetRequest(email: User["email"], token: PasswordReset["token"]) {
+export const sendResetPasswordEmail = async (
+  user: User,
+  token: PasswordReset
+) => {
   try {
-    // Generate the email and send it
-    await sendPasswordResetEmail(email, token);
-    console.log('Password reset email sent successfully');
+    // Send reset password email using Nodemailer
+    const transporter = nodemailer.createTransport({
+      // Set up your email transport configuration
+      // Example: using SMTP transport with Gmail
+      service: "Gmail",
+      auth: {
+        user: "nswalker44@gmail.com",
+        pass: "tpjqkqdlgkgxupeb",
+      },
+    });
+
+    const mailOptions = {
+      from: "Admin@Jobjourneys.com",
+      to: user.email || "",
+      subject: "Password Reset",
+      html: `
+        <p>Hi ${user.email || ""},</p>
+        <p>You have requested to reset your password for your Job Journey Account. Please click the link below to reset:</p>
+        <a href="https://jobjourneys.vercel.app/password-reset?token=${encodeURIComponent(
+          token.token
+        )}">Reset Password</a>
+        <p>If you didn't request this, you can safely ignore this email.</p>
+      `,
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+
+    // Do not include the following lines in the function
+    // These will cause infinite recursion and errors
+    // await sendResetPasswordEmail(user, token);
+    // return redirect("/PasswordResetSuccess");
   } catch (error) {
-    console.error('Error sending password reset email:', error);
+    // Handle any errors that occur during email sending
+    console.error("Error sending reset password email:", error);
+    // You might want to return an error response here if needed
+    // return json<ActionData>({ errors: { email: "Failed to send reset password email" } }, { status: 500 });
+    throw new Error("Failed to send reset password email");
   }
-}
+};
 
 export async function deleteUserByEmail(email: User["email"]) {
   return prisma.user.delete({ where: { email } });

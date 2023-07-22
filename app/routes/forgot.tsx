@@ -5,9 +5,13 @@ import type {
 } from "@remix-run/node";
 import nodemailer from "nodemailer";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData, useNavigate } from "@remix-run/react";
 import React from "react";
-import { getUserByEmail, createPasswordResetToken } from "~/models/user.server";
+import {
+  getUserByEmail,
+  sendResetPasswordEmail,
+  createPasswordResetToken,
+} from "~/models/user.server";
 
 import { validateEmail } from "~/utils";
 import { loginImages } from "../loginImages";
@@ -19,6 +23,8 @@ interface ActionData {
   errors: {
     email?: string;
     password?: string;
+    user?: string;
+    token?: string;
   };
 }
 
@@ -36,66 +42,45 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const email = formData.get("email");
 
-  if (!validateEmail(email)) {
+  try {
+    if (!validateEmail(email)) {
+      return json<ActionData>(
+        { errors: { email: "Email is invalid" } },
+        { status: 400 }
+      );
+    }
+
+    const user: User | null = await getUserByEmail(email);
+    if (!user) {
+      return json<ActionData>(
+        { errors: { email: "No user found with this email" } },
+        { status: 400 }
+      );
+    }
+    const token: PasswordReset | null = await createPasswordResetToken(user.id);
+
+    // If the token is null, handle the error
+    if (!token) {
+      return json<ActionData>(
+        { errors: { token: "Failed to create password reset token" } },
+        { status: 500 }
+      );
+    }
+
+    // Call the function to send the reset password email
+    await sendResetPasswordEmail(user, token);
+
+    // Handle success case here, for example, redirect to PasswordResetSuccess
+    return redirect("/PasswordResetSuccess");
+  } catch (error) {
+    // Handle error case here (e.g., show error message or redirect to an error page)
+    console.error("Error sending reset password email:", error);
+    // You can return an error response here if needed
     return json<ActionData>(
-      { errors: { email: "Email is invalid" } },
-      { status: 400 }
+      { errors: { email: "Failed to send reset password email" } },
+      { status: 500 }
     );
   }
-
-  const user: User | null = await getUserByEmail(email);
-  if (!user) {
-    return json<ActionData>(
-      { errors: { email: "No user found with this email" } },
-      { status: 400 }
-    );
-  }
-
-  const token: PasswordReset | null = await createPasswordResetToken(user.id);
-
-  if (!token) {
-    // Handle the case when token is null
-    return null;
-  }
-
-  const sendResetPasswordEmail = async (user: User, token: PasswordReset) => {
-    // Send reset password email using Nodemailer
-    const transporter = nodemailer.createTransport({
-      // Set up your email transport configuration
-      // Example: using SMTP transport with Gmail
-      service: "Gmail",
-      auth: {
-        user: "nswalker44@gmail.com",
-        pass: "tpjqkqdlgkgxupeb",
-      },
-    });
-
-    const mailOptions = {
-      from: "Admin@Jobjourneys.com",
-      to: user.email || "",
-      subject: "Password Reset",
-      html: `
-        <p>Hi ${user.email || ""},</p>
-        <p>You have requested to reset your password for your Job Journey Account. Please click the link below to reset:</p>
-        <a href="https://jobjourneys.vercel.app/password-reset?token=${encodeURIComponent(
-          token.token
-        )}">Reset Password</a>
-        <p>If you didn't request this, you can safely ignore this email.</p>
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-  };
-
-  await sendResetPasswordEmail(user, token);
-
-  return redirect("/PasswordResetSuccess");
-};
-
-export const meta: MetaFunction = () => {
-  return {
-    title: "forgot",
-  };
 };
 
 export default function ResetPassword() {

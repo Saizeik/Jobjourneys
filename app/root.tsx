@@ -1,26 +1,11 @@
-import type {
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
-
+import { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from "@remix-run/react";
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, } from "@remix-run/react";
 
 import Layout from "./layout";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
-
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
-
 import { useTransition, useEffect } from "react";
 
 export const links: LinksFunction = () => {
@@ -39,15 +24,24 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
+  // Declare and assign the ENV variable before its usage
+  const ENV = getEnv();
   console.log(ENV);
+  const user = await getUser(request);
+
   return json<LoaderData>({
-    user: await getUser(request),
-    ENV: getEnv(),
+    user,
+    ENV,
   });
 };
 
 export default function App() {
+  // Fetch the loader data
+  const data = useLoaderData<LoaderData>();
+  const { user, ENV } = data;
+
   return (
+    // Complete HTML structure with <html> tag
     <html lang="en" className="h-full">
       <head>
         <link

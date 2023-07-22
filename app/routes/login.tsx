@@ -3,13 +3,14 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { json, redirect,  } from "@remix-run/node";
 import {
   Form,
   Link,
   useActionData,
   useSearchParams,
   useLoaderData,
+  useNavigate,
 } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/node";
 import React from "react";
@@ -116,7 +117,9 @@ export default function LoginPage() {
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const [imageLoading, setImageLoading] = useState(true);
   const { message } = useLoaderData<typeof loader>();
+  const navigate = useNavigate()
 
+  
   const imageLoaded = () => {
     setImageLoading(false);
   };
@@ -284,10 +287,7 @@ export default function LoginPage() {
                         
                         <Link
                           className="inline text-lg font-bold text-white underline mx-4"
-                          to={{
-                            pathname: "/forgot",
-                            search: searchParams.toString(),
-                          }}
+                          to = "/forgot"
                         >
                           Reset Password
                         </Link>
