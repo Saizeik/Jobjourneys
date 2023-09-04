@@ -148,13 +148,7 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const image = getRandomImage();
     setRandomImage(image);
-    if (successParam === "true") {
-      setShowSuccessMessage(true);
-
-      // Show the toast message
-      toast.success("Password reset successful!");
-    }
-  }, [successParam]);
+});
 
   return (
     <>

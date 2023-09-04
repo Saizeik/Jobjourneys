@@ -1050,10 +1050,6 @@ function useUser() {
     );
   return maybeUser;
 }
-function useOptionalAdminUser() {
-  let user = useOptionalUser();
-  return !user || user.email !== ENV.ADMIN_EMAIL ? null : user;
-}
 function validateEmail(email) {
   return typeof email == "string" && email.length > 3 && email.includes("@");
 }
@@ -1148,8 +1144,8 @@ function ResetPasswordForm() {
   }, [randomImage, setRandomImage] = (0, import_react10.useState)();
   return (0, import_react10.useEffect)(() => {
     let image = getRandomImage2();
-    setRandomImage(image), successParam === "true" && (setShowSuccessMessage(!0), import_react_hot_toast2.toast.success("Password reset successful!"));
-  }, [successParam]), /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("main", { className: "relative flex min-h-screen items-center justify-center overflow-y-auto bg-white", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "relative sm:pb-16 sm:pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "mx-auto max-w-7xl sm:px-6 lg:px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "relative shadow-xl sm:overflow-hidden sm:rounded-2xl", children: [
+    setRandomImage(image);
+  }), /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("main", { className: "relative flex min-h-screen items-center justify-center overflow-y-auto bg-white", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "relative sm:pb-16 sm:pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "mx-auto max-w-7xl sm:px-6 lg:px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "relative shadow-xl sm:overflow-hidden sm:rounded-2xl", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: " absolute inset-0", children: [
       randomImage && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
         import_framer_motion2.motion.img,
@@ -1168,29 +1164,29 @@ function ResetPasswordForm() {
         !1,
         {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 167,
+          lineNumber: 161,
           columnNumber: 19
         },
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "absolute inset-0 bg-teal-400 mix-blend-multiply" }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 179,
+        lineNumber: 173,
         columnNumber: 17
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/password-reset/index.tsx",
-      lineNumber: 165,
+      lineNumber: 159,
       columnNumber: 15
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: " lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("h1", { className: "text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("span", { className: "mb-4 block uppercase text-white drop-shadow-md", children: "Job Journey" }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 183,
+        lineNumber: 177,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 182,
+        lineNumber: 176,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "flex min-h-full flex-col justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "mx-auto w-full max-w-md px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react9.Form, { method: "post", className: "space-y-6", children: [
@@ -1207,7 +1203,7 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 192,
+                lineNumber: 186,
                 columnNumber: 27
               },
               this
@@ -1229,7 +1225,7 @@ function ResetPasswordForm() {
                 !1,
                 {
                   fileName: "app/routes/password-reset/index.tsx",
-                  lineNumber: 199,
+                  lineNumber: 193,
                   columnNumber: 29
                 },
                 this
@@ -1245,19 +1241,19 @@ function ResetPasswordForm() {
                 !1,
                 {
                   fileName: "app/routes/password-reset/index.tsx",
-                  lineNumber: 212,
+                  lineNumber: 206,
                   columnNumber: 31
                 },
                 this
               )
             ] }, void 0, !0, {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 198,
+              lineNumber: 192,
               columnNumber: 27
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 191,
+            lineNumber: 185,
             columnNumber: 25
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
@@ -1271,7 +1267,7 @@ function ResetPasswordForm() {
             !1,
             {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 222,
+              lineNumber: 216,
               columnNumber: 25
             },
             this
@@ -1288,7 +1284,7 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 229,
+                lineNumber: 223,
                 columnNumber: 27
               },
               this
@@ -1309,7 +1305,7 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 234,
+                lineNumber: 228,
                 columnNumber: 27
               },
               this
@@ -1325,19 +1321,19 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 247,
+                lineNumber: 241,
                 columnNumber: 29
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 228,
+            lineNumber: 222,
             columnNumber: 25
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 190,
+          lineNumber: 184,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { children: [
@@ -1352,7 +1348,7 @@ function ResetPasswordForm() {
             !1,
             {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 258,
+              lineNumber: 252,
               columnNumber: 25
             },
             this
@@ -1374,7 +1370,7 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 265,
+                lineNumber: 259,
                 columnNumber: 27
               },
               this
@@ -1390,19 +1386,19 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 280,
+                lineNumber: 274,
                 columnNumber: 29
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 264,
+            lineNumber: 258,
             columnNumber: 25
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 257,
+          lineNumber: 251,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
@@ -1416,7 +1412,7 @@ function ResetPasswordForm() {
           !1,
           {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 290,
+            lineNumber: 284,
             columnNumber: 23
           },
           this
@@ -1432,7 +1428,7 @@ function ResetPasswordForm() {
           !1,
           {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 295,
+            lineNumber: 289,
             columnNumber: 23
           },
           this
@@ -1450,14 +1446,14 @@ function ResetPasswordForm() {
           !1,
           {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 302,
+            lineNumber: 296,
             columnNumber: 25
           },
           this
         ),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react_hot_toast2.Toaster, { position: "top-center" }, void 0, !1, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 311,
+          lineNumber: 305,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "text-center text-sm font-bold text-white", children: [
@@ -1474,57 +1470,57 @@ function ResetPasswordForm() {
             !1,
             {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 316,
+              lineNumber: 310,
               columnNumber: 27
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 314,
+          lineNumber: 308,
           columnNumber: 25
         }, this) }, void 0, !1, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 313,
+          lineNumber: 307,
           columnNumber: 23
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 189,
+        lineNumber: 183,
         columnNumber: 21
       }, this) }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 188,
+        lineNumber: 182,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 187,
+        lineNumber: 181,
         columnNumber: 17
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/password-reset/index.tsx",
-      lineNumber: 181,
+      lineNumber: 175,
       columnNumber: 15
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 164,
+    lineNumber: 158,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 163,
+    lineNumber: 157,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 162,
+    lineNumber: 156,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 161,
+    lineNumber: 155,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 160,
+    lineNumber: 154,
     columnNumber: 5
   }, this);
 }
@@ -1978,29 +1974,29 @@ function ResetPassword() {
         !1,
         {
           fileName: "app/routes/forgot.tsx",
-          lineNumber: 115,
+          lineNumber: 116,
           columnNumber: 17
         },
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "absolute inset-0 bg-teal-400 mix-blend-multiply" }, void 0, !1, {
         fileName: "app/routes/forgot.tsx",
-        lineNumber: 127,
+        lineNumber: 128,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/forgot.tsx",
-      lineNumber: 113,
+      lineNumber: 114,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("h1", { className: "text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { className: "mb-4 block uppercase text-white drop-shadow-md", children: "Job Journey" }, void 0, !1, {
         fileName: "app/routes/forgot.tsx",
-        lineNumber: 131,
+        lineNumber: 132,
         columnNumber: 17
       }, this) }, void 0, !1, {
         fileName: "app/routes/forgot.tsx",
-        lineNumber: 130,
+        lineNumber: 131,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "flex min-h-full flex-col justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "mx-auto w-full max-w-md px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react12.Form, { method: "post", className: "space-y-6", children: [
@@ -2016,7 +2012,7 @@ function ResetPassword() {
             !1,
             {
               fileName: "app/routes/forgot.tsx",
-              lineNumber: 139,
+              lineNumber: 140,
               columnNumber: 23
             },
             this
@@ -2040,24 +2036,24 @@ function ResetPassword() {
               !1,
               {
                 fileName: "app/routes/forgot.tsx",
-                lineNumber: 146,
+                lineNumber: 147,
                 columnNumber: 25
               },
               this
             ),
             ((_b = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _b.email) && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "pt-1 text-red-700", id: "email-error", children: actionData.errors.email }, void 0, !1, {
               fileName: "app/routes/forgot.tsx",
-              lineNumber: 161,
+              lineNumber: 162,
               columnNumber: 27
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/forgot.tsx",
-            lineNumber: 145,
+            lineNumber: 146,
             columnNumber: 23
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/forgot.tsx",
-          lineNumber: 138,
+          lineNumber: 139,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
@@ -2071,7 +2067,7 @@ function ResetPassword() {
           !1,
           {
             fileName: "app/routes/forgot.tsx",
-            lineNumber: 168,
+            lineNumber: 169,
             columnNumber: 21
           },
           this
@@ -2090,53 +2086,53 @@ function ResetPassword() {
             !1,
             {
               fileName: "app/routes/forgot.tsx",
-              lineNumber: 178,
+              lineNumber: 179,
               columnNumber: 25
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/routes/forgot.tsx",
-          lineNumber: 176,
+          lineNumber: 177,
           columnNumber: 23
         }, this) }, void 0, !1, {
           fileName: "app/routes/forgot.tsx",
-          lineNumber: 175,
+          lineNumber: 176,
           columnNumber: 21
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/forgot.tsx",
-        lineNumber: 137,
+        lineNumber: 138,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/forgot.tsx",
-        lineNumber: 136,
+        lineNumber: 137,
         columnNumber: 17
       }, this) }, void 0, !1, {
         fileName: "app/routes/forgot.tsx",
-        lineNumber: 135,
+        lineNumber: 136,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/forgot.tsx",
-      lineNumber: 129,
+      lineNumber: 130,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/forgot.tsx",
-    lineNumber: 112,
+    lineNumber: 113,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/forgot.tsx",
-    lineNumber: 111,
+    lineNumber: 112,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/forgot.tsx",
-    lineNumber: 110,
+    lineNumber: 111,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/forgot.tsx",
-    lineNumber: 109,
+    lineNumber: 110,
     columnNumber: 5
   }, this);
 }
@@ -3038,7 +3034,6 @@ function NotesPage2() {
 // app/routes/posts.tsx
 var posts_exports = {};
 __export(posts_exports, {
-  ErrorBoundary: () => ErrorBoundary,
   default: () => PostsRoute
 });
 var import_react21 = require("@remix-run/react"), import_jsx_dev_runtime12 = require("react/jsx-dev-runtime");
@@ -3047,20 +3042,6 @@ function PostsRoute() {
     fileName: "app/routes/posts.tsx",
     lineNumber: 4,
     columnNumber: 10
-  }, this);
-}
-function ErrorBoundary({ error }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "text-red-500", children: [
-    "Oh no, something went wrong!",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("pre", { children: error.message }, void 0, !1, {
-      fileName: "app/routes/posts.tsx",
-      lineNumber: 11,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/posts.tsx",
-    lineNumber: 9,
-    columnNumber: 5
   }, this);
 }
 
@@ -3707,7 +3688,7 @@ function MapJourney() {
 var jobappnoteId_exports = {};
 __export(jobappnoteId_exports, {
   CatchBoundary: () => CatchBoundary,
-  ErrorBoundary: () => ErrorBoundary2,
+  ErrorBoundary: () => ErrorBoundary,
   action: () => action8,
   default: () => NoteDetailsPage,
   loader: () => loader12
@@ -4017,7 +3998,7 @@ function NoteDetailsPage() {
     columnNumber: 5
   }, this);
 }
-function ErrorBoundary2({ error }) {
+function ErrorBoundary({ error }) {
   return console.error(error), /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { children: [
     "An unexpected error occurred: ",
     error.message
@@ -4991,7 +4972,7 @@ function NewJobAppPage() {
 var noteId_exports = {};
 __export(noteId_exports, {
   CatchBoundary: () => CatchBoundary2,
-  ErrorBoundary: () => ErrorBoundary3,
+  ErrorBoundary: () => ErrorBoundary2,
   action: () => action10,
   default: () => NoteDetailsPage2,
   loader: () => loader13
@@ -5081,7 +5062,7 @@ function NoteDetailsPage2() {
     columnNumber: 5
   }, this);
 }
-function ErrorBoundary3({ error }) {
+function ErrorBoundary2({ error }) {
   return console.error(error), /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("div", { children: [
     "An unexpected error occurred: ",
     error.message
@@ -5539,7 +5520,7 @@ function PostsRoute2() {
 // app/routes/posts/admin.tsx
 var admin_exports = {};
 __export(admin_exports, {
-  ErrorBoundary: () => ErrorBoundary4,
+  ErrorBoundary: () => ErrorBoundary3,
   default: () => AdminRoute,
   loader: () => loader15
 });
@@ -5725,7 +5706,7 @@ function AdminRoute() {
     columnNumber: 5
   }, this);
 }
-function ErrorBoundary4({ error }) {
+function ErrorBoundary3({ error }) {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("div", { className: "text-red-500", children: [
     "Oh no, something went wrong!",
     /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("pre", { children: error.message }, void 0, !1, {
@@ -5744,7 +5725,7 @@ function ErrorBoundary4({ error }) {
 var slug_exports2 = {};
 __export(slug_exports2, {
   CatchBoundary: () => CatchBoundary3,
-  ErrorBoundary: () => ErrorBoundary5,
+  ErrorBoundary: () => ErrorBoundary4,
   action: () => action12,
   default: () => NewPostRoute,
   loader: () => loader16
@@ -6331,7 +6312,7 @@ function CatchBoundary3() {
     }, this);
   throw new Error(`Unsupported thrown response status code: ${caught.status}`);
 }
-function ErrorBoundary5({ error }) {
+function ErrorBoundary4({ error }) {
   return error instanceof Error ? /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)("div", { className: "text-red-500", children: [
     "Oh no, something went wrong!",
     /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)("pre", { children: error.message }, void 0, !1, {
@@ -6388,7 +6369,7 @@ var import_framer_motion13 = require("framer-motion"), import_jsx_dev_runtime25 
   closed: { opacity: 1, x: "0%" }
 };
 function PostsRoute3() {
-  let { posts } = (0, import_react40.useLoaderData)(), adminUser = useOptionalAdminUser(), user = useOptionalUser(), username = useUser(), [isOpen, setIsOpen] = (0, import_react41.useState)(!1), container = {
+  let { posts } = (0, import_react40.useLoaderData)(), user = useOptionalUser(), username = useUser(), [isOpen, setIsOpen] = (0, import_react41.useState)(!1), container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -6426,14 +6407,14 @@ function PostsRoute3() {
             {
               fileName: "app/routes/posts/index.tsx",
               lineNumber: 57,
-              columnNumber: 15
+              columnNumber: 17
             },
             this
           ) : null
         ] }, void 0, !0, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 54,
-          columnNumber: 11
+          columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("button", { className: "sm:hidden", children: [
           " ",
@@ -6449,14 +6430,14 @@ function PostsRoute3() {
             {
               fileName: "app/routes/posts/index.tsx",
               lineNumber: 68,
-              columnNumber: 15
+              columnNumber: 17
             },
             this
           ) : null
         ] }, void 0, !0, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 65,
-          columnNumber: 11
+          columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("button", { className: "sm:hidden", children: [
           " ",
@@ -6472,14 +6453,14 @@ function PostsRoute3() {
             {
               fileName: "app/routes/posts/index.tsx",
               lineNumber: 79,
-              columnNumber: 15
+              columnNumber: 17
             },
             this
           ) : null
         ] }, void 0, !0, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 76,
-          columnNumber: 11
+          columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("button", { className: "sm:hidden", children: [
           " ",
@@ -6495,14 +6476,14 @@ function PostsRoute3() {
             {
               fileName: "app/routes/posts/index.tsx",
               lineNumber: 90,
-              columnNumber: 15
+              columnNumber: 17
             },
             this
           ) : null
         ] }, void 0, !0, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 87,
-          columnNumber: 11
+          columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_react40.Form, { action: "/logout", method: "post", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
           "button",
@@ -6516,18 +6497,18 @@ function PostsRoute3() {
           {
             fileName: "app/routes/posts/index.tsx",
             lineNumber: 99,
-            columnNumber: 13
+            columnNumber: 15
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 98,
-          columnNumber: 11
+          columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("p", { className: " ml-4 hidden font-medium text-white md:hidden", children: username.email }, void 0, !1, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 106,
-          columnNumber: 11
+          columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/posts/index.tsx",
@@ -6544,265 +6525,187 @@ function PostsRoute3() {
       {
         className: `max-w-screen-3xl my-14 flex w-full flex-col items-center rounded bg-gradient-to-r from-indigo-900  
         to-white px-4 py-6`,
-        children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_framer_motion13.motion.ul, { variants: container, initial: "hidden", animate: "show", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_framer_motion13.motion.li, { variants: item, children: adminUser ? /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: "flex-col-2 mt-4 flex flex w-full max-w-3xl items-center space-y-1 rounded-lg bg-white px-4 py-6 text-center shadow-lg", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("a", { className: "flex items-center rounded-md bg-gray-700  px-2 py-2 text-center text-white hover:opacity-50", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-              "svg",
-              {
-                xmlns: "http://www.w3.org/2000/svg",
-                className: "h-5 w-5 opacity-75",
-                fill: "none",
-                viewBox: "0 0 24 24",
-                stroke: "currentColor",
-                "stroke-width": "2",
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                    "path",
-                    {
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round",
-                      d: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                    },
-                    void 0,
-                    !1,
-                    {
-                      fileName: "app/routes/posts/index.tsx",
-                      lineNumber: 129,
-                      columnNumber: 23
-                    },
-                    this
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                    "path",
-                    {
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round",
-                      d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    },
-                    void 0,
-                    !1,
-                    {
-                      fileName: "app/routes/posts/index.tsx",
-                      lineNumber: 134,
-                      columnNumber: 23
-                    },
-                    this
-                  )
-                ]
-              },
-              void 0,
-              !0,
-              {
-                fileName: "app/routes/posts/index.tsx",
-                lineNumber: 121,
-                columnNumber: 21
-              },
-              this
-            ),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_react40.Link, { to: "admin", className: "m-2 text-sm font-medium ", children: [
-              " ",
-              "Admin",
-              " "
-            ] }, void 0, !0, {
-              fileName: "app/routes/posts/index.tsx",
-              lineNumber: 141,
-              columnNumber: 21
-            }, this)
-          ] }, void 0, !0, {
-            fileName: "app/routes/posts/index.tsx",
-            lineNumber: 120,
-            columnNumber: 19
-          }, this) }, void 0, !1, {
-            fileName: "app/routes/posts/index.tsx",
-            lineNumber: 119,
-            columnNumber: 17
-          }, this) : null }, void 0, !1, {
-            fileName: "app/routes/posts/index.tsx",
-            lineNumber: 117,
-            columnNumber: 13
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_framer_motion13.motion.li, { children: [
-            " ",
-            /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-              import_framer_motion13.motion.nav,
-              {
-                animate: isOpen ? "open" : "closed",
-                variants,
-                children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                  "div",
-                  {
-                    className: "flex-col-2 mt-4 flex flex w-full max-w-3xl items-center space-y-1 rounded-lg bg-white px-4 py-6 text-center shadow-lg",
-                    onClick: () => setIsOpen((isOpen2) => !isOpen2),
-                    children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: "flex-col-2 mt-4  flex space-y-1 hover:cursor-pointer", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("details", { className: "group", children: [
-                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("summary", { className: "flex items-center rounded-md  bg-gray-700 px-2 py-2 text-white", children: [
-                        /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                          "svg",
-                          {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            className: "h-5 w-5 opacity-75",
-                            fill: "none",
-                            viewBox: "0 0 24 24",
-                            stroke: "currentColor",
-                            "stroke-width": "2",
-                            children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                              "path",
-                              {
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round",
-                                d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                              },
-                              void 0,
-                              !1,
-                              {
-                                fileName: "app/routes/posts/index.tsx",
-                                lineNumber: 171,
-                                columnNumber: 27
-                              },
-                              this
-                            )
-                          },
-                          void 0,
-                          !1,
-                          {
-                            fileName: "app/routes/posts/index.tsx",
-                            lineNumber: 163,
-                            columnNumber: 25
-                          },
-                          this
-                        ),
-                        /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("span", { className: "ml-3 text-sm font-medium", children: "Job Posts" }, void 0, !1, {
-                          fileName: "app/routes/posts/index.tsx",
-                          lineNumber: 178,
-                          columnNumber: 25
-                        }, this),
-                        /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("span", { className: "ml-auto shrink-0 transition duration-300 group-open:-rotate-90", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                          "svg",
-                          {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            className: "h-5 w-5",
-                            viewBox: "0 0 20 20",
-                            fill: "currentColor",
-                            children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                              "path",
-                              {
-                                "fill-rule": "evenodd",
-                                d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
-                                "clip-rule": "evenodd"
-                              },
-                              void 0,
-                              !1,
-                              {
-                                fileName: "app/routes/posts/index.tsx",
-                                lineNumber: 189,
-                                columnNumber: 29
-                              },
-                              this
-                            )
-                          },
-                          void 0,
-                          !1,
-                          {
-                            fileName: "app/routes/posts/index.tsx",
-                            lineNumber: 183,
-                            columnNumber: 27
-                          },
-                          this
-                        ) }, void 0, !1, {
-                          fileName: "app/routes/posts/index.tsx",
-                          lineNumber: 182,
-                          columnNumber: 25
-                        }, this)
-                      ] }, void 0, !0, {
-                        fileName: "app/routes/posts/index.tsx",
-                        lineNumber: 162,
-                        columnNumber: 23
-                      }, this),
-                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("ol", { className: "m-2 list-decimal", children: posts.map((post) => /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("li", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: "flex items-center", children: [
-                        /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                          import_react40.Link,
-                          {
-                            to: post.slug,
-                            prefetch: "intent",
-                            className: "text-black-600 font-bold underline",
-                            children: post.title
-                          },
-                          void 0,
-                          !1,
-                          {
-                            fileName: "app/routes/posts/index.tsx",
-                            lineNumber: 202,
-                            columnNumber: 31
-                          },
-                          this
-                        ),
-                        ":",
-                        " ",
-                        /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
-                          "em",
-                          {
-                            className: "ml-1 rounded-sm bg-gray-100 p-1 text-center font-bold ",
-                            style: {
-                              color: post.appStatus === "Applied" ? "blue" : post.appStatus === "Interviewing" ? "orange" : post.appStatus === "Hired" ? "green" : post.appStatus === "Not-selected" ? "red" : ""
+        children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_framer_motion13.motion.ul, { variants: container, initial: "hidden", animate: "show", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_framer_motion13.motion.li, { children: [
+          " ",
+          /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+            import_framer_motion13.motion.nav,
+            {
+              animate: isOpen ? "open" : "closed",
+              variants,
+              children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                "div",
+                {
+                  className: "flex-col-2 mt-4 flex flex w-full max-w-3xl items-center space-y-1 rounded-lg bg-white px-4 py-6 text-center shadow-lg",
+                  onClick: () => setIsOpen((isOpen2) => !isOpen2),
+                  children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: "flex-col-2 mt-4  flex space-y-1 hover:cursor-pointer", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("details", { className: "group", children: [
+                    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("summary", { className: "flex items-center rounded-md  bg-gray-700 px-2 py-2 text-white", children: [
+                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                        "svg",
+                        {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          className: "h-5 w-5 opacity-75",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                          "stroke-width": "2",
+                          children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                            "path",
+                            {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                             },
-                            children: post.appStatus
-                          },
-                          void 0,
-                          !1,
-                          {
-                            fileName: "app/routes/posts/index.tsx",
-                            lineNumber: 210,
-                            columnNumber: 31
-                          },
-                          this
-                        )
-                      ] }, void 0, !0, {
+                            void 0,
+                            !1,
+                            {
+                              fileName: "app/routes/posts/index.tsx",
+                              lineNumber: 138,
+                              columnNumber: 27
+                            },
+                            this
+                          )
+                        },
+                        void 0,
+                        !1,
+                        {
+                          fileName: "app/routes/posts/index.tsx",
+                          lineNumber: 130,
+                          columnNumber: 25
+                        },
+                        this
+                      ),
+                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("span", { className: "ml-3 text-sm font-medium", children: "Job Posts" }, void 0, !1, {
                         fileName: "app/routes/posts/index.tsx",
-                        lineNumber: 201,
-                        columnNumber: 29
-                      }, this) }, post.slug, !1, {
+                        lineNumber: 145,
+                        columnNumber: 25
+                      }, this),
+                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("span", { className: "ml-auto shrink-0 transition duration-300 group-open:-rotate-90", children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                        "svg",
+                        {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          className: "h-5 w-5",
+                          viewBox: "0 0 20 20",
+                          fill: "currentColor",
+                          children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                            "path",
+                            {
+                              "fill-rule": "evenodd",
+                              d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
+                              "clip-rule": "evenodd"
+                            },
+                            void 0,
+                            !1,
+                            {
+                              fileName: "app/routes/posts/index.tsx",
+                              lineNumber: 156,
+                              columnNumber: 29
+                            },
+                            this
+                          )
+                        },
+                        void 0,
+                        !1,
+                        {
+                          fileName: "app/routes/posts/index.tsx",
+                          lineNumber: 150,
+                          columnNumber: 27
+                        },
+                        this
+                      ) }, void 0, !1, {
                         fileName: "app/routes/posts/index.tsx",
-                        lineNumber: 200,
-                        columnNumber: 27
-                      }, this)) }, void 0, !1, {
-                        fileName: "app/routes/posts/index.tsx",
-                        lineNumber: 198,
-                        columnNumber: 23
+                        lineNumber: 149,
+                        columnNumber: 25
                       }, this)
                     ] }, void 0, !0, {
                       fileName: "app/routes/posts/index.tsx",
-                      lineNumber: 161,
-                      columnNumber: 21
-                    }, this) }, void 0, !1, {
+                      lineNumber: 129,
+                      columnNumber: 23
+                    }, this),
+                    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("ol", { className: "m-2 list-decimal", children: posts.map((post) => /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("li", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)("div", { className: "flex items-center", children: [
+                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                        import_react40.Link,
+                        {
+                          to: post.slug,
+                          prefetch: "intent",
+                          className: "text-black-600 font-bold underline",
+                          children: post.title
+                        },
+                        void 0,
+                        !1,
+                        {
+                          fileName: "app/routes/posts/index.tsx",
+                          lineNumber: 169,
+                          columnNumber: 31
+                        },
+                        this
+                      ),
+                      ":",
+                      " ",
+                      /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
+                        "em",
+                        {
+                          className: "ml-1 rounded-sm bg-gray-100 p-1 text-center font-bold ",
+                          style: {
+                            color: post.appStatus === "Applied" ? "blue" : post.appStatus === "Interviewing" ? "orange" : post.appStatus === "Hired" ? "green" : post.appStatus === "Not-selected" ? "red" : ""
+                          },
+                          children: post.appStatus
+                        },
+                        void 0,
+                        !1,
+                        {
+                          fileName: "app/routes/posts/index.tsx",
+                          lineNumber: 177,
+                          columnNumber: 31
+                        },
+                        this
+                      )
+                    ] }, void 0, !0, {
                       fileName: "app/routes/posts/index.tsx",
-                      lineNumber: 160,
-                      columnNumber: 19
+                      lineNumber: 168,
+                      columnNumber: 29
+                    }, this) }, post.slug, !1, {
+                      fileName: "app/routes/posts/index.tsx",
+                      lineNumber: 167,
+                      columnNumber: 27
+                    }, this)) }, void 0, !1, {
+                      fileName: "app/routes/posts/index.tsx",
+                      lineNumber: 165,
+                      columnNumber: 23
                     }, this)
-                  },
-                  void 0,
-                  !1,
-                  {
+                  ] }, void 0, !0, {
                     fileName: "app/routes/posts/index.tsx",
-                    lineNumber: 156,
-                    columnNumber: 17
-                  },
-                  this
-                )
-              },
-              void 0,
-              !1,
-              {
-                fileName: "app/routes/posts/index.tsx",
-                lineNumber: 152,
-                columnNumber: 15
-              },
-              this
-            )
-          ] }, void 0, !0, {
-            fileName: "app/routes/posts/index.tsx",
-            lineNumber: 150,
-            columnNumber: 13
-          }, this)
+                    lineNumber: 128,
+                    columnNumber: 21
+                  }, this) }, void 0, !1, {
+                    fileName: "app/routes/posts/index.tsx",
+                    lineNumber: 127,
+                    columnNumber: 19
+                  }, this)
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/routes/posts/index.tsx",
+                  lineNumber: 123,
+                  columnNumber: 17
+                },
+                this
+              )
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/routes/posts/index.tsx",
+              lineNumber: 119,
+              columnNumber: 15
+            },
+            this
+          )
         ] }, void 0, !0, {
+          fileName: "app/routes/posts/index.tsx",
+          lineNumber: 117,
+          columnNumber: 13
+        }, this) }, void 0, !1, {
           fileName: "app/routes/posts/index.tsx",
           lineNumber: 116,
           columnNumber: 11
@@ -6831,7 +6734,6 @@ function PostsRoute3() {
 // app/routes/posts/user.tsx
 var user_exports = {};
 __export(user_exports, {
-  ErrorBoundary: () => ErrorBoundary6,
   default: () => UserRoute,
   loader: () => loader18
 });
@@ -7271,26 +7173,12 @@ function UserRoute() {
     columnNumber: 5
   }, this);
 }
-function ErrorBoundary6({ error }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)("div", { className: "text-red-500", children: [
-    "Oh no, something went wrong!",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)("pre", { children: error.message }, void 0, !1, {
-      fileName: "app/routes/posts/user.tsx",
-      lineNumber: 209,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/posts/user.tsx",
-    lineNumber: 207,
-    columnNumber: 5
-  }, this);
-}
 
 // app/routes/posts/user/$slug.tsx
 var slug_exports3 = {};
 __export(slug_exports3, {
   CatchBoundary: () => CatchBoundary4,
-  ErrorBoundary: () => ErrorBoundary7,
+  ErrorBoundary: () => ErrorBoundary5,
   action: () => action13,
   default: () => NewPostRoute2,
   getCoords: () => getCoords,
@@ -7321,7 +7209,7 @@ var import_axios = __toESM(require("axios")), import_framer_motion15 = require("
     coordinateLong: coordinateLong ? null : "Coordinate longitude is required",
     markdown: markdown ? null : "Markdown is required"
   };
-  return typeof jobAppLink == "string" && !/^https:\/\//.test(jobAppLink) && (errors.jobAppLink = "Website address must start with 'https://'"), (typeof slug != "string" || /[\{\}\[\]\(\)\#\@\!\$\%\^\&\*\+\=\<\>\?\,\'\"\;\:\\\/]/g.test(slug)) && (errors.slug = "Please use alphanumeric characters only"), Object.values(errors).some((errorMessage) => errorMessage) ? (0, import_node25.json)(errors) : ((0, import_tiny_invariant7.default)(typeof title == "string", "title must be a string"), (0, import_tiny_invariant7.default)(typeof slug == "string", "slug must be a string"), (0, import_tiny_invariant7.default)(typeof address == "string", "address must be a string"), (0, import_tiny_invariant7.default)(typeof date == "string", "date must be a date"), (0, import_tiny_invariant7.default)(typeof jobAppLink == "string", "website address must be a string"), (0, import_tiny_invariant7.default)(
+  return typeof jobAppLink == "string" && !/^https:\/\//.test(jobAppLink) && (errors.jobAppLink = "Website address must start with 'https://'"), (typeof slug != "string" || /[\{\}\[\]\(\)\#\@\!\$\%\^\&\*\+\=\<\>\?\,\'\"\;\:\\\/]/g.test(slug)) && (errors.slug = "Please use alphanumeric characters only"), (0, import_tiny_invariant7.default)(typeof title == "string", "title must be a string"), (0, import_tiny_invariant7.default)(typeof slug == "string", "slug must be a string"), (0, import_tiny_invariant7.default)(typeof address == "string", "address must be a string"), (0, import_tiny_invariant7.default)(typeof date == "string", "date must be a date"), (0, import_tiny_invariant7.default)(typeof jobAppLink == "string", "website address must be a string"), (0, import_tiny_invariant7.default)(
     typeof appStatus == "string",
     "Application status must be a string"
   ), (0, import_tiny_invariant7.default)(
@@ -7352,7 +7240,7 @@ var import_axios = __toESM(require("axios")), import_framer_motion15 = require("
     coordinateLong,
     markdown,
     userId
-  }), (0, import_node25.redirect)("/posts/user"));
+  }), (0, import_node25.redirect)("/posts/user");
 }, inputClassName2 = "w-full rounded border border-gray-500 px-2 py-1 text-lg text-blue-500";
 function getCoords({
   latitude,
@@ -7397,13 +7285,13 @@ function getCoords({
   return /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_framer_motion15.motion.ul, { variants: container, initial: "hidden", animate: "show", children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_framer_motion15.motion.li, { variants: item, children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("div", { className: "lg bg-custom flex flex-col items-center rounded p-6 text-center text-blue-50 shadow-lg md:flex-row", children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_react45.Form, { className: "md: mx-auto w-2/3 w-full", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("h6", { className: "mb-4  w-full p-2  text-center text-xl font-bold text-white", children: "Enter Company Address for Coordinates" }, void 0, !1, {
       fileName: "app/routes/posts/user/$slug.tsx",
-      lineNumber: 250,
+      lineNumber: 246,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { className: " text-md mb-8 text-center font-bold text-white", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { className: "mb-4 text-lg", children: "Address: " }, void 0, !1, {
         fileName: "app/routes/posts/user/$slug.tsx",
-        lineNumber: 255,
+        lineNumber: 251,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_api.Autocomplete, { onLoad, onPlaceChanged, children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7419,18 +7307,18 @@ function getCoords({
         !1,
         {
           fileName: "app/routes/posts/user/$slug.tsx",
-          lineNumber: 258,
+          lineNumber: 254,
           columnNumber: 17
         },
         this
       ) }, void 0, !1, {
         fileName: "app/routes/posts/user/$slug.tsx",
-        lineNumber: 257,
+        lineNumber: 253,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/posts/user/$slug.tsx",
-      lineNumber: 254,
+      lineNumber: 250,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7444,7 +7332,7 @@ function getCoords({
       !1,
       {
         fileName: "app/routes/posts/user/$slug.tsx",
-        lineNumber: 268,
+        lineNumber: 264,
         columnNumber: 13
       },
       this
@@ -7456,24 +7344,24 @@ function getCoords({
       latLng.lng
     ] }, void 0, !0, {
       fileName: "app/routes/posts/user/$slug.tsx",
-      lineNumber: 275,
+      lineNumber: 271,
       columnNumber: 15
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/posts/user/$slug.tsx",
-    lineNumber: 249,
+    lineNumber: 245,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/posts/user/$slug.tsx",
-    lineNumber: 248,
+    lineNumber: 244,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/posts/user/$slug.tsx",
-    lineNumber: 247,
+    lineNumber: 243,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/posts/user/$slug.tsx",
-    lineNumber: 246,
+    lineNumber: 242,
     columnNumber: 5
   }, this);
 }
@@ -7523,7 +7411,7 @@ function NewPostRoute2() {
           }
         }) }, void 0, !1, {
           fileName: "app/routes/posts/user/$slug.tsx",
-          lineNumber: 347,
+          lineNumber: 343,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7537,7 +7425,7 @@ function NewPostRoute2() {
                 " ",
                 errors != null && errors.title ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.title }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 369,
+                  lineNumber: 365,
                   columnNumber: 21
                 }, this) : null,
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7553,18 +7441,18 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 371,
+                    lineNumber: 367,
                     columnNumber: 19
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 366,
+                lineNumber: 362,
                 columnNumber: 17
               }, this) }, void 0, !1, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 365,
+                lineNumber: 361,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7583,23 +7471,23 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 383,
+                    lineNumber: 379,
                     columnNumber: 19
                   },
                   this
                 ),
                 errors != null && errors.slug ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.slug }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 391,
+                  lineNumber: 387,
                   columnNumber: 21
                 }, this) : null
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 381,
+                lineNumber: 377,
                 columnNumber: 17
               }, this) }, void 0, !1, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 380,
+                lineNumber: 376,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7619,23 +7507,23 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 399,
+                    lineNumber: 395,
                     columnNumber: 19
                   },
                   this
                 ),
                 errors != null && errors.date ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.date }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 408,
+                  lineNumber: 404,
                   columnNumber: 21
                 }, this) : null
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 397,
+                lineNumber: 393,
                 columnNumber: 17
               }, this) }, void 0, !1, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 396,
+                lineNumber: 392,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7654,23 +7542,23 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 415,
+                    lineNumber: 411,
                     columnNumber: 19
                   },
                   this
                 ),
                 errors != null && errors.jobAppLink ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.jobAppLink }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 423,
+                  lineNumber: 419,
                   columnNumber: 21
                 }, this) : null
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 413,
+                lineNumber: 409,
                 columnNumber: 17
               }, this) }, void 0, !1, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 412,
+                lineNumber: 408,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7692,23 +7580,23 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 430,
+                    lineNumber: 426,
                     columnNumber: 19
                   },
                   this
                 ),
                 errors != null && errors.address ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.address }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 441,
+                  lineNumber: 437,
                   columnNumber: 21
                 }, this) : null
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 428,
+                lineNumber: 424,
                 columnNumber: 17
               }, this) }, void 0, !1, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 427,
+                lineNumber: 423,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: [
@@ -7717,12 +7605,12 @@ function NewPostRoute2() {
                   " ",
                   errors != null && errors.coordinateLat ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.coordinateLat }, void 0, !1, {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 449,
+                    lineNumber: 445,
                     columnNumber: 21
                   }, this) : null
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 446,
+                  lineNumber: 442,
                   columnNumber: 17
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7741,14 +7629,14 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 452,
+                    lineNumber: 448,
                     columnNumber: 17
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 445,
+                lineNumber: 441,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: [
@@ -7757,12 +7645,12 @@ function NewPostRoute2() {
                   " ",
                   errors != null && errors.coordinateLong ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.coordinateLong }, void 0, !1, {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 469,
+                    lineNumber: 465,
                     columnNumber: 21
                   }, this) : null
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 466,
+                  lineNumber: 462,
                   columnNumber: 17
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7781,14 +7669,14 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 472,
+                    lineNumber: 468,
                     columnNumber: 17
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 465,
+                lineNumber: 461,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("div", { children: [
@@ -7809,18 +7697,18 @@ function NewPostRoute2() {
                     !1,
                     {
                       fileName: "app/routes/posts/user/$slug.tsx",
-                      lineNumber: 488,
+                      lineNumber: 484,
                       columnNumber: 21
                     },
                     this
                   )
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 486,
+                  lineNumber: 482,
                   columnNumber: 19
                 }, this) }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 485,
+                  lineNumber: 481,
                   columnNumber: 17
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7839,18 +7727,18 @@ function NewPostRoute2() {
                     !1,
                     {
                       fileName: "app/routes/posts/user/$slug.tsx",
-                      lineNumber: 500,
+                      lineNumber: 496,
                       columnNumber: 21
                     },
                     this
                   )
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 498,
+                  lineNumber: 494,
                   columnNumber: 19
                 }, this) }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 497,
+                  lineNumber: 493,
                   columnNumber: 17
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7869,18 +7757,18 @@ function NewPostRoute2() {
                     !1,
                     {
                       fileName: "app/routes/posts/user/$slug.tsx",
-                      lineNumber: 512,
+                      lineNumber: 508,
                       columnNumber: 21
                     },
                     this
                   )
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 510,
+                  lineNumber: 506,
                   columnNumber: 19
                 }, this) }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 509,
+                  lineNumber: 505,
                   columnNumber: 17
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("label", { children: [
@@ -7899,28 +7787,28 @@ function NewPostRoute2() {
                     !1,
                     {
                       fileName: "app/routes/posts/user/$slug.tsx",
-                      lineNumber: 524,
+                      lineNumber: 520,
                       columnNumber: 21
                     },
                     this
                   )
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 522,
+                  lineNumber: 518,
                   columnNumber: 19
                 }, this) }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 521,
+                  lineNumber: 517,
                   columnNumber: 17
                 }, this),
                 (errors == null ? void 0 : errors.appStatus) && /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { className: "text-red-500", children: errors.appStatus }, void 0, !1, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 534,
+                  lineNumber: 530,
                   columnNumber: 19
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 483,
+                lineNumber: 479,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("p", { children: [
@@ -7929,12 +7817,12 @@ function NewPostRoute2() {
                   " ",
                   errors != null && errors.markdown ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("em", { className: "text-red-600", children: errors.markdown }, void 0, !1, {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 542,
+                    lineNumber: 538,
                     columnNumber: 21
                   }, this) : null
                 ] }, void 0, !0, {
                   fileName: "app/routes/posts/user/$slug.tsx",
-                  lineNumber: 539,
+                  lineNumber: 535,
                   columnNumber: 17
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(
@@ -7950,14 +7838,14 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 545,
+                    lineNumber: 541,
                     columnNumber: 17
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 538,
+                lineNumber: 534,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("div", { className: "flex justify-end gap-4", children: [
@@ -7975,7 +7863,7 @@ function NewPostRoute2() {
                   !1,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 555,
+                    lineNumber: 551,
                     columnNumber: 19
                   },
                   this
@@ -7997,19 +7885,19 @@ function NewPostRoute2() {
                   !0,
                   {
                     fileName: "app/routes/posts/user/$slug.tsx",
-                    lineNumber: 565,
+                    lineNumber: 561,
                     columnNumber: 17
                   },
                   this
                 )
               ] }, void 0, !0, {
                 fileName: "app/routes/posts/user/$slug.tsx",
-                lineNumber: 553,
+                lineNumber: 549,
                 columnNumber: 15
               }, this)
             ] }, ((_g = data.post) == null ? void 0 : _g.slug) ?? "new", !0, {
               fileName: "app/routes/posts/user/$slug.tsx",
-              lineNumber: 364,
+              lineNumber: 360,
               columnNumber: 13
             }, this)
           },
@@ -8017,18 +7905,18 @@ function NewPostRoute2() {
           !1,
           {
             fileName: "app/routes/posts/user/$slug.tsx",
-            lineNumber: 360,
+            lineNumber: 356,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/routes/posts/user/$slug.tsx",
-        lineNumber: 346,
+        lineNumber: 342,
         columnNumber: 9
       }, this) }, void 0, !1, {
         fileName: "app/routes/posts/user/$slug.tsx",
-        lineNumber: 345,
+        lineNumber: 341,
         columnNumber: 7
       }, this)
     },
@@ -8036,7 +7924,7 @@ function NewPostRoute2() {
     !1,
     {
       fileName: "app/routes/posts/user/$slug.tsx",
-      lineNumber: 339,
+      lineNumber: 335,
       columnNumber: 5
     },
     this
@@ -8051,26 +7939,26 @@ function CatchBoundary4() {
       '" does not exist!'
     ] }, void 0, !0, {
       fileName: "app/routes/posts/user/$slug.tsx",
-      lineNumber: 592,
+      lineNumber: 588,
       columnNumber: 7
     }, this);
   throw new Error(`Unsupported thrown response status code: ${caught.status}`);
 }
-function ErrorBoundary7({ error }) {
+function ErrorBoundary5({ error }) {
   return error instanceof Error ? /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("div", { className: "text-red-500", children: [
     "Oh no, something went wrong!",
     /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("pre", { children: error.message }, void 0, !1, {
       fileName: "app/routes/posts/user/$slug.tsx",
-      lineNumber: 605,
+      lineNumber: 601,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/posts/user/$slug.tsx",
-    lineNumber: 603,
+    lineNumber: 599,
     columnNumber: 7
   }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("div", { className: "text-red-500", children: "Oh no, something went wrong!" }, void 0, !1, {
     fileName: "app/routes/posts/user/$slug.tsx",
-    lineNumber: 609,
+    lineNumber: 605,
     columnNumber: 10
   }, this);
 }
@@ -8114,7 +8002,7 @@ function UserIndexRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-T7EDZA2Q.js", imports: ["/build/_shared/chunk-YEID6IW6.js", "/build/_shared/chunk-YYBX7GHC.js", "/build/_shared/chunk-RODUX5XG.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-PR6NWS6J.js", imports: ["/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess": { id: "routes/PasswordResetSuccess", parentId: "root", path: "PasswordResetSuccess", index: void 0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess-OGAOABLW.js", imports: ["/build/_shared/chunk-ODH2NS7P.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess/index": { id: "routes/PasswordResetSuccess/index", parentId: "root", path: "PasswordResetSuccess", index: !0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess/index-2L55USOH.js", imports: ["/build/_shared/chunk-ODH2NS7P.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/cookie": { id: "routes/cookie", parentId: "root", path: "cookie", index: void 0, caseSensitive: void 0, module: "/build/routes/cookie-3N6546L4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-R6NHTTZV.js", imports: ["/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-JPGQFBOZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-WRO3XCF6.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes": { id: "routes/jobappnotes", parentId: "root", path: "jobappnotes", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes-2GVPU6GY.js", imports: ["/build/_shared/chunk-RRUPSDWX.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/$jobappnoteId": { id: "routes/jobappnotes/$jobappnoteId", parentId: "routes/jobappnotes", path: ":jobappnoteId", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/$jobappnoteId-755H4MJZ.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/jobappnotes/index": { id: "routes/jobappnotes/index", parentId: "routes/jobappnotes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/jobappnotes/index-PCXOTOQG.js", imports: ["/build/_shared/chunk-CDIATO7R.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/new": { id: "routes/jobappnotes/new", parentId: "routes/jobappnotes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/new-YOARHRBJ.js", imports: ["/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-D75TCSTY.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-IISKTPJF.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-3CW5ZZI5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map": { id: "routes/map", parentId: "root", path: "map", index: void 0, caseSensitive: void 0, module: "/build/routes/map-WFUD66NT.js", imports: ["/build/_shared/chunk-QLSZR4EG.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map/index": { id: "routes/map/index", parentId: "root", path: "map", index: !0, caseSensitive: void 0, module: "/build/routes/map/index-B7HQER3J.js", imports: ["/build/_shared/chunk-QLSZR4EG.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-RIER7IKB.js", imports: ["/build/_shared/chunk-EI3GZ464.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-TEYCY3OL.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-C7RQB7RX.js", imports: ["/build/_shared/chunk-CDIATO7R.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-B75KTYEF.js", imports: ["/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset": { id: "routes/password-reset", parentId: "root", path: "password-reset", index: void 0, caseSensitive: void 0, module: "/build/routes/password-reset-WBLZ3QTN.js", imports: ["/build/_shared/chunk-E6MMPLEU.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset/index": { id: "routes/password-reset/index", parentId: "root", path: "password-reset", index: !0, caseSensitive: void 0, module: "/build/routes/password-reset/index-I4YEW4YC.js", imports: ["/build/_shared/chunk-E6MMPLEU.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts": { id: "routes/posts", parentId: "root", path: "posts", index: void 0, caseSensitive: void 0, module: "/build/routes/posts-REXIH7Q2.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "routes/posts", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-YHF52VLI.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-4KL7V6EI.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "routes/posts", path: "admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-JVSTIGVI.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-4KL7V6EI.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-XY3MZQI6.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-6XSZIM3O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "routes/posts", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-PBFDQMEI.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user": { id: "routes/posts/user", parentId: "routes/posts", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user-AV6PD35K.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-4KL7V6EI.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/posts/user/$slug": { id: "routes/posts/user/$slug", parentId: "routes/posts/user", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user/$slug-TPEZJSPJ.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/user/index": { id: "routes/posts/user/index", parentId: "routes/posts/user", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/user/index-UN62NK2N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "1d54faee", hmr: void 0, url: "/build/manifest-1D54FAEE.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-T7EDZA2Q.js", imports: ["/build/_shared/chunk-YEID6IW6.js", "/build/_shared/chunk-YYBX7GHC.js", "/build/_shared/chunk-RODUX5XG.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-PR6NWS6J.js", imports: ["/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess": { id: "routes/PasswordResetSuccess", parentId: "root", path: "PasswordResetSuccess", index: void 0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess-OGAOABLW.js", imports: ["/build/_shared/chunk-ODH2NS7P.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess/index": { id: "routes/PasswordResetSuccess/index", parentId: "root", path: "PasswordResetSuccess", index: !0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess/index-2L55USOH.js", imports: ["/build/_shared/chunk-ODH2NS7P.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/cookie": { id: "routes/cookie", parentId: "root", path: "cookie", index: void 0, caseSensitive: void 0, module: "/build/routes/cookie-3N6546L4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-OC6B3DB3.js", imports: ["/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-JPGQFBOZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-EK572TYM.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes": { id: "routes/jobappnotes", parentId: "root", path: "jobappnotes", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes-CY6YRJOX.js", imports: ["/build/_shared/chunk-RRUPSDWX.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/$jobappnoteId": { id: "routes/jobappnotes/$jobappnoteId", parentId: "routes/jobappnotes", path: ":jobappnoteId", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/$jobappnoteId-755H4MJZ.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/jobappnotes/index": { id: "routes/jobappnotes/index", parentId: "routes/jobappnotes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/jobappnotes/index-PCXOTOQG.js", imports: ["/build/_shared/chunk-CDIATO7R.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/new": { id: "routes/jobappnotes/new", parentId: "routes/jobappnotes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/new-YOARHRBJ.js", imports: ["/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-UIMO56PM.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-PWI4FNDZ.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-3CW5ZZI5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map": { id: "routes/map", parentId: "root", path: "map", index: void 0, caseSensitive: void 0, module: "/build/routes/map-7O3GUIUN.js", imports: ["/build/_shared/chunk-SKH2QDX7.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map/index": { id: "routes/map/index", parentId: "root", path: "map", index: !0, caseSensitive: void 0, module: "/build/routes/map/index-MI62TJHX.js", imports: ["/build/_shared/chunk-SKH2QDX7.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-QAALYWHR.js", imports: ["/build/_shared/chunk-EI3GZ464.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-TEYCY3OL.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-C7RQB7RX.js", imports: ["/build/_shared/chunk-CDIATO7R.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-B75KTYEF.js", imports: ["/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset": { id: "routes/password-reset", parentId: "root", path: "password-reset", index: void 0, caseSensitive: void 0, module: "/build/routes/password-reset-RZLZROO3.js", imports: ["/build/_shared/chunk-QIBDPCJA.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset/index": { id: "routes/password-reset/index", parentId: "root", path: "password-reset", index: !0, caseSensitive: void 0, module: "/build/routes/password-reset/index-Z5ZI3XDJ.js", imports: ["/build/_shared/chunk-QIBDPCJA.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts": { id: "routes/posts", parentId: "root", path: "posts", index: void 0, caseSensitive: void 0, module: "/build/routes/posts-AC5V2KS4.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "routes/posts", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-WL5Y3NE3.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "routes/posts", path: "admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-MLBACZ6L.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-XY3MZQI6.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-6XSZIM3O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "routes/posts", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-R2R75SPN.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user": { id: "routes/posts/user", parentId: "routes/posts", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user-4GZ7O52C.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user/$slug": { id: "routes/posts/user/$slug", parentId: "routes/posts/user", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user/$slug-G5HB2M4U.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/user/index": { id: "routes/posts/user/index", parentId: "routes/posts/user", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/user/index-UN62NK2N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "2fc810f8", hmr: void 0, url: "/build/manifest-2FC810F8.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "./public/build", future = { v2_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !1, v2_meta: !1, v2_normalizeFormMethod: !0, v2_routeConvention: !0 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

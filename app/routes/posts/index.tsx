@@ -2,7 +2,7 @@ import { Form, Link, useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { getPostListings } from "~/models/post.server";
-import { useOptionalAdminUser, useOptionalUser } from "~/utils";
+import { useOptionalUser } from "~/utils";
 import { requireUserId } from "~/session.server";
 import { useState } from "react";
 import { useUser } from "~/utils";
@@ -25,7 +25,7 @@ const variants = {
 
 export default function PostsRoute() {
   const { posts } = useLoaderData() as LoaderData;
-  const adminUser = useOptionalAdminUser();
+
   const user = useOptionalUser();
   const username = useUser();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,61 +51,61 @@ export default function PostsRoute() {
             <Link to=".">Job Posts</Link>
           </h1>
           <div className="flex flex-col md:flex-row">
-          <button className="sm:hidden">
-            {" "}
-            {user ? (
-              <Link
-                to="/posts/user"
-                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
-              >
-                Dashboard
-              </Link>
-            ) : null}
-          </button>
-          <button className="sm:hidden">
-            {" "}
-            {user ? (
-              <Link
-                to="/map"
-                className="mb-4  mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
-              >
-                Map Journey
-              </Link>
-            ) : null}
-          </button>
-          <button className="sm:hidden">
-            {" "}
-            {user ? (
-              <Link
-                to="/notes"
-                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
-              >
-                Notes
-              </Link>
-            ) : null}
-          </button>
-          <button className="sm:hidden">
-            {" "}
-            {user ? (
-              <Link
-                to="/jobappnotes"
-                className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
-              >
-                Job App Notes
-              </Link>
-            ) : null}
-          </button>
-          <Form action="/logout" method="post">
-            <button
-              type="submit"
-              className="m-2  mr-4 rounded bg-white px-4 py-2 font-medium text-black hover:bg-black hover:text-white active:bg-black"
-            >
-              Logout
+            <button className="sm:hidden">
+              {" "}
+              {user ? (
+                <Link
+                  to="/posts/user"
+                  className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                >
+                  Dashboard
+                </Link>
+              ) : null}
             </button>
-          </Form>
-          <p className=" ml-4 hidden font-medium text-white md:hidden">
-            {username.email}
-          </p>
+            <button className="sm:hidden">
+              {" "}
+              {user ? (
+                <Link
+                  to="/map"
+                  className="mb-4  mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                >
+                  Map Journey
+                </Link>
+              ) : null}
+            </button>
+            <button className="sm:hidden">
+              {" "}
+              {user ? (
+                <Link
+                  to="/notes"
+                  className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                >
+                  Notes
+                </Link>
+              ) : null}
+            </button>
+            <button className="sm:hidden">
+              {" "}
+              {user ? (
+                <Link
+                  to="/jobappnotes"
+                  className="mb-4 mr-4 flex items-center justify-center rounded-md border border-transparent bg-white px-4  py-2 text-base font-medium text-black shadow-sm hover:bg-black hover:text-white sm:px-8 md:mb-0"
+                >
+                  Job App Notes
+                </Link>
+              ) : null}
+            </button>
+            <Form action="/logout" method="post">
+              <button
+                type="submit"
+                className="m-2  mr-4 rounded bg-white px-4 py-2 font-medium text-black hover:bg-black hover:text-white active:bg-black"
+              >
+                Logout
+              </button>
+            </Form>
+            <p className=" ml-4 hidden font-medium text-white md:hidden">
+              {username.email}
+            </p>
           </div>
         </header>
 
@@ -114,39 +114,6 @@ export default function PostsRoute() {
         to-white px-4 py-6"
         >
           <motion.ul variants={container} initial="hidden" animate="show">
-            <motion.li variants={item}>
-              {adminUser ? (
-                <div className="flex-col-2 mt-4 flex flex w-full max-w-3xl items-center space-y-1 rounded-lg bg-white px-4 py-6 text-center shadow-lg">
-                  <a className="flex items-center rounded-md bg-gray-700  px-2 py-2 text-center text-white hover:opacity-50">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 opacity-75"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-
-                    <Link to="admin" className="m-2 text-sm font-medium ">
-                      {" "}
-                      Admin{" "}
-                    </Link>
-                  </a>
-                </div>
-              ) : null}
-            </motion.li>
-
             <motion.li>
               {" "}
               <motion.nav

@@ -105,10 +105,6 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   // return data if we have errors
 
-  const hasErrors = Object.values(errors).some((errorMessage) => errorMessage);
-  if (hasErrors) {
-    return json<ActionData>(errors);
-  }
 
   invariant(typeof title === "string", "title must be a string");
   invariant(typeof slug === "string", "slug must be a string");

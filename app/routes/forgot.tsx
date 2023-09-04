@@ -11,6 +11,7 @@ import {
   getUserByEmail,
   sendResetPasswordEmail,
   createPasswordResetToken,
+  deletePasswordResetByToken,
 } from "~/models/user.server";
 
 import { validateEmail } from "~/utils";
