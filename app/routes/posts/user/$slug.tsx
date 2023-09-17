@@ -63,7 +63,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     await deletePost(params.slug);
     return redirect("/posts/user");
   }
-
+  
   const title = formData.get("title");
 
   const jobTitle = formData.get("slug");

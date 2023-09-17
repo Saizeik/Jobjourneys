@@ -136,6 +136,17 @@ export default function ResetPasswordForm() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(
     successParam === "true"
   );
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isInputValueVisible, setIsInputValueVisible] =
+    useState<boolean>(false);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleToggleVisibility = () => {
+    setIsInputValueVisible(!isInputValueVisible);
+  };
+
 
   const imageLoaded = () => {
     setImageLoading(false);
@@ -229,14 +240,31 @@ export default function ResetPasswordForm() {
                             id="password"
                             ref={passwordRef}
                             name="password"
-                            type="password"
+                            type={isInputValueVisible ? "text" : "password"}
+                            value={inputValue}
+                            onChange={handleChange}
                             autoComplete="current-password"
                             aria-invalid={
                               actionData?.errors?.password ? true : undefined
                             }
                             aria-describedby="password-error"
                             className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                            style={{
+                              paddingRight: "40px",
+                            }}
                           />
+                          <button
+                            type="button"
+                            onClick={handleToggleVisibility}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 transform"
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {isInputValueVisible ? "🙊" : "🙈"}
+                          </button>
                           {actionData?.errors?.password && (
                             <div
                               className="pt-1 text-red-700"
@@ -260,16 +288,31 @@ export default function ResetPasswordForm() {
                             id="confirmPassword"
                             ref={confirmPasswordRef}
                             name="confirmPassword"
-                            type="password"
+                            type={isInputValueVisible ? "text" : "password"}
+                            value={inputValue}
+                            onChange={handleChange}
                             autoComplete="current-password"
                             aria-invalid={
-                              actionData?.errors?.confirmPassword
-                                ? true
-                                : undefined
+                              actionData?.errors?.password ? true : undefined
                             }
-                            aria-describedby="confirmPassword-error"
+                            aria-describedby="password-error"
                             className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                            style={{
+                              paddingRight: "40px",
+                            }}
                           />
+                          <button
+                            type="button"
+                            onClick={handleToggleVisibility}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 transform"
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {isInputValueVisible ? "🙊" : "🙈"}
+                          </button>
                           {actionData?.errors?.confirmPassword && (
                             <div
                               className="pt-1 text-red-700"

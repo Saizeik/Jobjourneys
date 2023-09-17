@@ -94,6 +94,16 @@ export default function Join() {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const [imageLoading, setImageLoading] = useState(true);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isInputValueVisible, setIsInputValueVisible] =
+    useState<boolean>(false);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleToggleVisibility = () => {
+    setIsInputValueVisible(!isInputValueVisible);
+  };
 
   const imageLoaded = () => {
     setImageLoading(false);
@@ -186,14 +196,31 @@ export default function Join() {
                           id="password"
                           ref={passwordRef}
                           name="password"
-                          type="password"
-                          autoComplete="new-password"
+                          type={isInputValueVisible ? "text" : "password"}
+                          value={inputValue}
+                          onChange={handleChange}
+                          autoComplete="current-password"
                           aria-invalid={
                             actionData?.errors?.password ? true : undefined
                           }
                           aria-describedby="password-error"
                           className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                          style={{
+                            paddingRight: "40px",
+                          }}
                         />
+                        <button
+                          type="button"
+                          onClick={handleToggleVisibility}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 transform"
+                          style={{
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          {isInputValueVisible ? "🙊" : "🙈"}
+                        </button>
                         {actionData?.errors?.password && (
                           <div
                             className="pt-1 text-red-700"

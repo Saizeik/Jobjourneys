@@ -3,7 +3,7 @@ import type {
   LoaderFunction,
   MetaFunction,
 } from "@remix-run/node";
-import { json, redirect,  } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -117,9 +117,17 @@ export default function LoginPage() {
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const [imageLoading, setImageLoading] = useState(true);
   const { message } = useLoaderData<typeof loader>();
-  const navigate = useNavigate()
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isInputValueVisible, setIsInputValueVisible] =
+    useState<boolean>(false);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
 
-  
+  const handleToggleVisibility = () => {
+    setIsInputValueVisible(!isInputValueVisible);
+  };
+
   const imageLoaded = () => {
     setImageLoading(false);
   };
@@ -161,10 +169,10 @@ export default function LoginPage() {
                 )}
                 <div className="absolute inset-0 bg-teal-400 mix-blend-multiply" />
               </div>
-                 
+
               <div className=" lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32">
-                 <motion.div
-                  className="flex min-h-full flex-col justify-center mb-2"
+                <motion.div
+                  className="mb-2 flex min-h-full flex-col justify-center"
                   initial={{ opacity: 0, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 2 }}
@@ -178,12 +186,11 @@ export default function LoginPage() {
                     Job Journey
                   </span>
                 </h1>
-            
 
                 <div className="flex min-h-full flex-col justify-center">
                   <div className="mx-auto w-full max-w-md px-8">
                     <Form method="post" className="space-y-6">
-                      <div className = "mt-2">
+                      <div className="mt-2">
                         <label
                           htmlFor="email"
                           className="block text-sm font-bold  text-white"
@@ -225,14 +232,31 @@ export default function LoginPage() {
                             id="password"
                             ref={passwordRef}
                             name="password"
-                            type="password"
+                            type={isInputValueVisible ? "text" : "password"}
+                            value={inputValue}
+                            onChange={handleChange}
                             autoComplete="current-password"
                             aria-invalid={
                               actionData?.errors?.password ? true : undefined
                             }
                             aria-describedby="password-error"
                             className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                            style={{
+                              paddingRight: "40px",
+                            }}
                           />
+                          <button
+                            type="button"
+                            onClick={handleToggleVisibility}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 transform"
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {isInputValueVisible ? "🙊" : "🙈"}
+                          </button>
                           {actionData?.errors?.password && (
                             <div
                               className="pt-1 text-red-700"
@@ -270,24 +294,24 @@ export default function LoginPage() {
                             Remember me
                           </label>
                         </div>
-                        <div className="text-center text-md font-bold text-white">
+                        <div className="text-md text-center font-bold text-white">
                           Don't have an account?{" "}
                           <div>
-                          <Link
-                            className="text-lg font-bold text-white underline"
-                            to={{
-                              pathname: "/join",
-                              search: searchParams.toString(),
-                            }}
-                          >
-                            Sign up
-                          </Link>
+                            <Link
+                              className="text-lg font-bold text-white underline"
+                              to={{
+                                pathname: "/join",
+                                search: searchParams.toString(),
+                              }}
+                            >
+                              Sign up
+                            </Link>
                           </div>
                         </div>
-                        
+
                         <Link
-                          className="inline text-lg font-bold text-white underline mx-4"
-                          to = "/forgot"
+                          className="mx-4 inline text-lg font-bold text-white underline"
+                          to="/forgot"
                         >
                           Reset Password
                         </Link>

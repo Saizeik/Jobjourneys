@@ -1139,7 +1139,11 @@ function ResetPasswordForm() {
   var _a, _b, _c, _d, _e, _f;
   let emailRef = React2.useRef(null), [searchParams] = (0, import_react9.useSearchParams)(), successParam = searchParams.get("success"), actionData = (0, import_react9.useActionData)(), [imageLoading, setImageLoading] = (0, import_react10.useState)(!0), passwordRef = React2.useRef(null), confirmPasswordRef = React2.useRef(null), redirectTo = searchParams.get("redirectTo") ?? void 0, [showSuccessMessage, setShowSuccessMessage] = (0, import_react10.useState)(
     successParam === "true"
-  ), imageLoaded = () => {
+  ), [inputValue, setInputValue] = (0, import_react10.useState)(""), [isInputValueVisible, setIsInputValueVisible] = (0, import_react10.useState)(!1), handleChange = (e) => {
+    setInputValue(e.target.value);
+  }, handleToggleVisibility = () => {
+    setIsInputValueVisible(!isInputValueVisible);
+  }, imageLoaded = () => {
     setImageLoading(!1);
   }, [randomImage, setRandomImage] = (0, import_react10.useState)();
   return (0, import_react10.useEffect)(() => {
@@ -1164,29 +1168,29 @@ function ResetPasswordForm() {
         !1,
         {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 161,
+          lineNumber: 172,
           columnNumber: 19
         },
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "absolute inset-0 bg-teal-400 mix-blend-multiply" }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 173,
+        lineNumber: 184,
         columnNumber: 17
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/password-reset/index.tsx",
-      lineNumber: 159,
+      lineNumber: 170,
       columnNumber: 15
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: " lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("h1", { className: "text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("span", { className: "mb-4 block uppercase text-white drop-shadow-md", children: "Job Journey" }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 177,
+        lineNumber: 188,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 176,
+        lineNumber: 187,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "flex min-h-full flex-col justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "mx-auto w-full max-w-md px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react9.Form, { method: "post", className: "space-y-6", children: [
@@ -1203,7 +1207,7 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 186,
+                lineNumber: 197,
                 columnNumber: 27
               },
               this
@@ -1225,7 +1229,7 @@ function ResetPasswordForm() {
                 !1,
                 {
                   fileName: "app/routes/password-reset/index.tsx",
-                  lineNumber: 193,
+                  lineNumber: 204,
                   columnNumber: 29
                 },
                 this
@@ -1241,19 +1245,19 @@ function ResetPasswordForm() {
                 !1,
                 {
                   fileName: "app/routes/password-reset/index.tsx",
-                  lineNumber: 206,
+                  lineNumber: 217,
                   columnNumber: 31
                 },
                 this
               )
             ] }, void 0, !0, {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 192,
+              lineNumber: 203,
               columnNumber: 27
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 185,
+            lineNumber: 196,
             columnNumber: 25
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
@@ -1267,7 +1271,7 @@ function ResetPasswordForm() {
             !1,
             {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 216,
+              lineNumber: 227,
               columnNumber: 25
             },
             this
@@ -1284,7 +1288,7 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 223,
+                lineNumber: 234,
                 columnNumber: 27
               },
               this
@@ -1295,17 +1299,44 @@ function ResetPasswordForm() {
                 id: "password",
                 ref: passwordRef,
                 name: "password",
-                type: "password",
+                type: isInputValueVisible ? "text" : "password",
+                value: inputValue,
+                onChange: handleChange,
                 autoComplete: "current-password",
                 "aria-invalid": (_c = actionData == null ? void 0 : actionData.errors) != null && _c.password ? !0 : void 0,
                 "aria-describedby": "password-error",
-                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg",
+                style: {
+                  paddingRight: "40px"
+                }
               },
               void 0,
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 228,
+                lineNumber: 239,
+                columnNumber: 27
+              },
+              this
+            ),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+              "button",
+              {
+                type: "button",
+                onClick: handleToggleVisibility,
+                className: "absolute right-2 top-1/2 -translate-y-1/2 transform",
+                style: {
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer"
+                },
+                children: isInputValueVisible ? "\u{1F64A}" : "\u{1F648}"
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/routes/password-reset/index.tsx",
+                lineNumber: 256,
                 columnNumber: 27
               },
               this
@@ -1321,19 +1352,19 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 241,
+                lineNumber: 269,
                 columnNumber: 29
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 222,
+            lineNumber: 233,
             columnNumber: 25
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 184,
+          lineNumber: 195,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { children: [
@@ -1348,7 +1379,7 @@ function ResetPasswordForm() {
             !1,
             {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 252,
+              lineNumber: 280,
               columnNumber: 25
             },
             this
@@ -1360,17 +1391,44 @@ function ResetPasswordForm() {
                 id: "confirmPassword",
                 ref: confirmPasswordRef,
                 name: "confirmPassword",
-                type: "password",
+                type: isInputValueVisible ? "text" : "password",
+                value: inputValue,
+                onChange: handleChange,
                 autoComplete: "current-password",
-                "aria-invalid": (_e = actionData == null ? void 0 : actionData.errors) != null && _e.confirmPassword ? !0 : void 0,
-                "aria-describedby": "confirmPassword-error",
-                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                "aria-invalid": (_e = actionData == null ? void 0 : actionData.errors) != null && _e.password ? !0 : void 0,
+                "aria-describedby": "password-error",
+                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg",
+                style: {
+                  paddingRight: "40px"
+                }
               },
               void 0,
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 259,
+                lineNumber: 287,
+                columnNumber: 27
+              },
+              this
+            ),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+              "button",
+              {
+                type: "button",
+                onClick: handleToggleVisibility,
+                className: "absolute right-2 top-1/2 -translate-y-1/2 transform",
+                style: {
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer"
+                },
+                children: isInputValueVisible ? "\u{1F64A}" : "\u{1F648}"
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/routes/password-reset/index.tsx",
+                lineNumber: 304,
                 columnNumber: 27
               },
               this
@@ -1386,19 +1444,19 @@ function ResetPasswordForm() {
               !1,
               {
                 fileName: "app/routes/password-reset/index.tsx",
-                lineNumber: 274,
+                lineNumber: 317,
                 columnNumber: 29
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 258,
+            lineNumber: 286,
             columnNumber: 25
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 251,
+          lineNumber: 279,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
@@ -1412,7 +1470,7 @@ function ResetPasswordForm() {
           !1,
           {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 284,
+            lineNumber: 327,
             columnNumber: 23
           },
           this
@@ -1428,7 +1486,7 @@ function ResetPasswordForm() {
           !1,
           {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 289,
+            lineNumber: 332,
             columnNumber: 23
           },
           this
@@ -1446,14 +1504,14 @@ function ResetPasswordForm() {
           !1,
           {
             fileName: "app/routes/password-reset/index.tsx",
-            lineNumber: 296,
+            lineNumber: 339,
             columnNumber: 25
           },
           this
         ),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react_hot_toast2.Toaster, { position: "top-center" }, void 0, !1, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 305,
+          lineNumber: 348,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "text-center text-sm font-bold text-white", children: [
@@ -1470,57 +1528,57 @@ function ResetPasswordForm() {
             !1,
             {
               fileName: "app/routes/password-reset/index.tsx",
-              lineNumber: 310,
+              lineNumber: 353,
               columnNumber: 27
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 308,
+          lineNumber: 351,
           columnNumber: 25
         }, this) }, void 0, !1, {
           fileName: "app/routes/password-reset/index.tsx",
-          lineNumber: 307,
+          lineNumber: 350,
           columnNumber: 23
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 183,
+        lineNumber: 194,
         columnNumber: 21
       }, this) }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 182,
+        lineNumber: 193,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/password-reset/index.tsx",
-        lineNumber: 181,
+        lineNumber: 192,
         columnNumber: 17
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/password-reset/index.tsx",
-      lineNumber: 175,
+      lineNumber: 186,
       columnNumber: 15
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 158,
+    lineNumber: 169,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 157,
+    lineNumber: 168,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 156,
+    lineNumber: 167,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 155,
+    lineNumber: 166,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/password-reset/index.tsx",
-    lineNumber: 154,
+    lineNumber: 165,
     columnNumber: 5
   }, this);
 }
@@ -2364,7 +2422,11 @@ var action6 = async ({ request }) => {
 });
 function LoginPage() {
   var _a, _b, _c, _d;
-  let [searchParams] = (0, import_react17.useSearchParams)(), redirectTo = searchParams.get("redirectTo") || "/posts/user", actionData = (0, import_react17.useActionData)(), emailRef = import_react18.default.useRef(null), passwordRef = import_react18.default.useRef(null), [imageLoading, setImageLoading] = (0, import_react19.useState)(!0), { message } = (0, import_react17.useLoaderData)(), navigate = (0, import_react17.useNavigate)(), imageLoaded = () => {
+  let [searchParams] = (0, import_react17.useSearchParams)(), redirectTo = searchParams.get("redirectTo") || "/posts/user", actionData = (0, import_react17.useActionData)(), emailRef = import_react18.default.useRef(null), passwordRef = import_react18.default.useRef(null), [imageLoading, setImageLoading] = (0, import_react19.useState)(!0), { message } = (0, import_react17.useLoaderData)(), [inputValue, setInputValue] = (0, import_react19.useState)(""), [isInputValueVisible, setIsInputValueVisible] = (0, import_react19.useState)(!1), handleChange = (e) => {
+    setInputValue(e.target.value);
+  }, handleToggleVisibility = () => {
+    setIsInputValueVisible(!isInputValueVisible);
+  }, imageLoaded = () => {
     setImageLoading(!1);
   };
   import_react18.default.useEffect(() => {
@@ -2394,32 +2456,32 @@ function LoginPage() {
         !1,
         {
           fileName: "app/routes/login.tsx",
-          lineNumber: 150,
+          lineNumber: 158,
           columnNumber: 19
         },
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "absolute inset-0 bg-teal-400 mix-blend-multiply" }, void 0, !1, {
         fileName: "app/routes/login.tsx",
-        lineNumber: 162,
+        lineNumber: 170,
         columnNumber: 17
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/login.tsx",
-      lineNumber: 148,
+      lineNumber: 156,
       columnNumber: 15
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: " lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
         import_framer_motion5.motion.div,
         {
-          className: "flex min-h-full flex-col justify-center mb-2",
+          className: "mb-2 flex min-h-full flex-col justify-center",
           initial: { opacity: 0, x: 0 },
           animate: { opacity: 1, x: 0 },
           transition: { duration: 2 },
           children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("p", { className: "text-center text-xl font-bold text-white", children: message }, void 0, !1, {
             fileName: "app/routes/login.tsx",
-            lineNumber: 172,
+            lineNumber: 180,
             columnNumber: 19
           }, this)
         },
@@ -2427,18 +2489,18 @@ function LoginPage() {
         !1,
         {
           fileName: "app/routes/login.tsx",
-          lineNumber: 166,
-          columnNumber: 18
+          lineNumber: 174,
+          columnNumber: 17
         },
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("h1", { className: "text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("span", { className: "mb-4 block uppercase text-white drop-shadow-md", children: "Job Journey" }, void 0, !1, {
         fileName: "app/routes/login.tsx",
-        lineNumber: 177,
+        lineNumber: 185,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/login.tsx",
-        lineNumber: 176,
+        lineNumber: 184,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "flex min-h-full flex-col justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "mx-auto w-full max-w-md px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_react17.Form, { method: "post", className: "space-y-6", children: [
@@ -2454,7 +2516,7 @@ function LoginPage() {
             !1,
             {
               fileName: "app/routes/login.tsx",
-              lineNumber: 187,
+              lineNumber: 194,
               columnNumber: 25
             },
             this
@@ -2478,24 +2540,24 @@ function LoginPage() {
               !1,
               {
                 fileName: "app/routes/login.tsx",
-                lineNumber: 194,
+                lineNumber: 201,
                 columnNumber: 27
               },
               this
             ),
             ((_b = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _b.email) && /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "pt-1 text-red-700", id: "email-error", children: actionData.errors.email }, void 0, !1, {
               fileName: "app/routes/login.tsx",
-              lineNumber: 209,
+              lineNumber: 216,
               columnNumber: 29
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/login.tsx",
-            lineNumber: 193,
+            lineNumber: 200,
             columnNumber: 25
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/login.tsx",
-          lineNumber: 186,
+          lineNumber: 193,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
@@ -2510,7 +2572,7 @@ function LoginPage() {
             !1,
             {
               fileName: "app/routes/login.tsx",
-              lineNumber: 217,
+              lineNumber: 224,
               columnNumber: 25
             },
             this
@@ -2522,17 +2584,44 @@ function LoginPage() {
                 id: "password",
                 ref: passwordRef,
                 name: "password",
-                type: "password",
+                type: isInputValueVisible ? "text" : "password",
+                value: inputValue,
+                onChange: handleChange,
                 autoComplete: "current-password",
                 "aria-invalid": (_c = actionData == null ? void 0 : actionData.errors) != null && _c.password ? !0 : void 0,
                 "aria-describedby": "password-error",
-                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg",
+                style: {
+                  paddingRight: "40px"
+                }
               },
               void 0,
               !1,
               {
                 fileName: "app/routes/login.tsx",
-                lineNumber: 224,
+                lineNumber: 231,
+                columnNumber: 27
+              },
+              this
+            ),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
+              "button",
+              {
+                type: "button",
+                onClick: handleToggleVisibility,
+                className: "absolute right-2 top-1/2 -translate-y-1/2 transform",
+                style: {
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer"
+                },
+                children: isInputValueVisible ? "\u{1F64A}" : "\u{1F648}"
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/routes/login.tsx",
+                lineNumber: 248,
                 columnNumber: 27
               },
               this
@@ -2548,19 +2637,19 @@ function LoginPage() {
               !1,
               {
                 fileName: "app/routes/login.tsx",
-                lineNumber: 237,
+                lineNumber: 261,
                 columnNumber: 29
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/login.tsx",
-            lineNumber: 223,
+            lineNumber: 230,
             columnNumber: 25
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/login.tsx",
-          lineNumber: 216,
+          lineNumber: 223,
           columnNumber: 23
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
@@ -2574,7 +2663,7 @@ function LoginPage() {
           !1,
           {
             fileName: "app/routes/login.tsx",
-            lineNumber: 247,
+            lineNumber: 271,
             columnNumber: 23
           },
           this
@@ -2590,7 +2679,7 @@ function LoginPage() {
           !1,
           {
             fileName: "app/routes/login.tsx",
-            lineNumber: 252,
+            lineNumber: 276,
             columnNumber: 23
           },
           this
@@ -2609,7 +2698,7 @@ function LoginPage() {
               !1,
               {
                 fileName: "app/routes/login.tsx",
-                lineNumber: 260,
+                lineNumber: 284,
                 columnNumber: 27
               },
               this
@@ -2625,17 +2714,17 @@ function LoginPage() {
               !1,
               {
                 fileName: "app/routes/login.tsx",
-                lineNumber: 266,
+                lineNumber: 290,
                 columnNumber: 27
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/login.tsx",
-            lineNumber: 259,
+            lineNumber: 283,
             columnNumber: 25
           }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "text-center text-md font-bold text-white", children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "text-md text-center font-bold text-white", children: [
             "Don't have an account?",
             " ",
             /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
@@ -2652,24 +2741,24 @@ function LoginPage() {
               !1,
               {
                 fileName: "app/routes/login.tsx",
-                lineNumber: 276,
-                columnNumber: 27
+                lineNumber: 300,
+                columnNumber: 29
               },
               this
             ) }, void 0, !1, {
               fileName: "app/routes/login.tsx",
-              lineNumber: 275,
+              lineNumber: 299,
               columnNumber: 27
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/login.tsx",
-            lineNumber: 273,
+            lineNumber: 297,
             columnNumber: 25
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
             import_react17.Link,
             {
-              className: "inline text-lg font-bold text-white underline mx-4",
+              className: "mx-4 inline text-lg font-bold text-white underline",
               to: "/forgot",
               children: "Reset Password"
             },
@@ -2677,53 +2766,53 @@ function LoginPage() {
             !1,
             {
               fileName: "app/routes/login.tsx",
-              lineNumber: 288,
+              lineNumber: 312,
               columnNumber: 25
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/routes/login.tsx",
-          lineNumber: 258,
+          lineNumber: 282,
           columnNumber: 23
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/login.tsx",
-        lineNumber: 185,
+        lineNumber: 192,
         columnNumber: 21
       }, this) }, void 0, !1, {
         fileName: "app/routes/login.tsx",
-        lineNumber: 184,
+        lineNumber: 191,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/login.tsx",
-        lineNumber: 183,
+        lineNumber: 190,
         columnNumber: 17
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/login.tsx",
-      lineNumber: 165,
+      lineNumber: 173,
       columnNumber: 15
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/login.tsx",
-    lineNumber: 147,
+    lineNumber: 155,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/routes/login.tsx",
-    lineNumber: 146,
+    lineNumber: 154,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/login.tsx",
-    lineNumber: 145,
+    lineNumber: 153,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/login.tsx",
-    lineNumber: 144,
+    lineNumber: 152,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/login.tsx",
-    lineNumber: 143,
+    lineNumber: 151,
     columnNumber: 5
   }, this);
 }
@@ -3093,7 +3182,11 @@ var action7 = async ({ request }) => {
 });
 function Join() {
   var _a, _b, _c, _d;
-  let [searchParams] = (0, import_react22.useSearchParams)(), redirectTo = searchParams.get("redirectTo") ?? void 0, actionData = (0, import_react22.useActionData)(), emailRef = React5.useRef(null), passwordRef = React5.useRef(null), [imageLoading, setImageLoading] = (0, import_react23.useState)(!0), imageLoaded = () => {
+  let [searchParams] = (0, import_react22.useSearchParams)(), redirectTo = searchParams.get("redirectTo") ?? void 0, actionData = (0, import_react22.useActionData)(), emailRef = React5.useRef(null), passwordRef = React5.useRef(null), [imageLoading, setImageLoading] = (0, import_react23.useState)(!0), [inputValue, setInputValue] = (0, import_react23.useState)(""), [isInputValueVisible, setIsInputValueVisible] = (0, import_react23.useState)(!1), handleChange = (e) => {
+    setInputValue(e.target.value);
+  }, handleToggleVisibility = () => {
+    setIsInputValueVisible(!isInputValueVisible);
+  }, imageLoaded = () => {
     setImageLoading(!1);
   };
   React5.useEffect(() => {
@@ -3123,29 +3216,29 @@ function Join() {
         !1,
         {
           fileName: "app/routes/join.tsx",
-          lineNumber: 124,
+          lineNumber: 134,
           columnNumber: 17
         },
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "absolute inset-0 bg-teal-400 mix-blend-multiply" }, void 0, !1, {
         fileName: "app/routes/join.tsx",
-        lineNumber: 136,
+        lineNumber: 146,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/join.tsx",
-      lineNumber: 122,
+      lineNumber: 132,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: " lg:pb-18 relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-32", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("h1", { className: "text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("span", { className: "mb-4 block uppercase text-white drop-shadow-md", children: "Job Journey" }, void 0, !1, {
         fileName: "app/routes/join.tsx",
-        lineNumber: 140,
+        lineNumber: 150,
         columnNumber: 17
       }, this) }, void 0, !1, {
         fileName: "app/routes/join.tsx",
-        lineNumber: 139,
+        lineNumber: 149,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "flex min-h-full flex-col justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "mx-auto w-full max-w-md px-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_react22.Form, { method: "post", className: "space-y-6", children: [
@@ -3161,7 +3254,7 @@ function Join() {
             !1,
             {
               fileName: "app/routes/join.tsx",
-              lineNumber: 148,
+              lineNumber: 158,
               columnNumber: 23
             },
             this
@@ -3185,24 +3278,24 @@ function Join() {
               !1,
               {
                 fileName: "app/routes/join.tsx",
-                lineNumber: 155,
+                lineNumber: 165,
                 columnNumber: 25
               },
               this
             ),
             ((_b = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _b.email) && /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "pt-1 text-red-700", id: "email-error", children: actionData.errors.email }, void 0, !1, {
               fileName: "app/routes/join.tsx",
-              lineNumber: 170,
+              lineNumber: 180,
               columnNumber: 27
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/join.tsx",
-            lineNumber: 154,
+            lineNumber: 164,
             columnNumber: 23
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/join.tsx",
-          lineNumber: 147,
+          lineNumber: 157,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { children: [
@@ -3217,7 +3310,7 @@ function Join() {
             !1,
             {
               fileName: "app/routes/join.tsx",
-              lineNumber: 178,
+              lineNumber: 188,
               columnNumber: 23
             },
             this
@@ -3229,17 +3322,44 @@ function Join() {
                 id: "password",
                 ref: passwordRef,
                 name: "password",
-                type: "password",
-                autoComplete: "new-password",
+                type: isInputValueVisible ? "text" : "password",
+                value: inputValue,
+                onChange: handleChange,
+                autoComplete: "current-password",
                 "aria-invalid": (_c = actionData == null ? void 0 : actionData.errors) != null && _c.password ? !0 : void 0,
                 "aria-describedby": "password-error",
-                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                className: "w-full rounded border border-gray-500 px-2 py-1 text-lg",
+                style: {
+                  paddingRight: "40px"
+                }
               },
               void 0,
               !1,
               {
                 fileName: "app/routes/join.tsx",
-                lineNumber: 185,
+                lineNumber: 195,
+                columnNumber: 25
+              },
+              this
+            ),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+              "button",
+              {
+                type: "button",
+                onClick: handleToggleVisibility,
+                className: "absolute right-2 top-1/2 -translate-y-1/2 transform",
+                style: {
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer"
+                },
+                children: isInputValueVisible ? "\u{1F64A}" : "\u{1F648}"
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/routes/join.tsx",
+                lineNumber: 212,
                 columnNumber: 25
               },
               this
@@ -3255,24 +3375,24 @@ function Join() {
               !1,
               {
                 fileName: "app/routes/join.tsx",
-                lineNumber: 198,
+                lineNumber: 225,
                 columnNumber: 27
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/join.tsx",
-            lineNumber: 184,
+            lineNumber: 194,
             columnNumber: 23
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/join.tsx",
-          lineNumber: 177,
+          lineNumber: 187,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("input", { type: "hidden", name: "redirectTo", value: redirectTo }, void 0, !1, {
           fileName: "app/routes/join.tsx",
-          lineNumber: 208,
+          lineNumber: 235,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
@@ -3286,7 +3406,7 @@ function Join() {
           !1,
           {
             fileName: "app/routes/join.tsx",
-            lineNumber: 209,
+            lineNumber: 236,
             columnNumber: 21
           },
           this
@@ -3308,53 +3428,53 @@ function Join() {
             !1,
             {
               fileName: "app/routes/join.tsx",
-              lineNumber: 219,
+              lineNumber: 246,
               columnNumber: 25
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/routes/join.tsx",
-          lineNumber: 217,
+          lineNumber: 244,
           columnNumber: 23
         }, this) }, void 0, !1, {
           fileName: "app/routes/join.tsx",
-          lineNumber: 216,
+          lineNumber: 243,
           columnNumber: 21
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/join.tsx",
-        lineNumber: 146,
+        lineNumber: 156,
         columnNumber: 19
       }, this) }, void 0, !1, {
         fileName: "app/routes/join.tsx",
-        lineNumber: 145,
+        lineNumber: 155,
         columnNumber: 17
       }, this) }, void 0, !1, {
         fileName: "app/routes/join.tsx",
-        lineNumber: 144,
+        lineNumber: 154,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/join.tsx",
-      lineNumber: 138,
+      lineNumber: 148,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/join.tsx",
-    lineNumber: 121,
+    lineNumber: 131,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/join.tsx",
-    lineNumber: 120,
+    lineNumber: 130,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/routes/join.tsx",
-    lineNumber: 119,
+    lineNumber: 129,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/join.tsx",
-    lineNumber: 118,
+    lineNumber: 128,
     columnNumber: 5
   }, this);
 }
@@ -8002,7 +8122,7 @@ function UserIndexRoute() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-T7EDZA2Q.js", imports: ["/build/_shared/chunk-YEID6IW6.js", "/build/_shared/chunk-YYBX7GHC.js", "/build/_shared/chunk-RODUX5XG.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-PR6NWS6J.js", imports: ["/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess": { id: "routes/PasswordResetSuccess", parentId: "root", path: "PasswordResetSuccess", index: void 0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess-OGAOABLW.js", imports: ["/build/_shared/chunk-ODH2NS7P.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess/index": { id: "routes/PasswordResetSuccess/index", parentId: "root", path: "PasswordResetSuccess", index: !0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess/index-2L55USOH.js", imports: ["/build/_shared/chunk-ODH2NS7P.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/cookie": { id: "routes/cookie", parentId: "root", path: "cookie", index: void 0, caseSensitive: void 0, module: "/build/routes/cookie-3N6546L4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-OC6B3DB3.js", imports: ["/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-JPGQFBOZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-EK572TYM.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes": { id: "routes/jobappnotes", parentId: "root", path: "jobappnotes", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes-CY6YRJOX.js", imports: ["/build/_shared/chunk-RRUPSDWX.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/$jobappnoteId": { id: "routes/jobappnotes/$jobappnoteId", parentId: "routes/jobappnotes", path: ":jobappnoteId", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/$jobappnoteId-755H4MJZ.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/jobappnotes/index": { id: "routes/jobappnotes/index", parentId: "routes/jobappnotes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/jobappnotes/index-PCXOTOQG.js", imports: ["/build/_shared/chunk-CDIATO7R.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/new": { id: "routes/jobappnotes/new", parentId: "routes/jobappnotes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/new-YOARHRBJ.js", imports: ["/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-UIMO56PM.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-PWI4FNDZ.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-3CW5ZZI5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map": { id: "routes/map", parentId: "root", path: "map", index: void 0, caseSensitive: void 0, module: "/build/routes/map-7O3GUIUN.js", imports: ["/build/_shared/chunk-SKH2QDX7.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map/index": { id: "routes/map/index", parentId: "root", path: "map", index: !0, caseSensitive: void 0, module: "/build/routes/map/index-MI62TJHX.js", imports: ["/build/_shared/chunk-SKH2QDX7.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-QAALYWHR.js", imports: ["/build/_shared/chunk-EI3GZ464.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-TEYCY3OL.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-C7RQB7RX.js", imports: ["/build/_shared/chunk-CDIATO7R.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-B75KTYEF.js", imports: ["/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset": { id: "routes/password-reset", parentId: "root", path: "password-reset", index: void 0, caseSensitive: void 0, module: "/build/routes/password-reset-RZLZROO3.js", imports: ["/build/_shared/chunk-QIBDPCJA.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset/index": { id: "routes/password-reset/index", parentId: "root", path: "password-reset", index: !0, caseSensitive: void 0, module: "/build/routes/password-reset/index-Z5ZI3XDJ.js", imports: ["/build/_shared/chunk-QIBDPCJA.js", "/build/_shared/chunk-AUJITS7P.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts": { id: "routes/posts", parentId: "root", path: "posts", index: void 0, caseSensitive: void 0, module: "/build/routes/posts-AC5V2KS4.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "routes/posts", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-WL5Y3NE3.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "routes/posts", path: "admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-MLBACZ6L.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-XY3MZQI6.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-6XSZIM3O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "routes/posts", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-R2R75SPN.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user": { id: "routes/posts/user", parentId: "routes/posts", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user-4GZ7O52C.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-CDIATO7R.js", "/build/_shared/chunk-SZ6LP54K.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user/$slug": { id: "routes/posts/user/$slug", parentId: "routes/posts/user", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user/$slug-G5HB2M4U.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/user/index": { id: "routes/posts/user/index", parentId: "routes/posts/user", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/user/index-UN62NK2N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "2fc810f8", hmr: void 0, url: "/build/manifest-2FC810F8.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-A24XILTH.js", imports: ["/build/_shared/chunk-KNNM2CBC.js", "/build/_shared/chunk-T36LGWDA.js", "/build/_shared/chunk-RODUX5XG.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-RGKO3YYK.js", imports: ["/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess": { id: "routes/PasswordResetSuccess", parentId: "root", path: "PasswordResetSuccess", index: void 0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess-I5K6OK6S.js", imports: ["/build/_shared/chunk-NYO5K6T5.js", "/build/_shared/chunk-MARJVBR3.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/PasswordResetSuccess/index": { id: "routes/PasswordResetSuccess/index", parentId: "root", path: "PasswordResetSuccess", index: !0, caseSensitive: void 0, module: "/build/routes/PasswordResetSuccess/index-OKZXDMNW.js", imports: ["/build/_shared/chunk-NYO5K6T5.js", "/build/_shared/chunk-MARJVBR3.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/cookie": { id: "routes/cookie", parentId: "root", path: "cookie", index: void 0, caseSensitive: void 0, module: "/build/routes/cookie-3N6546L4.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-GTQDTJZO.js", imports: ["/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-JPGQFBOZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-JD45BEUT.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes": { id: "routes/jobappnotes", parentId: "root", path: "jobappnotes", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes-X7DBMYEV.js", imports: ["/build/_shared/chunk-RRUPSDWX.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/$jobappnoteId": { id: "routes/jobappnotes/$jobappnoteId", parentId: "routes/jobappnotes", path: ":jobappnoteId", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/$jobappnoteId-ORVFMDZO.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/jobappnotes/index": { id: "routes/jobappnotes/index", parentId: "routes/jobappnotes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/jobappnotes/index-WPT2GDWV.js", imports: ["/build/_shared/chunk-KYAC3KAF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/jobappnotes/new": { id: "routes/jobappnotes/new", parentId: "routes/jobappnotes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/jobappnotes/new-W3M43C6I.js", imports: ["/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-GH324DO4.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-6PAZLHOR.js", imports: ["/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-3CW5ZZI5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map": { id: "routes/map", parentId: "root", path: "map", index: void 0, caseSensitive: void 0, module: "/build/routes/map-P6BB7SMK.js", imports: ["/build/_shared/chunk-XUPQKDWC.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/map/index": { id: "routes/map/index", parentId: "root", path: "map", index: !0, caseSensitive: void 0, module: "/build/routes/map/index-244O4UJD.js", imports: ["/build/_shared/chunk-XUPQKDWC.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-PKXMETS5.js", imports: ["/build/_shared/chunk-EI3GZ464.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-UMXQSLHQ.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-ZUI2LN6W.js", imports: ["/build/_shared/chunk-KYAC3KAF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-RTKCLHJL.js", imports: ["/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset": { id: "routes/password-reset", parentId: "root", path: "password-reset", index: void 0, caseSensitive: void 0, module: "/build/routes/password-reset-H6ORYQWI.js", imports: ["/build/_shared/chunk-3EK5GSO2.js", "/build/_shared/chunk-MARJVBR3.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/password-reset/index": { id: "routes/password-reset/index", parentId: "root", path: "password-reset", index: !0, caseSensitive: void 0, module: "/build/routes/password-reset/index-CDIRVDGM.js", imports: ["/build/_shared/chunk-3EK5GSO2.js", "/build/_shared/chunk-MARJVBR3.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-UHX2GAPF.js", "/build/_shared/chunk-K6WIK5TA.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts": { id: "routes/posts", parentId: "root", path: "posts", index: void 0, caseSensitive: void 0, module: "/build/routes/posts-B53H5EFT.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "routes/posts", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-VARIE32U.js", imports: ["/build/_shared/chunk-AUYLHJJM.js", "/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-ZQGNOS2R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "routes/posts", path: "admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-6BF3EGBG.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-ZQGNOS2R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-Y5UARRL7.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-IAI4KEQV.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "routes/posts", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-7EC7VTSZ.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user": { id: "routes/posts/user", parentId: "routes/posts", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user-4IHDQSFN.js", imports: ["/build/_shared/chunk-KOFPMDLO.js", "/build/_shared/chunk-YD2CFXBM.js", "/build/_shared/chunk-KYAC3KAF.js", "/build/_shared/chunk-ZQGNOS2R.js", "/build/_shared/chunk-TMJLOEVS.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/user/$slug": { id: "routes/posts/user/$slug", parentId: "routes/posts/user", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/user/$slug-6WYLMXOT.js", imports: ["/build/_shared/chunk-AUYLHJJM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/posts/user/index": { id: "routes/posts/user/index", parentId: "routes/posts/user", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/user/index-WHYRLNUU.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "20281a0a", hmr: void 0, url: "/build/manifest-20281A0A.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "./public/build", future = { v2_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !1, v2_meta: !1, v2_normalizeFormMethod: !0, v2_routeConvention: !0 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
